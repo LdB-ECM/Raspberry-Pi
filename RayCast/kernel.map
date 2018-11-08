@@ -1,0 +1,571 @@
+Archive member included to satisfy reference by file (symbol)
+
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o (__locale_ctype_ptr)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o) (__ascii_mbtowc)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strcmp.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o) (strcmp)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strlen-stub.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o (strlen)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strnlen.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o (strnlen)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o) (__ascii_wctomb)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-ctype_.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o) (_ctype_)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o) (_impure_ptr)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o (cos)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_sin.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o (sin)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o (sqrt)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o) (__ieee754_rem_pio2)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_sqrt.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o) (__ieee754_sqrt)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_cos.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o) (__kernel_cos)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o) (__kernel_rem_pio2)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_sin.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o) (__kernel_sin)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_fabs.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o) (fabs)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_floor.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o) (floor)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_lib_ver.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o) (__fdlib_version)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_matherr.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o) (matherr)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o) (scalbn)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_copysign.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o) (copysign)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a(lib_a-errno.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o) (__errno)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_udivsi3.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o (__aeabi_uidiv)
+g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_dvmd_tls.o)
+                              g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+
+Discarded input sections
+
+ .comment       0x00000000       0x80 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+ .text          0x00000000        0x0 C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+ .data          0x00000000        0x0 C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+ .bss           0x00000000        0x0 C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+ .text._sbrk    0x00000000       0x2c C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+ .comment       0x00000000       0x80 C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .text._setlocale_r
+                0x00000000       0x68 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .text.__locale_mb_cur_max
+                0x00000000       0x28 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .text.__locale_ctype_ptr_l
+                0x00000000        0x8 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .text.setlocale
+                0x00000000       0x18 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .bss._PathLocale
+                0x00000000        0x4 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .debug_frame   0x00000000       0x70 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+ .text._mbtowc_r
+                0x00000000       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x00000000       0x4c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+ .text          0x00000000      0x224 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strcmp.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strcmp.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strcmp.o)
+ .debug_frame   0x00000000       0x40 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strcmp.o)
+ .ARM.attributes
+                0x00000000       0x16 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strcmp.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strlen-stub.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strlen-stub.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strlen-stub.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strlen-stub.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strnlen.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strnlen.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strnlen.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strnlen.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+ .text._wctomb_r
+                0x00000000       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+ .debug_frame   0x00000000       0x3c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-ctype_.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-ctype_.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-ctype_.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x00000000        0x4 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o)
+ .debug_frame   0x00000000       0x3c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_sin.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_sin.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_sin.o)
+ .debug_frame   0x00000000       0x3c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_sin.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+ .debug_frame   0x00000000       0x54 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+ .debug_frame   0x00000000       0x4c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_sqrt.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_sqrt.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_sqrt.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_sqrt.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_cos.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_cos.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_cos.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_cos.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+ .debug_frame   0x00000000       0xa4 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_sin.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_sin.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_sin.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_sin.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_fabs.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_fabs.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_fabs.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_fabs.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_floor.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_floor.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_floor.o)
+ .debug_frame   0x00000000       0x44 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_floor.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_lib_ver.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_lib_ver.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_lib_ver.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_matherr.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_matherr.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_matherr.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_matherr.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o)
+ .debug_frame   0x00000000       0x88 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_copysign.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_copysign.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_copysign.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_copysign.o)
+ .text          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a(lib_a-errno.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a(lib_a-errno.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a(lib_a-errno.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a(lib_a-errno.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_udivsi3.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000000       0x20 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_udivsi3.o)
+ .data          0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_dvmd_tls.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x00008000         0x08000000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x00008000     0x4934
+                0x00008000                . = ALIGN (0x4)
+                0x00008000                __text_start__ = .
+                0x00008000                _start = .
+ *(.text.startup)
+ .text.startup  0x00008000      0x43c C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+                0x0000839c                RPi_CpuIdString
+                0x000083f4                EnableInterrupts
+                0x000083fc                DisableInterrupts
+                0x00008404                CoreExecute
+ *(.text .text.* .gnu.linkonce.t.*)
+ *fill*         0x0000843c        0x4 
+ .text          0x00008440      0x544 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+                0x00008440                c_irq_handler
+                0x0000845c                c_irq_identify_and_clear_source
+                0x00008488                LineIntersect2D
+                0x000085b8                kernel_main
+ .text.ARMaddrToGPUaddr
+                0x00008984       0x14 C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+                0x00008984                ARMaddrToGPUaddr
+ .text.GPUaddrToARMaddr
+                0x00008998       0x5c C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+                0x00008998                GPUaddrToARMaddr
+ .text          0x000089f4     0x28b0 C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o
+                0x00009340                gpio_setup
+                0x000093ac                gpio_output
+                0x00009418                gpio_input
+                0x00009460                gpio_checkEvent
+                0x000094a4                gpio_clearEvent
+                0x000094e4                gpio_edgeDetect
+                0x000095a8                gpio_fixResistor
+                0x000096d4                timer_getTickCount
+                0x00009724                timer_wait
+                0x000097a4                tick_difference
+                0x000097b0                mailbox_write
+                0x000097f4                mailbox_read
+                0x00009840                set_Activity_LED
+                0x00009aa8                SetMaxCPUSpeed
+                0x00009c00                DeadLoop
+                0x0000a144                PiConsole_Init
+                0x0000a30c                PiConsole_WriteChar
+                0x0000a38c                PiConsole_WriteText
+                0x0000a430                PiConsole_VertLine
+                0x0000a464                WriteText
+                0x0000a4c4                vsprintf
+                0x0000b1a8                sprintf
+                0x0000b1d8                printf
+ .text.__locale_ctype_ptr
+                0x0000b2a4       0x28 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+                0x0000b2a4                __locale_ctype_ptr
+ .text.__ascii_mbtowc
+                0x0000b2cc       0x4c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+                0x0000b2cc                __ascii_mbtowc
+ .text.strlen   0x0000b318       0x60 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strlen-stub.o)
+                0x0000b318                strlen
+ .text.strnlen  0x0000b378       0x5c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strnlen.o)
+                0x0000b378                strnlen
+ .text.__ascii_wctomb
+                0x0000b3d4       0x28 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+                0x0000b3d4                __ascii_wctomb
+ *fill*         0x0000b3fc        0x4 
+ .text.cos      0x0000b400       0xd0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o)
+                0x0000b400                cos
+ .text.sin      0x0000b4d0       0xd8 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_sin.o)
+                0x0000b4d0                sin
+ .text.sqrt     0x0000b5a8       0xf0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+                0x0000b5a8                sqrt
+ .text.__ieee754_rem_pio2
+                0x0000b698      0x328 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+                0x0000b698                __ieee754_rem_pio2
+ .text.__ieee754_sqrt
+                0x0000b9c0        0xc g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_sqrt.o)
+                0x0000b9c0                __ieee754_sqrt
+ *fill*         0x0000b9cc        0x4 
+ .text.__kernel_cos
+                0x0000b9d0      0x150 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_cos.o)
+                0x0000b9d0                __kernel_cos
+ .text.__kernel_rem_pio2
+                0x0000bb20      0x8f0 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+                0x0000bb20                __kernel_rem_pio2
+ .text.__kernel_sin
+                0x0000c410       0xb8 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_sin.o)
+                0x0000c410                __kernel_sin
+ .text.fabs     0x0000c4c8       0x10 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_fabs.o)
+                0x0000c4c8                fabs
+ .text.floor    0x0000c4d8      0x18c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_floor.o)
+                0x0000c4d8                floor
+ .text.matherr  0x0000c664        0x8 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_matherr.o)
+                0x0000c664                matherr
+ *fill*         0x0000c66c        0x4 
+ .text.scalbn   0x0000c670      0x180 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o)
+                0x0000c670                scalbn
+ .text.copysign
+                0x0000c7f0       0x1c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_copysign.o)
+                0x0000c7f0                copysign
+ .text.__errno  0x0000c80c       0x10 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a(lib_a-errno.o)
+                0x0000c80c                __errno
+ .text          0x0000c81c      0x114 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_udivsi3.o)
+                0x0000c81c                __aeabi_uidiv
+                0x0000c81c                __udivsi3
+                0x0000c910                __aeabi_uidivmod
+ .text          0x0000c930        0x4 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_dvmd_tls.o)
+                0x0000c930                __aeabi_idiv0
+                0x0000c930                __aeabi_ldiv0
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ *(.init .init.*)
+                0x0000c934                . = ALIGN (0x4)
+                0x0000c934                __text_end__ = .
+
+.glue_7         0x0000c934        0x0
+ .glue_7        0x0000c934        0x0 linker stubs
+
+.glue_7t        0x0000c934        0x0
+ .glue_7t       0x0000c934        0x0 linker stubs
+
+.vfp11_veneer   0x0000c934        0x0
+ .vfp11_veneer  0x0000c934        0x0 linker stubs
+
+.v4_bx          0x0000c934        0x0
+ .v4_bx         0x0000c934        0x0 linker stubs
+
+.iplt           0x0000c934        0x0
+ .iplt          0x0000c934        0x0 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+
+.bss            0x0000c934       0x4c
+                0x0000c934                . = ALIGN (0x4)
+                0x0000c934                __bss_start__ = .
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x0000c934        0x1 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+ *fill*         0x0000c935        0x3 
+ .bss           0x0000c938       0x48 C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o
+                0x0000c93c                con
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+ *(COMMON)
+                0x0000c980                . = ALIGN (0x4)
+                0x0000c980                __bss_end__ = .
+
+.rodata         0x0000c980     0x1398
+                0x0000c980                . = ALIGN (0x4)
+                0x0000c980                __rodata_start__ = .
+ *(.rodata .rodata.*)
+ .rodata        0x0000c980       0x14 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+ .rodata.str1.4
+                0x0000c994       0x41 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+ *fill*         0x0000c9d5        0x3 
+ .rodata.cpuid  0x0000c9d8       0x36 C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+ *fill*         0x0000ca0e        0x2 
+ .rodata        0x0000ca10     0x1014 C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o
+                0x0000da20                BitFontEnd
+ .rodata._setlocale_r.str1.4
+                0x0000da24        0xa g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+                                  0xd (size before relaxing)
+ *fill*         0x0000da2e        0x2 
+ .rodata.str1.4
+                0x0000da30        0x2 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ *fill*         0x0000da32        0x2 
+ .rodata._ctype_
+                0x0000da34      0x101 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-ctype_.o)
+                0x0000da34                _ctype_
+ *fill*         0x0000db35        0x3 
+ .rodata.sqrt.str1.4
+                0x0000db38        0x8 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+                                  0x5 (size before relaxing)
+ .rodata.npio2_hw
+                0x0000db40       0x80 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+ .rodata.two_over_pi
+                0x0000dbc0      0x108 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+ .rodata.PIo2   0x0000dcc8       0x40 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+ .rodata.init_jk
+                0x0000dd08       0x10 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+                0x0000dd18                . = ALIGN (0x4)
+                0x0000dd18                __rodata_end__ = .
+
+.rel.dyn        0x0000dd18        0x0
+ .rel.iplt      0x0000dd18        0x0 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+
+.data           0x0000dd18      0xfbc
+                0x0000dd18                . = ALIGN (0x4)
+                0x0000dd18                __data_start__ = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x0000dd18      0x9f8 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+                0x0000dd18                grHt
+                0x0000dd1c                grWth
+                0x0000dd20                worldMap
+                0x0000e620                Level
+                0x0000e648                Box
+                0x0000e698                InnerBox
+                0x0000e6c0                InBox1
+ .data.smartstart
+                0x0000e710        0xc C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+                0x0000e714                RPi_CPUCurrentMode
+                0x0000e718                RPi_Heap
+ .data.smartstart32
+                0x0000e71c       0x18 C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+                0x0000e71c                RPi_IO_Base_Addr
+                0x0000e720                RPi_BootAddr
+                0x0000e724                RPi_CoresReady
+                0x0000e728                RPi_CPUBootMode
+                0x0000e72c                RPi_CpuId
+                0x0000e730                RPi_CompileMode
+ .data          0x0000e734        0x4 C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o
+ .data.__global_locale
+                0x0000e738      0x16c g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+                0x0000e738                __global_locale
+ .data._impure_ptr
+                0x0000e8a4        0x4 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+                0x0000e8a4                _impure_ptr
+ .data.impure_data
+                0x0000e8a8      0x428 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+ .data.__fdlib_version
+                0x0000ecd0        0x1 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_lib_ver.o)
+                0x0000ecd0                __fdlib_version
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+                0x0000ecd4                . = ALIGN (0x4)
+ *fill*         0x0000ecd1        0x3 
+                0x0000ecd4                __data_end__ = .
+
+.igot.plt       0x0000ecd4        0x0
+ .igot.plt      0x0000ecd4        0x0 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+
+.data1          0x0000ecd4        0xc
+                0x0000ece0                . = ALIGN (0x10)
+ *fill*         0x0000ecd4        0xc 
+                0x0000ece0                __data1_start__ = .
+ *(.data1 .data1.*)
+ *(.rel.data1 .rel.data1.*)
+                0x0000ece0                . = ALIGN (0x10)
+                0x0000ece0                __data1_end__ = .
+
+.stack          0x0000ece0     0xa200
+                0x0000ece0                . = ALIGN (0x8)
+                0x0000ece0                __stack_start__core0 = .
+                0x0000eee0                . = (. + 0x200)
+ *fill*         0x0000ece0      0x200 
+                0x0000eee0                __HYP_stack_core0 = .
+                0x00016ee0                . = (. + 0x8000)
+ *fill*         0x0000eee0     0x8000 
+                0x00016ee0                __SVC_stack_core0 = .
+                0x00017ee0                . = (. + 0x1000)
+ *fill*         0x00016ee0     0x1000 
+                0x00017ee0                __IRQ_stack_core0 = .
+                0x00018ee0                . = (. + 0x1000)
+ *fill*         0x00017ee0     0x1000 
+                0x00018ee0                __FIQ_stack_core0 = .
+                0x00018ee0                . = ALIGN (0x8)
+                0x00018ee0                __stack_end__core0 = .
+
+.stack_core1    0x00018ee0     0x1600
+                0x00018ee0                . = ALIGN (0x8)
+                0x00018ee0                __stack_start__core1 = .
+                0x000190e0                . = (. + 0x200)
+ *fill*         0x00018ee0      0x200 
+                0x000190e0                __HYP_stack_core1 = .
+                0x0001a0e0                . = (. + 0x1000)
+ *fill*         0x000190e0     0x1000 
+                0x0001a0e0                __SVC_stack_core1 = .
+                0x0001a2e0                . = (. + 0x200)
+ *fill*         0x0001a0e0      0x200 
+                0x0001a2e0                __IRQ_stack_core1 = .
+                0x0001a4e0                . = (. + 0x200)
+ *fill*         0x0001a2e0      0x200 
+                0x0001a4e0                __FIQ_stack_core1 = .
+                0x0001a4e0                . = ALIGN (0x8)
+                0x0001a4e0                __stack_end__core1 = .
+
+.stack_core2    0x0001a4e0     0x1600
+                0x0001a4e0                . = ALIGN (0x8)
+                0x0001a4e0                __stack_start__core2 = .
+                0x0001a6e0                . = (. + 0x200)
+ *fill*         0x0001a4e0      0x200 
+                0x0001a6e0                __HYP_stack_core2 = .
+                0x0001b6e0                . = (. + 0x1000)
+ *fill*         0x0001a6e0     0x1000 
+                0x0001b6e0                __SVC_stack_core2 = .
+                0x0001b8e0                . = (. + 0x200)
+ *fill*         0x0001b6e0      0x200 
+                0x0001b8e0                __IRQ_stack_core2 = .
+                0x0001bae0                . = (. + 0x200)
+ *fill*         0x0001b8e0      0x200 
+                0x0001bae0                __FIQ_stack_core2 = .
+                0x0001bae0                . = ALIGN (0x8)
+                0x0001bae0                __stack_end__core2 = .
+
+.stack_core3    0x0001bae0     0x1600
+                0x0001bae0                . = ALIGN (0x8)
+                0x0001bae0                __stack_start__core3 = .
+                0x0001bce0                . = (. + 0x200)
+ *fill*         0x0001bae0      0x200 
+                0x0001bce0                __HYP_stack_core3 = .
+                0x0001cce0                . = (. + 0x1000)
+ *fill*         0x0001bce0     0x1000 
+                0x0001cce0                __SVC_stack_core3 = .
+                0x0001cee0                . = (. + 0x200)
+ *fill*         0x0001cce0      0x200 
+                0x0001cee0                __IRQ_stack_core3 = .
+                0x0001d0e0                . = (. + 0x200)
+ *fill*         0x0001cee0      0x200 
+                0x0001d0e0                __FIQ_stack_core3 = .
+                0x0001d0e0                . = ALIGN (0x8)
+                0x0001d0e0                __stack_end__core3 = .
+
+.ARM.attributes
+                0x00000000       0x31
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x33 C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+ .ARM.attributes
+                0x00000033       0x1f C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+ .ARM.attributes
+                0x00000052       0x33 C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o
+ .ARM.attributes
+                0x00000085       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-locale.o)
+ .ARM.attributes
+                0x000000b9       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-mbtowc_r.o)
+ .ARM.attributes
+                0x000000ed       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strlen-stub.o)
+ .ARM.attributes
+                0x00000121       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-strnlen.o)
+ .ARM.attributes
+                0x00000155       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-wctomb_r.o)
+ .ARM.attributes
+                0x00000189       0x32 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-ctype_.o)
+ .ARM.attributes
+                0x000001bb       0x32 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a(lib_a-impure.o)
+ .ARM.attributes
+                0x000001ed       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_cos.o)
+ .ARM.attributes
+                0x00000221       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_sin.o)
+ .ARM.attributes
+                0x00000255       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-w_sqrt.o)
+ .ARM.attributes
+                0x00000289       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_rem_pio2.o)
+ .ARM.attributes
+                0x000002bd       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-e_sqrt.o)
+ .ARM.attributes
+                0x000002f1       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_cos.o)
+ .ARM.attributes
+                0x00000325       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_rem_pio2.o)
+ .ARM.attributes
+                0x00000359       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-k_sin.o)
+ .ARM.attributes
+                0x0000038d       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_fabs.o)
+ .ARM.attributes
+                0x000003c1       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_floor.o)
+ .ARM.attributes
+                0x000003f5       0x32 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_lib_ver.o)
+ .ARM.attributes
+                0x00000427       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_matherr.o)
+ .ARM.attributes
+                0x0000045b       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_scalbn.o)
+ .ARM.attributes
+                0x0000048f       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a(lib_a-s_copysign.o)
+ .ARM.attributes
+                0x000004c3       0x34 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a(lib_a-errno.o)
+ .ARM.attributes
+                0x000004f7       0x18 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x0000050f       0x18 g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a(_dvmd_tls.o)
+
+.Heap           0x0001d0e0        0x0
+                0x0001d0e0                . = ALIGN (0x4)
+                0x0001d0e0                __heap_start__ = .
+                0x0001d0e0                _end = .
+                [!provide]                PROVIDE (end, .)
+
+/DISCARD/
+ *(.ARM.exidx .ARM.exidx.*)
+ *(.rel.ARM.exidx .rel.ARM.exidx.* .gnu.linkonce.armexidx.*)
+ *(.debug_frame .debug_frame.*)
+ *(.comment *.comment.*)
+ *(.symtab .symtab.*)
+ *(.strtab .strtab.*)
+ *(.shstrtab .shstrtab.*)
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+LOAD C:\Users\ldebo\AppData\Local\Temp\ccg5Bpir.o
+LOAD C:\Users\ldebo\AppData\Local\Temp\ccAREABL.o
+LOAD C:\Users\ldebo\AppData\Local\Temp\ccvkcVsN.o
+LOAD g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libc.a
+LOAD g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libm.a
+LOAD g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/hard\libg.a
+LOAD g:/pi/gcc_pi_6_3/bin/../lib/gcc/arm-none-eabi/6.3.1/hard\libgcc.a
+OUTPUT(kernel.elf elf32-littlearm)

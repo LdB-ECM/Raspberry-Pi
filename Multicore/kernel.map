@@ -1,0 +1,1068 @@
+Archive member included to satisfy reference by file (symbol)
+
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (__locale_ctype_ptr)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (mbstowcs)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o) (_mbstowcs_r)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (__ascii_mbtowc)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+                              C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o (rand)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (strcasecmp)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (strcat)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strchr)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (strcmp)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strcpy)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (strlcpy)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o (strlen)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (strncasecmp)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (strncmp)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strncpy)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strtod)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strtol)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strtold)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strtoll)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o) (_strtorx_l)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strtoul)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (strtoull)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+                              C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o (wcscpy)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (__ascii_wctomb)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (__set_ctype)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o) (__gethex)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o) (__match)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (_getenv_r)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o) (_impure_ptr)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o) (__localeconv_l)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o) (memcpy)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o) (_Balloc)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o) (nanf)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o) (_strtodg_l)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o) (_calloc_r)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o) (environ)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o) (__env_lock)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o) (_malloc_r)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o) (memset)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o) (__malloc_lock)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o) (_sbrk_r)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o) (_free_r)
+g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+                              g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o) (errno)
+
+Allocating common symbols
+Common symbol       size              file
+
+__errno             0x4               C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+errno               0x4               g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+test                0x8               C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+
+Discarded input sections
+
+ .data          0x0000000000000000        0x0 C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+ .comment       0x0000000000000000       0x2e C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+ .text          0x0000000000000000        0x0 C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+ .data          0x0000000000000000        0x0 C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+ .bss           0x0000000000000000        0x0 C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+ .comment       0x0000000000000000       0x2e C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o
+ .data          0x0000000000000000        0x0 C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o
+ .bss           0x0000000000000000        0x0 C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o
+ .comment       0x0000000000000000       0x2e C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .debug_frame   0x0000000000000000      0x2c8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .debug_frame   0x0000000000000000       0x38 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .debug_frame   0x0000000000000000       0xa8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x0000000000000000      0x128 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .debug_frame   0x0000000000000000       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .debug_frame   0x0000000000000000       0x60 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .debug_frame   0x0000000000000000       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .debug_frame   0x0000000000000000       0x28 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .debug_frame   0x0000000000000000       0x60 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .debug_frame   0x0000000000000000       0x28 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .debug_frame   0x0000000000000000      0x330 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .debug_frame   0x0000000000000000       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .debug_frame   0x0000000000000000       0x88 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .debug_frame   0x0000000000000000       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .debug_frame   0x0000000000000000       0x58 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .debug_frame   0x0000000000000000       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .debug_frame   0x0000000000000000       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .debug_frame   0x0000000000000000       0x28 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .debug_frame   0x0000000000000000       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .debug_frame   0x0000000000000000       0x28 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_frame   0x0000000000000000       0x88 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_frame   0x0000000000000000       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .debug_frame   0x0000000000000000       0xb8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .text          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .rodata        0x0000000000000000        0x8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .debug_frame   0x0000000000000000       0x58 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .debug_frame   0x0000000000000000      0x3b0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .debug_frame   0x0000000000000000       0x28 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .debug_frame   0x0000000000000000      0x328 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .debug_frame   0x0000000000000000       0x48 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .text          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .debug_frame   0x0000000000000000       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+ .debug_frame   0x0000000000000000      0x100 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .debug_frame   0x0000000000000000       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000000000       0x50 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .debug_frame   0x0000000000000000       0xb0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .text          0x0000000000000000      0x144 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+ .data          0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+ .bss           0x0000000000000000        0x0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+ .comment       0x0000000000000000       0x2e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+ .debug_frame   0x0000000000000000       0x90 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x0000000000080000 0x0000000008000000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000000080000     0xe488
+                0x0000000000080000                . = ALIGN (0x4)
+                0x0000000000080000                __text_start__ = .
+                0x0000000000080000                _start = .
+ *(.text.startup)
+ .text.startup  0x0000000000080000      0x2f8 C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+                0x000000000008029c                EnableInterrupts
+                0x00000000000802a4                DisableInterrupts
+                0x00000000000802ac                CoreExecute
+ *(.text .text.* .gnu.linkonce.t.*)
+ *fill*         0x00000000000802f8        0x8 
+ .text          0x0000000000080300      0x21c C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+                0x0000000000080300                somerand
+                0x0000000000080330                marco
+                0x0000000000080340                polo
+                0x0000000000080350                caught
+                0x0000000000080360                c_irq_handler
+                0x00000000000803e0                kernel_main
+ *fill*         0x000000000008051c        0x4 
+ .text.setTimerIrqAddress
+                0x0000000000080520       0x20 C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+                0x0000000000080520                setTimerIrqAddress
+ .text.ARMaddrToGPUaddr
+                0x0000000000080540        0xc C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+                0x0000000000080540                ARMaddrToGPUaddr
+ *fill*         0x000000000008054c      0x2b4 
+ .text.GPUaddrToARMaddr
+                0x0000000000080800      0xf98 C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+                0x0000000000080800                GPUaddrToARMaddr
+                0x000000000008080c                irq_handler
+                0x0000000000081000                VectorTable
+ *fill*         0x0000000000081798        0x8 
+ .text          0x00000000000817a0     0x272c C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o
+                0x00000000000829d0                RPi_CpuIdString
+                0x0000000000082a30                gpio_setup
+                0x0000000000082aa0                gpio_output
+                0x0000000000082b10                gpio_input
+                0x0000000000082b60                gpio_checkEvent
+                0x0000000000082ba0                gpio_clearEvent
+                0x0000000000082be0                gpio_edgeDetect
+                0x0000000000082c90                gpio_fixResistor
+                0x0000000000082d80                timer_getTickCount
+                0x0000000000082db0                timer_wait
+                0x0000000000082e10                tick_difference
+                0x0000000000082e20                mailbox_write
+                0x0000000000082e60                mailbox_read
+                0x0000000000082eb0                mailbox_tag_message
+                0x0000000000083030                TimerIrqSetup
+                0x0000000000083130                set_Activity_LED
+                0x00000000000832c0                ARM_setmaxspeed
+                0x0000000000083370                displaySmartStart
+                0x0000000000083450                Embedded_Console_WriteChar
+                0x0000000000083510                WriteText
+                0x0000000000083610                SetDCPenColor
+                0x0000000000083630                SetDCBrushColor
+                0x0000000000083650                MoveToEx
+                0x0000000000083680                LineTo
+                0x0000000000083740                TextOut
+                0x00000000000837d0                TransparentTextOut
+                0x0000000000083840                BmpOut
+                0x0000000000083890                CvtBmpLine
+                0x0000000000083b30                Rectangle
+                0x0000000000083b60                PiConsole_Init
+                0x0000000000083e20                GetConsoleDC
+                0x0000000000083e30                GetConsole_FrameBuffer
+                0x0000000000083e40                GetConsole_Width
+                0x0000000000083e50                GetConsole_Height
+                0x0000000000083e60                WhereXY
+                0x0000000000083e90                GotoXY
+                0x0000000000083ea0                _sbrk
+ *fill*         0x0000000000083ecc        0x4 
+ .text          0x0000000000083ed0     0x1acc C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o
+                0x0000000000084180                strnlen
+                0x00000000000841c0                emb_vsprintf
+                0x0000000000084aa0                vsscanf
+                0x00000000000857c0                sscanf
+                0x0000000000085850                emb_sprintf
+                0x00000000000858d0                printf
+ *fill*         0x000000000008599c        0x4 
+ .text          0x00000000000859a0      0xd0c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+                0x0000000000085a58                __loadlocale
+                0x00000000000861f0                __get_locale_env
+                0x0000000000086280                _setlocale_r
+                0x0000000000086640                __locale_mb_cur_max
+                0x0000000000086668                __locale_ctype_ptr_l
+                0x0000000000086670                __locale_ctype_ptr
+                0x0000000000086698                setlocale
+ *fill*         0x00000000000866ac        0x4 
+ .text          0x00000000000866b0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+                0x00000000000866b0                mbstowcs
+ .text          0x00000000000866e0       0xfc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+                0x00000000000866e0                _mbstowcs_r
+ *fill*         0x00000000000867dc        0x4 
+ .text          0x00000000000867e0      0x6e4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+                0x00000000000867e0                _mbtowc_r
+                0x0000000000086808                __ascii_mbtowc
+                0x0000000000086848                __utf8_mbtowc
+                0x0000000000086b10                __sjis_mbtowc
+                0x0000000000086be0                __eucjp_mbtowc
+                0x0000000000086d00                __jis_mbtowc
+ *fill*         0x0000000000086ec4        0x4 
+ .text          0x0000000000086ec8       0x48 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+                0x0000000000086ec8                srand
+                0x0000000000086ee0                rand
+ .text          0x0000000000086f10       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+                0x0000000000086f10                strcasecmp
+ .text          0x0000000000086fb0       0x74 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+                0x0000000000086fb0                strcat
+ .text          0x0000000000087024       0xdc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+                0x0000000000087024                strchr
+ .text          0x0000000000087100       0xa4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+                0x0000000000087100                strcmp
+ *fill*         0x00000000000871a4       0x1c 
+ .text          0x00000000000871c0      0x1b8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+                0x00000000000871c0                strcpy
+ .text          0x0000000000087378       0x44 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+                0x0000000000087378                strlcpy
+ *fill*         0x00000000000873bc        0x4 
+ .text          0x00000000000873c0      0x140 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+                0x00000000000873c0                strlen
+ .text          0x0000000000087500       0xcc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+                0x0000000000087500                strncasecmp
+ *fill*         0x00000000000875cc       0x34 
+ .text          0x0000000000087600      0x124 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+                0x000000000008761c                strncmp
+ *fill*         0x0000000000087724        0x4 
+ .text          0x0000000000087728       0xb0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+                0x0000000000087728                strncpy
+ .text          0x00000000000877d8     0x1288 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+                0x00000000000877d8                _strtod_l
+                0x00000000000888d0                _strtod_r
+                0x00000000000888f0                strtod_l
+                0x0000000000088908                strtod
+                0x0000000000088938                strtof_l
+                0x00000000000889c0                strtof
+ .text.unlikely
+                0x0000000000088a60       0x54 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ *fill*         0x0000000000088ab4        0x4 
+ .text          0x0000000000088ab8      0x240 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+                0x0000000000088c88                _strtol_r
+                0x0000000000088ca8                strtol_l
+                0x0000000000088cc8                strtol
+ .text          0x0000000000088cf8       0xc0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+                0x0000000000088cf8                _strtold_r
+                0x0000000000088d38                strtold_l
+                0x0000000000088d70                strtold
+ .text          0x0000000000088db8      0x240 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+                0x0000000000088f88                _strtoll_r
+                0x0000000000088fa8                strtoll_l
+                0x0000000000088fc8                strtoll
+ .text          0x0000000000088ff8      0x12c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+                0x0000000000088ff8                ULtox
+                0x00000000000890a8                _strtorx_l
+ *fill*         0x0000000000089124        0x4 
+ .text          0x0000000000089128      0x250 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+                0x0000000000089308                _strtoul_r
+                0x0000000000089328                strtoul_l
+                0x0000000000089348                strtoul
+ .text          0x0000000000089378      0x250 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+                0x0000000000089558                _strtoull_r
+                0x0000000000089578                strtoull_l
+                0x0000000000089598                strtoull
+ .text          0x00000000000895c8       0x24 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+                0x00000000000895c8                wcscpy
+ *fill*         0x00000000000895ec        0x4 
+ .text          0x00000000000895f0      0x310 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+                0x00000000000895f0                _wctomb_r
+                0x0000000000089618                __ascii_wctomb
+                0x0000000000089648                __utf8_wctomb
+                0x0000000000089728                __sjis_wctomb
+                0x00000000000897a8                __eucjp_wctomb
+                0x0000000000089850                __jis_wctomb
+ .text          0x0000000000089900       0x10 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+                0x0000000000089900                __set_ctype
+ .text          0x0000000000089910      0x8b4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+                0x0000000000089a08                __gethex
+ *fill*         0x000000000008a1c4        0x4 
+ .text          0x000000000008a1c8      0x270 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+                0x000000000008a1c8                __match
+                0x000000000008a210                __hexnan
+ .text          0x000000000008a438      0x128 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+                0x000000000008a438                _findenv_r
+                0x000000000008a548                _getenv_r
+ .text          0x000000000008a560       0x54 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+                0x000000000008a560                __localeconv_l
+                0x000000000008a568                _localeconv_r
+                0x000000000008a590                localeconv
+ *fill*         0x000000000008a5b4        0xc 
+ .text          0x000000000008a5c0      0x16c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+                0x000000000008a5c0                memcpy
+ *fill*         0x000000000008a72c        0x4 
+ .text          0x000000000008a730      0xe5c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+                0x000000000008a730                _Balloc
+                0x000000000008a7d8                _Bfree
+                0x000000000008a7f8                __multadd
+                0x000000000008a8e0                __s2b
+                0x000000000008aa00                __hi0bits
+                0x000000000008aa60                __lo0bits
+                0x000000000008ab00                __i2b
+                0x000000000008ab30                __multiply
+                0x000000000008acf0                __pow5mult
+                0x000000000008ae18                __lshift
+                0x000000000008af50                __mcmp
+                0x000000000008afa0                __mdiff
+                0x000000000008b130                __ulp
+                0x000000000008b1a0                __b2d
+                0x000000000008b2c0                __d2b
+                0x000000000008b3e0                __ratio
+                0x000000000008b468                _mprec_log10
+                0x000000000008b4a0                __copybits
+                0x000000000008b508                __any_on
+ *fill*         0x000000000008b58c        0x4 
+ .text          0x000000000008b590        0xc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+                0x000000000008b590                nanf
+ *fill*         0x000000000008b59c        0x4 
+ .text          0x000000000008b5a0     0x1fb8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+                0x000000000008b698                increment
+                0x000000000008bb30                decrement
+                0x000000000008bb68                set_ones
+                0x000000000008bc30                _strtodg_l
+ .text          0x000000000008d558       0x90 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+                0x000000000008d558                _calloc_r
+ .text          0x000000000008d5e8        0xc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+                0x000000000008d5e8                __env_lock
+                0x000000000008d5f0                __env_unlock
+ *fill*         0x000000000008d5f4        0x4 
+ .text          0x000000000008d5f8      0x848 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+                0x000000000008d5f8                _malloc_r
+ .text          0x000000000008de40      0x1d8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+                0x000000000008de40                memset
+ .text          0x000000000008e018        0xc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+                0x000000000008e018                __malloc_lock
+                0x000000000008e020                __malloc_unlock
+ *fill*         0x000000000008e024        0x4 
+ .text          0x000000000008e028       0x4c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+                0x000000000008e028                _sbrk_r
+ *fill*         0x000000000008e074        0x4 
+ .text          0x000000000008e078      0x410 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+                0x000000000008e078                _malloc_trim_r
+                0x000000000008e188                _free_r
+ *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
+ *(.init .init.*)
+                0x000000000008e488                . = ALIGN (0x4)
+                0x000000000008e488                __text_end__ = .
+
+.iplt           0x000000000008e488        0x0
+ .iplt          0x000000000008e488        0x0 C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+
+.bss            0x000000000008e488      0x394
+                0x000000000008e488                . = ALIGN (0x4)
+                0x000000000008e488                __bss_start__ = .
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x000000000008e488        0x9 C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+ *fill*         0x000000000008e491        0x7 
+ .bss           0x000000000008e498       0x78 C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o
+                0x000000000008e49c                console
+ .bss           0x000000000008e510      0x2b0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+                0x000000000008e7b8                _PathLocale
+ .bss           0x000000000008e7c0        0x8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+ .bss           0x000000000008e7c8       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+                0x000000000008e7c8                __malloc_top_pad
+                0x000000000008e7d0                __malloc_current_mallinfo
+                0x000000000008e7f8                __malloc_max_sbrked_mem
+                0x000000000008e800                __malloc_max_total_mem
+ *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+ *(COMMON)
+ COMMON         0x000000000008e808       0x10 C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+                0x000000000008e808                __errno
+                0x000000000008e810                test
+ COMMON         0x000000000008e818        0x4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+                0x000000000008e818                errno
+                0x000000000008e81c                . = ALIGN (0x4)
+                0x000000000008e81c                __bss_end__ = .
+
+.rodata         0x000000000008e820     0x1aec
+                0x000000000008e820                . = ALIGN (0x4)
+                0x000000000008e820                __rodata_start__ = .
+ *(.rodata .rodata.*)
+ .rodata.str1.8
+                0x000000000008e820       0x64 C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+ .rodata        0x000000000008e884     0x1004 C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o
+                0x000000000008f884                BitFontEnd
+ .rodata.str1.8
+                0x000000000008f888      0x114 C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o
+ *fill*         0x000000000008f99c        0x4 
+ .rodata        0x000000000008f9a0      0x108 C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o
+ .rodata        0x000000000008faa8      0x250 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+                0x000000000008fb50                __C_locale
+ .rodata.str1.8
+                0x000000000008fcf8      0x184 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+                                        0x18c (size before relaxing)
+ *fill*         0x000000000008fe7c        0x4 
+ .rodata        0x000000000008fe80       0x90 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .rodata        0x000000000008ff10       0x58 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .rodata.str1.8
+                0x000000000008ff68       0x18 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+                                         0x13 (size before relaxing)
+ .rodata        0x000000000008ff80      0x101 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+                0x000000000008ff80                _ctype_
+ *fill*         0x0000000000090081        0x7 
+ .rodata        0x0000000000090088      0x100 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+                0x0000000000090088                __hexdig
+ .rodata        0x0000000000090188      0x128 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+                0x0000000000090198                __mprec_tens
+                0x0000000000090260                __mprec_tinytens
+                0x0000000000090288                __mprec_bigtens
+ .rodata        0x00000000000902b0       0x5c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .rodata.str1.8
+                0x000000000009030c       0x13 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
+                0x0000000000090320                . = ALIGN (0x4)
+                0x0000000000090320                __rodata_end__ = .
+
+.rela.dyn       0x0000000000090310        0x0
+ .rela.iplt     0x0000000000090310        0x0 C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+
+.data           0x0000000000090310     0x1180
+                0x0000000000090310                . = ALIGN (0x4)
+                0x0000000000090310                __data_start__ = .
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data.smartstart64
+                0x0000000000090310       0x20 C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+                0x0000000000090310                RPi_IO_Base_Addr
+                0x0000000000090314                RPi_BootAddr
+                0x0000000000090318                RPi_CoresReady
+                0x000000000009031c                RPi_CPUBootMode
+                0x0000000000090320                RPi_CpuId
+                0x0000000000090324                RPi_CompileMode
+ .data          0x0000000000090330        0x4 C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o
+ *fill*         0x0000000000090334        0x4 
+ .data          0x0000000000090338      0x1c8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+                0x0000000000090338                __global_locale
+                0x00000000000904e0                __default_locale
+ .data          0x0000000000090500       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ *fill*         0x0000000000090514        0x4 
+ .data          0x0000000000090518      0x750 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+                0x0000000000090518                _impure_ptr
+ .data          0x0000000000090c68        0x8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+                0x0000000000090c68                environ
+ .data          0x0000000000090c70      0x820 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+                0x0000000000090c70                __malloc_av_
+                0x0000000000091480                __malloc_sbrk_base
+                0x0000000000091488                __malloc_trim_threshold
+ *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
+                0x0000000000091490                . = ALIGN (0x4)
+                0x0000000000091490                __data_end__ = .
+
+.igot.plt       0x0000000000091490        0x0
+ .igot.plt      0x0000000000091490        0x0 C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+
+.data1          0x0000000000091490        0x0
+                0x0000000000091490                . = ALIGN (0x10)
+                0x0000000000091490                __data1_start__ = .
+ *(.data1 .data1.*)
+ *(.rel.data1 .rel.data1.*)
+                0x0000000000091490                . = ALIGN (0x10)
+                0x0000000000091490                __data1_end__ = .
+
+.stack          0x0000000000091490     0xc200
+                0x0000000000091490                . = ALIGN (0x10)
+                0x0000000000091490                __stack_start__ = .
+                0x0000000000091690                . = (. + 0x200)
+ *fill*         0x0000000000091490      0x200 
+                0x0000000000091690                __EL0_stack_core0 = .
+                0x0000000000099690                . = (. + 0x8000)
+ *fill*         0x0000000000091690     0x8000 
+                0x0000000000099690                __EL1_stack_core0 = .
+                0x000000000009d690                . = (. + 0x4000)
+ *fill*         0x0000000000099690     0x4000 
+                0x000000000009d690                __EL2_stack_core0 = .
+                0x000000000009d690                . = ALIGN (0x10)
+                0x000000000009d690                __stack_end__ = .
+
+.stack_core1    0x000000000009d690     0x1400
+                0x000000000009d690                . = ALIGN (0x10)
+                0x000000000009d690                __stack_start_core1__ = .
+                0x000000000009d890                . = (. + 0x200)
+ *fill*         0x000000000009d690      0x200 
+                0x000000000009d890                __EL0_stack_core1 = .
+                0x000000000009da90                . = (. + 0x200)
+ *fill*         0x000000000009d890      0x200 
+                0x000000000009da90                __EL1_stack_core1 = .
+                0x000000000009ea90                . = (. + 0x1000)
+ *fill*         0x000000000009da90     0x1000 
+                0x000000000009ea90                __EL2_stack_core1 = .
+                0x000000000009ea90                . = ALIGN (0x10)
+                0x000000000009ea90                __stack_end_core1__ = .
+
+.stack_core2    0x000000000009ea90     0x1400
+                0x000000000009ea90                . = ALIGN (0x10)
+                0x000000000009ea90                __stack_start_core2__ = .
+                0x000000000009ec90                . = (. + 0x200)
+ *fill*         0x000000000009ea90      0x200 
+                0x000000000009ec90                __EL0_stack_core2 = .
+                0x000000000009ee90                . = (. + 0x200)
+ *fill*         0x000000000009ec90      0x200 
+                0x000000000009ee90                __EL1_stack_core2 = .
+                0x000000000009fe90                . = (. + 0x1000)
+ *fill*         0x000000000009ee90     0x1000 
+                0x000000000009fe90                __EL2_stack_core2 = .
+                0x000000000009fe90                . = ALIGN (0x10)
+                0x000000000009fe90                __stack_end_core2__ = .
+
+.stack_core3    0x000000000009fe90     0x1400
+                0x000000000009fe90                . = ALIGN (0x10)
+                0x000000000009fe90                __stack_start_core3__ = .
+                0x00000000000a0090                . = (. + 0x200)
+ *fill*         0x000000000009fe90      0x200 
+                0x00000000000a0090                __EL0_stack_core3 = .
+                0x00000000000a0290                . = (. + 0x200)
+ *fill*         0x00000000000a0090      0x200 
+                0x00000000000a0290                __EL1_stack_core3 = .
+                0x00000000000a1290                . = (. + 0x1000)
+ *fill*         0x00000000000a0290     0x1000 
+                0x00000000000a1290                __EL2_stack_core3 = .
+                0x00000000000a1290                . = ALIGN (0x10)
+                0x00000000000a1290                __stack_end_core3__ = .
+
+.ARM.attributes
+ *(.ARM.attributes)
+
+.Heap           0x00000000000a1290        0x0
+                0x00000000000a1290                . = ALIGN (0x4)
+                0x00000000000a1290                __heap_start__ = .
+                0x00000000000a1290                __end__ = .
+                [!provide]                        PROVIDE (__end__, .)
+                0x00000000000a1290                _end = .
+                [!provide]                        PROVIDE (end, .)
+
+/DISCARD/
+ *(.ARM.exidx .ARM.exidx.*)
+ *(.rel.ARM.exidx .rel.ARM.exidx.* .gnu.linkonce.armexidx.*)
+ *(.debug_frame .debug_frame.*)
+ *(.comment *.comment.*)
+ *(.symtab .symtab.*)
+ *(.strtab .strtab.*)
+ *(.shstrtab .shstrtab.*)
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+LOAD C:\Users\ldebo\AppData\Local\Temp\cc4saCX0.o
+LOAD C:\Users\ldebo\AppData\Local\Temp\cc4Ynx3d.o
+LOAD C:\Users\ldebo\AppData\Local\Temp\ccHu71sD.o
+LOAD C:\Users\ldebo\AppData\Local\Temp\ccdcHlX5.o
+LOAD g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a
+LOAD g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libm.a
+LOAD g:/pi/gcc_linaro_7_1/bin/../lib/gcc/aarch64-elf/7.1.1\libgcc.a
+OUTPUT(kernel.elf elf64-littleaarch64)
+
+.debug_info     0x0000000000000000    0x21df5
+ .debug_info    0x0000000000000000     0x1d43 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .debug_info    0x0000000000001d43      0x960 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .debug_info    0x00000000000026a3      0xf04 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .debug_info    0x00000000000035a7     0x13a2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .debug_info    0x0000000000004949      0x902 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .debug_info    0x000000000000524b      0x972 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .debug_info    0x0000000000005bbd      0x92e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .debug_info    0x00000000000064eb      0x1c2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+ .debug_info    0x00000000000066ad      0x1c2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+ .debug_info    0x000000000000686f      0x1c2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+ .debug_info    0x0000000000006a31      0x911 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .debug_info    0x0000000000007342      0x1c2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+ .debug_info    0x0000000000007504      0x98a g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .debug_info    0x0000000000007e8e      0x1c3 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+ .debug_info    0x0000000000008051      0x945 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .debug_info    0x0000000000008996     0x1da4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .debug_info    0x000000000000a73a     0x112c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .debug_info    0x000000000000b866     0x10b9 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .debug_info    0x000000000000c91f     0x112e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .debug_info    0x000000000000da4d     0x1131 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .debug_info    0x000000000000eb7e     0x112c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .debug_info    0x000000000000fcaa     0x112e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .debug_info    0x0000000000010dd8      0x913 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .debug_info    0x00000000000116eb     0x1172 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .debug_info    0x000000000001285d      0xe29 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .debug_info    0x0000000000013686     0x1566 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_info    0x0000000000014bec     0x1141 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_info    0x0000000000015d2d      0xa34 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .debug_info    0x0000000000016761      0x8b9 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .debug_info    0x000000000001701a      0xed4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .debug_info    0x0000000000017eee      0x1c2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+ .debug_info    0x00000000000180b0     0x1d7b g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .debug_info    0x0000000000019e2b      0x915 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .debug_info    0x000000000001a740     0x27b3 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .debug_info    0x000000000001cef3      0xb85 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .debug_info    0x000000000001da78       0x72 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+ .debug_info    0x000000000001daea      0x8f0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .debug_info    0x000000000001e3da      0xe5c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+ .debug_info    0x000000000001f236      0x1c2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+ .debug_info    0x000000000001f3f8      0x8f0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .debug_info    0x000000000001fce8      0x976 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .debug_info    0x000000000002065e      0xd0a g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .debug_info    0x0000000000021368      0xa8d g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+
+.debug_abbrev   0x0000000000000000     0x5a20
+ .debug_abbrev  0x0000000000000000      0x3cc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .debug_abbrev  0x00000000000003cc      0x214 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .debug_abbrev  0x00000000000005e0      0x26b g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .debug_abbrev  0x000000000000084b      0x321 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .debug_abbrev  0x0000000000000b6c      0x1fb g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .debug_abbrev  0x0000000000000d67      0x214 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .debug_abbrev  0x0000000000000f7b      0x202 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .debug_abbrev  0x000000000000117d       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+ .debug_abbrev  0x0000000000001191       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+ .debug_abbrev  0x00000000000011a5       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+ .debug_abbrev  0x00000000000011b9      0x1d2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .debug_abbrev  0x000000000000138b       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+ .debug_abbrev  0x000000000000139f      0x214 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .debug_abbrev  0x00000000000015b3       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+ .debug_abbrev  0x00000000000015c7      0x1ea g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .debug_abbrev  0x00000000000017b1      0x3f6 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .debug_abbrev  0x0000000000001ba7      0x2dc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .debug_abbrev  0x0000000000001e83      0x282 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .debug_abbrev  0x0000000000002105      0x2f8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .debug_abbrev  0x00000000000023fd      0x2cb g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .debug_abbrev  0x00000000000026c8      0x2dc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .debug_abbrev  0x00000000000029a4      0x2f8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .debug_abbrev  0x0000000000002c9c      0x1db g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .debug_abbrev  0x0000000000002e77      0x28c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .debug_abbrev  0x0000000000003103      0x1f5 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .debug_abbrev  0x00000000000032f8      0x347 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_abbrev  0x000000000000363f      0x2d8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_abbrev  0x0000000000003917      0x227 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .debug_abbrev  0x0000000000003b3e      0x19f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .debug_abbrev  0x0000000000003cdd      0x262 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .debug_abbrev  0x0000000000003f3f       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+ .debug_abbrev  0x0000000000003f53      0x3c3 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .debug_abbrev  0x0000000000004316      0x1e8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .debug_abbrev  0x00000000000044fe      0x46f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .debug_abbrev  0x000000000000496d      0x24d g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .debug_abbrev  0x0000000000004bba       0x56 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+ .debug_abbrev  0x0000000000004c10      0x1e4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .debug_abbrev  0x0000000000004df4      0x2da g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+ .debug_abbrev  0x00000000000050ce       0x14 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+ .debug_abbrev  0x00000000000050e2      0x1e0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .debug_abbrev  0x00000000000052c2      0x222 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .debug_abbrev  0x00000000000054e4      0x29e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .debug_abbrev  0x0000000000005782      0x29e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+
+.debug_loc      0x0000000000000000    0x193d5
+ .debug_loc     0x0000000000000000     0x11a0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .debug_loc     0x00000000000011a0       0xe4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .debug_loc     0x0000000000001284      0x32c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .debug_loc     0x00000000000015b0     0x142f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .debug_loc     0x00000000000029df      0x20d g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .debug_loc     0x0000000000002bec      0x118 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .debug_loc     0x0000000000002d04      0x1de g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .debug_loc     0x0000000000002ee2      0x2bf g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .debug_loc     0x00000000000031a1      0x300 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .debug_loc     0x00000000000034a1     0x3f75 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .debug_loc     0x0000000000007416      0x977 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .debug_loc     0x0000000000007d8d      0x227 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .debug_loc     0x0000000000007fb4      0x977 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .debug_loc     0x000000000000892b      0x3d2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .debug_loc     0x0000000000008cfd      0x88e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .debug_loc     0x000000000000958b      0x88e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .debug_loc     0x0000000000009e19       0xa7 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .debug_loc     0x0000000000009ec0      0xb0a g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .debug_loc     0x000000000000a9ca       0x39 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .debug_loc     0x000000000000aa03     0x1c16 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_loc     0x000000000000c619      0x92d g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_loc     0x000000000000cf46      0x30f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .debug_loc     0x000000000000d255       0xab g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .debug_loc     0x000000000000d300     0x2f83 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .debug_loc     0x0000000000010283     0x6a27 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .debug_loc     0x0000000000016caa      0x323 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .debug_loc     0x0000000000016fcd     0x16ed g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+ .debug_loc     0x00000000000186ba       0xae g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .debug_loc     0x0000000000018768      0x9ea g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .debug_loc     0x0000000000019152      0x283 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+
+.debug_aranges  0x0000000000000000      0x800
+ .debug_aranges
+                0x0000000000000000       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .debug_aranges
+                0x0000000000000030       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .debug_aranges
+                0x0000000000000060       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .debug_aranges
+                0x0000000000000090       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .debug_aranges
+                0x00000000000000c0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .debug_aranges
+                0x00000000000000f0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .debug_aranges
+                0x0000000000000120       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .debug_aranges
+                0x0000000000000150       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+ .debug_aranges
+                0x0000000000000180       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+ .debug_aranges
+                0x00000000000001b0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+ .debug_aranges
+                0x00000000000001e0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .debug_aranges
+                0x0000000000000210       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+ .debug_aranges
+                0x0000000000000240       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .debug_aranges
+                0x0000000000000270       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+ .debug_aranges
+                0x00000000000002a0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .debug_aranges
+                0x00000000000002d0       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .debug_aranges
+                0x0000000000000310       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .debug_aranges
+                0x0000000000000340       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .debug_aranges
+                0x0000000000000370       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .debug_aranges
+                0x00000000000003a0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .debug_aranges
+                0x00000000000003d0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .debug_aranges
+                0x0000000000000400       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .debug_aranges
+                0x0000000000000430       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .debug_aranges
+                0x0000000000000460       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .debug_aranges
+                0x0000000000000490       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .debug_aranges
+                0x00000000000004c0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_aranges
+                0x00000000000004f0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_aranges
+                0x0000000000000520       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .debug_aranges
+                0x0000000000000550       0x20 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .debug_aranges
+                0x0000000000000570       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .debug_aranges
+                0x00000000000005a0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+ .debug_aranges
+                0x00000000000005d0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .debug_aranges
+                0x0000000000000600       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .debug_aranges
+                0x0000000000000630       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .debug_aranges
+                0x0000000000000660       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .debug_aranges
+                0x0000000000000690       0x20 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+ .debug_aranges
+                0x00000000000006b0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .debug_aranges
+                0x00000000000006e0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+ .debug_aranges
+                0x0000000000000710       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+ .debug_aranges
+                0x0000000000000740       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .debug_aranges
+                0x0000000000000770       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .debug_aranges
+                0x00000000000007a0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .debug_aranges
+                0x00000000000007d0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+
+.debug_ranges   0x0000000000000000      0x8a0
+ .debug_ranges  0x0000000000000000       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .debug_ranges  0x00000000000000a0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .debug_ranges  0x00000000000000d0       0x80 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .debug_ranges  0x0000000000000150       0xa0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .debug_ranges  0x00000000000001f0       0x90 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .debug_ranges  0x0000000000000280      0x1b0 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .debug_ranges  0x0000000000000430       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .debug_ranges  0x0000000000000460       0x70 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .debug_ranges  0x00000000000004d0       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .debug_ranges  0x0000000000000500       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .debug_ranges  0x0000000000000530       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .debug_ranges  0x0000000000000560       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_ranges  0x00000000000005a0       0x40 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_ranges  0x00000000000005e0      0x110 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .debug_ranges  0x00000000000006f0      0x110 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .debug_ranges  0x0000000000000800       0x30 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .debug_ranges  0x0000000000000830       0x70 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+
+.debug_line     0x0000000000000000     0xa7bc
+ .debug_line    0x0000000000000000      0x672 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+ .debug_line    0x0000000000000672      0x343 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+ .debug_line    0x00000000000009b5      0x445 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+ .debug_line    0x0000000000000dfa      0x5f8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+ .debug_line    0x00000000000013f2      0x335 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+ .debug_line    0x0000000000001727      0x358 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+ .debug_line    0x0000000000001a7f      0x33c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+ .debug_line    0x0000000000001dbb      0x121 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strchr.o)
+ .debug_line    0x0000000000001edc      0x115 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcmp.o)
+ .debug_line    0x0000000000001ff1      0x153 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcpy.o)
+ .debug_line    0x0000000000002144      0x346 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+ .debug_line    0x000000000000248a      0x13e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlen.o)
+ .debug_line    0x00000000000025c8      0x366 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+ .debug_line    0x000000000000292e      0x12f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncmp.o)
+ .debug_line    0x0000000000002a5d      0x351 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+ .debug_line    0x0000000000002dae      0x94f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+ .debug_line    0x00000000000036fd      0x495 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+ .debug_line    0x0000000000003b92      0x488 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+ .debug_line    0x000000000000401a      0x496 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+ .debug_line    0x00000000000044b0      0x537 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+ .debug_line    0x00000000000049e7      0x48c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+ .debug_line    0x0000000000004e73      0x48d g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+ .debug_line    0x0000000000005300      0x332 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+ .debug_line    0x0000000000005632      0x4f4 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+ .debug_line    0x0000000000005b26      0x40e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+ .debug_line    0x0000000000005f34      0x695 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+ .debug_line    0x00000000000065c9      0x4c3 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+ .debug_line    0x0000000000006a8c      0x378 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+ .debug_line    0x0000000000006e04      0x265 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+ .debug_line    0x0000000000007069      0x370 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+ .debug_line    0x00000000000073d9      0x144 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memcpy.o)
+ .debug_line    0x000000000000751d      0x8ee g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+ .debug_line    0x0000000000007e0b      0x32a g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+ .debug_line    0x0000000000008135      0xb8e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+ .debug_line    0x0000000000008cc3      0x2c8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+ .debug_line    0x0000000000008f8b       0xcf g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+ .debug_line    0x000000000000905a      0x32e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+ .debug_line    0x0000000000009388      0x558 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+ .debug_line    0x00000000000098e0      0x15e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-memset.o)
+ .debug_line    0x0000000000009a3e      0x279 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+ .debug_line    0x0000000000009cb7      0x341 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+ .debug_line    0x0000000000009ff8      0x45f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+ .debug_line    0x000000000000a457      0x365 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+
+.debug_str      0x0000000000000000     0x300d
+ .debug_str     0x0000000000000000      0xa3a g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-locale.o)
+                                        0xb94 (size before relaxing)
+ .debug_str     0x0000000000000a3a      0x19c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs.o)
+                                        0x68e (size before relaxing)
+ .debug_str     0x0000000000000bd6       0xb8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbstowcs_r.o)
+                                        0x9ed (size before relaxing)
+ .debug_str     0x0000000000000c8e      0x25a g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mbtowc_r.o)
+                                        0xb2c (size before relaxing)
+ .debug_str     0x0000000000000ee8       0xb2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-rand.o)
+                                        0x667 (size before relaxing)
+ .debug_str     0x0000000000000f9a      0x184 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcasecmp.o)
+                                        0x673 (size before relaxing)
+ .debug_str     0x000000000000111e       0xb9 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strcat.o)
+                                        0x662 (size before relaxing)
+ .debug_str     0x00000000000011d7       0xaf g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strlcpy.o)
+                                        0x659 (size before relaxing)
+ .debug_str     0x0000000000001286       0xb3 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncasecmp.o)
+                                        0x67c (size before relaxing)
+ .debug_str     0x0000000000001339       0xd1 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strncpy.o)
+                                        0x681 (size before relaxing)
+ .debug_str     0x000000000000140a      0x3ad g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtod.o)
+                                        0xcf4 (size before relaxing)
+ .debug_str     0x00000000000017b7       0xdc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtol.o)
+                                        0xa23 (size before relaxing)
+ .debug_str     0x0000000000001893       0xd7 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtold.o)
+                                        0xaa7 (size before relaxing)
+ .debug_str     0x000000000000196a       0xcd g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoll.o)
+                                        0xa28 (size before relaxing)
+ .debug_str     0x0000000000001a37      0x119 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtorx.o)
+                                        0xba2 (size before relaxing)
+ .debug_str     0x0000000000001b50       0xcd g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoul.o)
+                                        0xa28 (size before relaxing)
+ .debug_str     0x0000000000001c1d       0xd1 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtoull.o)
+                                        0xa2d (size before relaxing)
+ .debug_str     0x0000000000001cee       0xb5 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wcscpy.o)
+                                        0x658 (size before relaxing)
+ .debug_str     0x0000000000001da3      0x114 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-wctomb_r.o)
+                                        0xa41 (size before relaxing)
+ .debug_str     0x0000000000001eb7      0x17e g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-ctype_.o)
+                                        0x97f (size before relaxing)
+ .debug_str     0x0000000000002035      0x11c g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-gethex.o)
+                                        0xc2b (size before relaxing)
+ .debug_str     0x0000000000002151       0xbc g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-gdtoa-hexnan.o)
+                                        0xb36 (size before relaxing)
+ .debug_str     0x000000000000220d       0xec g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-getenv_r.o)
+                                        0x6b2 (size before relaxing)
+ .debug_str     0x00000000000022f9      0x18a g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-impure.o)
+                                        0x653 (size before relaxing)
+ .debug_str     0x0000000000002483       0xda g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-localeconv.o)
+                                        0x9f0 (size before relaxing)
+ .debug_str     0x000000000000255d      0x103 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mprec.o)
+                                        0xb02 (size before relaxing)
+ .debug_str     0x0000000000002660      0x180 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sf_nan.o)
+                                        0x6bd (size before relaxing)
+ .debug_str     0x00000000000027e0      0x14f g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-strtodg.o)
+                                        0xd5b (size before relaxing)
+ .debug_str     0x000000000000292f      0x1e6 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-callocr.o)
+                                        0x7df (size before relaxing)
+ .debug_str     0x0000000000002b15       0xbb g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-environ.o)
+                                        0x201 (size before relaxing)
+ .debug_str     0x0000000000002bd0       0xc1 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-envlock.o)
+                                        0x674 (size before relaxing)
+ .debug_str     0x0000000000002c91       0xed g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mallocr.o)
+                                        0x8bb (size before relaxing)
+ .debug_str     0x0000000000002d7e       0xc2 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-mlock.o)
+                                        0x67b (size before relaxing)
+ .debug_str     0x0000000000002e40       0xc1 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-sbrkr.o)
+                                        0x696 (size before relaxing)
+ .debug_str     0x0000000000002f01       0x34 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-freer.o)
+                                        0x834 (size before relaxing)
+ .debug_str     0x0000000000002f35       0xd8 g:/pi/gcc_linaro_7_1/bin/../aarch64-elf/libc/usr/lib\libc.a(lib_a-reent.o)
+                                        0x68f (size before relaxing)

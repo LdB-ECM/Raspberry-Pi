@@ -1,0 +1,31 @@
+# Exported from 3D Builder
+
+newmtl material_0
+Kd 0.694118 0.694118 0.694118
+
+newmtl White
+Kd 1.000000 1.000000 1.000000
+map_Kd HTAIL.JPG
+
+newmtl White_0
+Kd 1.000000 1.000000 1.000000
+map_Kd RED.JPG
+
+newmtl White_1
+Kd 1.000000 1.000000 1.000000
+map_Kd WING.JPG
+
+newmtl White_2
+Kd 1.000000 1.000000 1.000000
+map_Kd FUS.JPG
+
+newmtl White_3
+Kd 1.000000 1.000000 1.000000
+map_Kd WHEEL.JPG
+
+newmtl material_6
+Kd 0.839216 0.839216 0.839216
+
+newmtl White_0
+Kd 1.000000 1.000000 1.000000
+map_Kd RED.JPG
