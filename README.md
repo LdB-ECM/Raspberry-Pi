@@ -1,11 +1,23 @@
-# **** Finally getting time to do the updates
+# **** Xmas holidays coming with some time for big updates
 >
-Visual Studio 2017 recently added direct make support so I am finally switching to make files so linux users can directly compile. The compiling background has been quickly documented. I will try to add in more detail in next few days.
+# New Work
+So I am starting a series on Task Switchers on Single and Multicores. We are going to start out with the simple standard task switcher (a FreeRTOS redux) on a single core. Yeah it's boring but we need to sort out base code stability before we start to fly.
+>
+https://github.com/LdB-ECM/Raspberry-Pi/tree/master/FreeRTOS
+>
+![](https://github.com/LdB-ECM/Docs_and_Images/blob/master/Images/FreeRTOS.jpg?raw=true)
+>
+
+# *** Cross Compiling Details
+Visual Studio 2017 recently added direct make support so I am finally switching to make files so linux users can directly compile. The compiling background has been quickly documented. Most of the directories are now carrying makefiles as I have relented and started doing it.
 >
 https://github.com/LdB-ECM/Docs_and_Images/tree/master/Documentation/Code_Background.md
 >
-
-# BareMetal Raspberry-Pi (Linux free zone)
+If you are on Windows and want a windows executable version of GNU make you can get 4.2.1 from
+>
+https://sourceforge.net/projects/ezwinports/files/
+>
+# BareMetal Raspberry-Pi (Linux free zone .. AKA windows)
 
 32 Bit Cross Compiler Toolchain I use (Multiple O/S are supported):
 >https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
@@ -16,16 +28,15 @@ https://github.com/LdB-ECM/Docs_and_Images/tree/master/Documentation/Code_Backgr
 64 Bit Cross Compiler Toolchain I use (Multiple O/S are supported):
 >https://releases.linaro.org/components/toolchain/binaries/latest/aarch64-elf/
 >
-64 Bit compile on the Pi itself:
-> TBD: Still trying to work out a toolchain install
-
-
+# OLDER WORK
+>
 # USB (Pi1,2,3 32Bit .. Pi3 AARCH64)
 >https://github.com/LdB-ECM/Raspberry-Pi/tree/master/Arm32_64_USB
 >
 Complete redux of CSUD (Chadderz's Simple USB Driver) by Alex Chadwick. All the memory allocation is gone and compacted to a single file (usb.c). It provides the Control channel functionality for a USB which enables enumeration. Now merged to latest SmartStart 2.0.3 code to bring the Alpha USB up to my latest bootstub. I have new GLES code which requires access to ethernet which means having the LAN9512/LAN9514 running. This is a small step to merge the existing code onto the newer smartstart bootstub to prepare a release for that. 
 If you just want to see it just put the files in the DiskImg directory on a formatted SD card and place in Pi.
 >
+
 ![](https://github.com/LdB-ECM/Docs_and_Images/blob/master/Images/USB64_alpha.jpg)
 >
 # MULTICORE (Pi1,2,3 32Bit .. Pi3 AARCH64)
