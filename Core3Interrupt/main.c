@@ -115,7 +115,7 @@ typedef union
 		unsigned PMU_Int : 1;										// @9	  PMU interrupt 
 		unsigned AXI_Int : 1;										// @10	  AXI-outstanding interrupt <For core 0 only!> all others are 0 
 		unsigned Timer_Int : 1;										// @11	  Local timer interrupt
-		unsigned GPIO_Int : 17;										// @12-27 Peripheral 1..15 interrupt (Currently not used
+		unsigned GPIO_Int : 16;										// @12-27 Peripheral 1..15 interrupt (Currently not used
 		unsigned reserved : 4;										// @28-31 reserved
 	};
 	uint32_t Raw32;													// Union to access all 32 bits as a uint32_t
