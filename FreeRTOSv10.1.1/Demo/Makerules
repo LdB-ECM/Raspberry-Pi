@@ -1,0 +1,12 @@
+# Name of this component (the directory this file is stored in)
+COMP = Demo
+
+# All .c Source files from this directory
+C_FILES = $(wildcard $(TOP_DIR)/$(COMP)/*.c) \
+          $(TOP_DIR)/FreeRTOS/Source/portable/MemMang/heap_4.c
+
+# All .S Source files from this directory
+S_FILES =  $(wildcard $(TOP_DIR)/$(COMP)/*.S)
+
+# Add the files to the compile source path
+COMP_SRC += ${S_FILES} ${C_FILES}

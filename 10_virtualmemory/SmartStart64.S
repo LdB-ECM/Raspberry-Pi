@@ -488,7 +488,6 @@ semaphore_dec:
 .ltorg										// Tell assembler ltorg data for this code can go here
 .size	semaphore_dec, .-semaphore_dec
 
-
 /* Re-entrant interrupt handler stub */
 /* http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.den0024a/ch10s05.html */
 .globl irq_handler
