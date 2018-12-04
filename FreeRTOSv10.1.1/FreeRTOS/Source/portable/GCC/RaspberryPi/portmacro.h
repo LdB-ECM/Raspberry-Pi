@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include <stddef.h>				// C standard unit needed for size_t
+
 /*-----------------------------------------------------------
  * Port specific definitions.  
  *
@@ -21,144 +23,42 @@ extern "C" {
 #define portDOUBLE		double
 #define portLONG		long
 #define portSHORT		short
-#define portSTACK_TYPE	unsigned portLONG
+#define portSTACK_TYPE	size_t
 #define portBASE_TYPE	portLONG
 
-/* added */
 typedef portSTACK_TYPE StackType_t;
 typedef portLONG BaseType_t;
-typedef unsigned portLONG UBaseType_t;
 
 #if( configUSE_16_BIT_TICKS == 1 )
-	typedef unsigned portSHORT  TickType_t;
-	#define portMAX_DELAY ( TickType_t ) 0xffff
-#else
-	typedef unsigned portLONG TickType_t;
-	#define portMAX_DELAY ( TickType_t ) 0xffffffffUL
+#error "The Raspberry Pi port does not support 16 bit timer ticks"
 #endif
-/* stop */
 
-/*
-#if( configUSE_16_BIT_TICKS == 1 )
-	typedef unsigned portSHORT portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffff
+#if __aarch64__ == 1
+typedef uint64_t UBaseType_t;
+typedef uint64_t TickType_t;
+#define portMAX_DELAY ( ( TickType_t ) 0xffffffffffffffffULL )
+#define portPOINTER_SIZE_TYPE  uint64_t
+#define portBYTE_ALIGNMENT	16
 #else
-	typedef unsigned portLONG portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffffffff
+typedef uint32_t UBaseType_t;
+typedef uint32_t TickType_t;
+#define portMAX_DELAY ( ( TickType_t ) 0xffffffffUL )
+#define portBYTE_ALIGNMENT	8
 #endif
-*/
+
+
 /*-----------------------------------------------------------*/	
-
 /* Architecture specifics. */
 #define portSTACK_GROWTH			( -1 )
-#define portTICK_PERIOD_MS			( ( portTickType ) 10000 / configTICK_RATE_HZ )		
-#define portBYTE_ALIGNMENT			8
-#define portNOP()						__asm volatile ( "NOP" );
+#define portTICK_PERIOD_MS			( ( portTickType ) 1000 / configTICK_RATE_HZ )		
+#define portNOP()					__asm volatile ( "NOP" );
 /*-----------------------------------------------------------*/	
 
-
-/* Scheduler utilities. */
-
-/*
- * portSAVE_CONTEXT, portRESTORE_CONTEXT, portENTER_SWITCHING_ISR
- * and portEXIT_SWITCHING_ISR can only be called from ARM mode, but
- * are included here for efficiency.  An attempt to call one from
- * THUMB mode code will result in a compile time error.
- */
-
-#define portRESTORE_CONTEXT()															\
-{																						\
-	/* Set the LR to the task stack.												*/	\
-	__asm volatile (																	\
-	/* Restore the original stack alignment (see note about 8-byte alignment below).*/	\
-	"add sp, sp, r4															\n\t"		\
-	/* Put the address of the current TCB into R1.									*/	\
-	"LDR		R0, =pxCurrentTCB											\n\t"		\
-	/* Load the 32-bit value stored at the address in R1.							*/	\
-	/* First item in the TCB is the top of the stack for the current TCB.			*/	\
-	"LDR		R0, [R0]													\n\t"		\
-																						\
-	/* Move the value into the Link Register!										*/	\
-	"LDR		LR, [R0]													\n\t"		\
-																						\
-	/* The critical nesting depth is the first item on the stack. */					\
-	/* Load it into the ulCriticalNesting variable. */									\
-	"LDR		R0, =ulCriticalNesting										\n\t"		\
-	"LDMFD		LR!, {R1}													\n\t"		\
-	"STR		R1, [R0]													\n\t"		\
-																						\
-	/* Get the SPSR from the stack. */													\
-	"LDMFD		LR!, {R0}													\n\t"		\
-	"MSR		SPSR_cxsf, R0												\n\t"		\
-																						\
-	/* Restore all system mode registers for the task. */								\
-	"LDMFD	LR, {R0-R14}^													\n\t"		\
-	"NOP																	\n\t"		\
-																						\
-	/* Restore the return address. */													\
-	"LDR		LR, [LR, #+60]												\n\t"		\
-																						\
-	/* And return - correcting the offset in the LR to obtain the */					\
-	/* correct address. */																\
-	"SUBS		PC, LR, #4													\n\t"		\
-	"NOP																	\n\t"		\
-	"NOP																	\n\t"		\
-	);																					\
-}
-/*-----------------------------------------------------------*/
-
-#define portSAVE_CONTEXT()													\
-{																			\
-	/* Push R0 as we are going to use the register. */						\
-	__asm volatile (														\
-	"STMDB	SP!, {R0}												\n\t"	\
-																			\
-	/* Set R0 to point to the task stack pointer. */						\
-	"STMDB	SP,{SP}^	\n\t"	/* ^ means get the user mode SP value. */	\
-	"SUB	SP, SP, #4												\n\t"	\
-	"LDMIA	SP!,{R0}												\n\t"	\
-																			\
-	/* Push the return address onto the stack. */							\
-	"STMDB	R0!, {LR}												\n\t"	\
-																			\
-	/* Now we have saved LR we can use it instead of R0. */					\
-	"MOV	LR, R0													\n\t"	\
-																			\
-	/* Pop R0 so we can save it onto the system mode stack. */				\
-	"LDMIA	SP!, {R0}												\n\t"	\
-																			\
-	/* Push all the system mode registers onto the task stack. */			\
-	"STMDB	LR,{R0-LR}^												\n\t"	\
-	"NOP															\n\t"	\
-	"SUB	LR, LR, #60												\n\t"	\
-																			\
-	/* Push the SPSR onto the task stack. */								\
-	"MRS	R0, SPSR												\n\t"	\
-	"STMDB	LR!, {R0}												\n\t"	\
-																			\
-	"LDR	R0, =ulCriticalNesting									\n\t"	\
-	"LDR	R0, [R0]												\n\t"	\
-	"STMDB	LR!, {R0}												\n\t"	\
-																			\
-	/* Store the new top of stack for the task. */							\
-	"LDR	R0, =pxCurrentTCB										\n\t"	\
-	"LDR	R0, [R0]												\n\t"	\
-	"STR	LR, [R0]												\n\t"	\
-	/* According to the document "Procedure Call Standard for the ARM   */	\
-	/* Architecture", the stack pointer is 4-byte aligned at all times, */	\
-	/* but it must be 8-byte aligned when calling an externally visible */	\
-	/* function. This is important because this code is reached from an */	\
-	/* IRQ and therefore the stack currently may only be 4-byte aligned.*/  \
-	/* If this is so, the stack must be padded to an 8-byte boundary	*/	\
-	/* before calling any external C code								*/	\
-	"AND R4, SP, #4													\n\t"	\
-	"SUB SP, SP, R4													\n\t"	\
-	);																		\
-}
-
-extern void vTaskSwitchContext( void );
-#define portYIELD_FROM_ISR()		vTaskSwitchContext()
-#define portYIELD()					__asm volatile ( "SWI 0" )
+#if __aarch64__ == 1
+#define portYIELD()		__asm volatile ( "SVC 0" ::: "memory" )
+#else
+#define portYIELD()		__asm volatile ( "SWI 0" )
+#endif
 /*-----------------------------------------------------------*/
 
 
@@ -180,30 +80,41 @@ extern void vTaskSwitchContext( void );
 	#define portENABLE_INTERRUPTS()	vPortEnableInterruptsFromThumb()
 	
 #else
+	#if __aarch64__ == 1
+		#define portDISABLE_INTERRUPTS()													\
+			__asm volatile ( "MSR DAIFSET, #2" ::: "memory" );								\
+			__asm volatile ( "DSB SY" );													\
+			__asm volatile ( "ISB SY" );
 
-	#define portDISABLE_INTERRUPTS()														\
-		__asm volatile (																		\
-			"STMDB	SP!, {R0}		\n\t"		/* Push R0.							*/	\
-			"MRS		R0, CPSR			\n\t"		/* Get CPSR.						*/	\
-			"ORR		R0, R0, #0xC0	\n\t"		/* Disable IRQ, FIQ.				*/	\
-			"MSR		CPSR, R0			\n\t"		/* Write back modified value.	*/	\
-			"LDMIA	SP!, {R0}			 " )	/* Pop R0.							*/
+		#define portENABLE_INTERRUPTS()														\
+			__asm volatile ( "MSR DAIFCLR, #2" ::: "memory" );								\
+			__asm volatile ( "DSB SY" );													\
+			__asm volatile ( "ISB SY" );
+	#else
+		#define portDISABLE_INTERRUPTS()													\
+			__asm volatile (																\
+				"STMDB	SP!, {R0}		\n\t"		/* Push R0.							*/	\
+				"MRS	R0, CPSR		\n\t"		/* Get CPSR.						*/	\
+				"ORR	R0, R0, #0xC0	\n\t"		/* Disable IRQ, FIQ.				*/	\
+				"MSR	CPSR, R0		\n\t"		/* Write back modified value.		*/	\
+				"LDMIA	SP!, {R0}			 " )	/* Pop R0.							*/
 			
-	#define portENABLE_INTERRUPTS()														\
-		__asm volatile (																		\
-			"STMDB	SP!, {R0}		\n\t"		/* Push R0.							*/	\
-			"MRS		R0, CPSR			\n\t"		/* Get CPSR.						*/	\
-			"BIC		R0, R0, #0xC0	\n\t"		/* Enable IRQ, FIQ.				*/	\
-			"MSR		CPSR, R0			\n\t"		/* Write back modified value.	*/	\
-			"LDMIA	SP!, {R0}			 " )	/* Pop R0.							*/
+		#define portENABLE_INTERRUPTS()														\
+			__asm volatile (																\
+				"STMDB	SP!, {R0}		\n\t"		/* Push R0.							*/	\
+				"MRS	R0, CPSR		\n\t"		/* Get CPSR.						*/	\
+				"BIC	R0, R0, #0xC0	\n\t"		/* Enable IRQ, FIQ.					*/	\
+				"MSR	CPSR, R0		\n\t"		/* Write back modified value.		*/	\
+				"LDMIA	SP!, {R0}			 " )	/* Pop R0.							*/
+	#endif
 
 #endif /* THUMB_INTERWORK */
 
-extern void vPortEnterCritical( void );
-extern void vPortExitCritical( void );
+extern void vPortEnterCritical ( void );
+extern void vPortExitCritical ( void );
 
-#define portENTER_CRITICAL()		vPortEnterCritical();
-#define portEXIT_CRITICAL()		vPortExitCritical();
+#define portENTER_CRITICAL()	vPortEnterCritical()
+#define portEXIT_CRITICAL()		vPortExitCritical()
 /*-----------------------------------------------------------*/
 
 #if configUSE_PORT_OPTIMISED_TASK_SELECTION == 1

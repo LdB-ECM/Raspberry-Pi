@@ -28,80 +28,16 @@
 #include "FreeRTOS.h"
 
 
-/* Constants required to handle critical sections. */
+/* Counts the interrupt nesting depth.  A context switch is only performed if
+if the nesting depth is 0. */
 #define portNO_CRITICAL_NESTING		( 0 )
-volatile uint32_t ulCriticalNesting = 9999UL;
-
-/*-----------------------------------------------------------*/
-
-
-/* 
- * The scheduler can only be started from ARM mode, hence the inclusion of this
- * function here.
- */
-void vPortISRStartFirstTask( void );
-/*-----------------------------------------------------------*/
-
-int g_bStarted = 0;
-
-void vPortISRStartFirstTask( void )
-{
-
-	/*
-	 *	Change from System to IRQ mode.
-	 *
-	 *
-	 */
-
-	g_bStarted++;
-
-	__asm volatile("mrs 	r0,cpsr");		// Read in the cpsr register.
-	__asm volatile("bic		r0,r0,#0x80");	// Clear bit 8, (0x80) -- Causes IRQs to be enabled
-	__asm volatile("msr		cpsr_c, r0");	// Write it back to the CPSR register
-//	__asm volatile("swi		0");			// Force a task switch with SWI!
-//	__asm volatile("nop");
-
-	/* Simply start the scheduler.  This is included here as it can only be
-	called from ARM mode. */
-	portRESTORE_CONTEXT();
-	__asm volatile (
-		"LDMFD	SP!, {LR}	\n"
-		"SUB	LR,	LR, #4	\n"
-		
-		"BX		LR			\n"
-	);
-}
-/*-----------------------------------------------------------*/
-
-/*
- * Called by portYIELD() or taskYIELD() to manually force a context switch.
- *
- * When a context switch is performed from the task level the saved task 
- * context is made to look as if it occurred from within the tick ISR.  This
- * way the same restore context function can be used when restoring the context
- * saved from the ISR or that saved from a call to vPortYieldProcessor.
- */
-
- /* ISR to handle manual context switches (from a call to taskYIELD()). */
-void vPortYieldProcessor(void) __attribute__((interrupt("SWI"), naked));
-void vPortYieldProcessor( void )
-{
-	/* Within an IRQ ISR the link register has an offset from the true return 
-	address, but an SWI ISR does not.  Add the offset manually so the same 
-	ISR return code can be used in both cases. */
-	__asm volatile ( "ADD		LR, LR, #4" );
-
-	/* Perform the context switch.  First save the context of the current task. */
-	portSAVE_CONTEXT();
-
-	/* Find the highest priority task that is ready to run. */
-	//__asm volatile ( "bl vTaskSwitchContext" );
-	vTaskSwitchContext();
+#if __aarch64__ == 1
+volatile uint64_t ulCriticalNesting = 9999;
+#else
+volatile uint32_t ulCriticalNesting = 9999;
+#endif
 
 
-	/* Restore the context of the new task. */
-	portRESTORE_CONTEXT();	
-}
 /*-----------------------------------------------------------*/
 
 /* 
@@ -109,25 +45,6 @@ void vPortYieldProcessor( void )
  */
 
 /*-----------------------------------------------------------*/
-
-
-/**
- *	This is the KERNEL's true entry point into an ISR.
- *
- *	We use the FreeRTOS to save context before entering the BitThunder
- *	vectorising ISR, and emitting the true ISR event.
- *
- *	On return from the BitThunder ISR we simply restore the context :D
- **/
-
-extern void irqHandler(void);
-void vFreeRTOS_ISR(void) __attribute__((interrupt("IRQ"), naked));
-void vFreeRTOS_ISR( void ) 
-{
-	portSAVE_CONTEXT();
-	irqHandler();
-	portRESTORE_CONTEXT();	
-}
 
 /*
  * The interrupt management utilities can only be called from ARM mode.  When
@@ -171,13 +88,19 @@ in a variable, which is then saved as part of the stack context. */
 void vPortEnterCritical( void )
 {
 	/* Disable interrupts as per portDISABLE_INTERRUPTS(); 							*/
+	#if __aarch64__ == 1
+	__asm volatile ("MSR DAIFSET, #2" ::: "memory");							
+	__asm volatile ("DSB SY");													
+	__asm volatile ("ISB SY");
+	#else
+	/* Disable interrupts as per portDISABLE_INTERRUPTS(); 							*/
 	__asm volatile ( 
 		"STMDB	SP!, {R0}			\n\t"	/* Push R0.								*/
 		"MRS	R0, CPSR			\n\t"	/* Get CPSR.							*/
 		"ORR	R0, R0, #0xC0		\n\t"	/* Disable IRQ, FIQ.					*/
 		"MSR	CPSR, R0			\n\t"	/* Write back modified value.			*/
 		"LDMIA	SP!, {R0}" );				/* Pop R0.								*/
-
+	#endif
 	/* Now interrupts are disabled ulCriticalNesting can be accessed 
 	directly.  Increment ulCriticalNesting to keep a count of how many times
 	portENTER_CRITICAL() has been called. */
@@ -195,6 +118,11 @@ void vPortExitCritical( void )
 		re-enabled. */
 		if( ulCriticalNesting == portNO_CRITICAL_NESTING )
 		{
+			#if __aarch64__ == 1
+			__asm volatile ("MSR DAIFCLR, #2" ::: "memory");
+			__asm volatile ("DSB SY");
+			__asm volatile ("ISB SY");
+			#else
 			/* Enable interrupts as per portEXIT_CRITICAL().					*/
 			__asm volatile ( 
 				"STMDB	SP!, {R0}		\n\t"	/* Push R0.						*/	
@@ -202,6 +130,7 @@ void vPortExitCritical( void )
 				"BIC	R0, R0, #0xC0	\n\t"	/* Enable IRQ, FIQ.				*/	
 				"MSR	CPSR, R0		\n\t"	/* Write back modified value.	*/	
 				"LDMIA	SP!, {R0}" );			/* Pop R0.						*/
+			#endif
 		}
 	}
 }

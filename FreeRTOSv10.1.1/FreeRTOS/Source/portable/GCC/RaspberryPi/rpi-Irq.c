@@ -132,13 +132,7 @@ bool irqDisableHandler (uint8_t coreNum, uint8_t irq)
 
 bool coreEnableIrq (uint8_t irq)
 {
-	uint32_t coreId;
-	#if __aarch64__ == 1
-	__asm("mrs %0, MPIDR_EL1 \t\n" : "=r" (coreId));				// Read Core ID from CPU register AARCH64
-	#else
-	__asm("mrc  p15, 0, %0, c0, c0, 5 \t\n" : "=r" (coreId));		// Read Core ID from CPU register AARCH32
-	#endif
-	coreId &= 3;													// Mask off all but core number
+	unsigned int coreId = getCoreID();								// Fetch core id
 	if ((coreId < RPi_CoresReady) && (irq < BCM2837_INTC_TOTAL_IRQ) // Core number and irq number are valid
 		&& coreICB[coreId].vectorTable[irq].pfnHandler)				// There is a valid handler registered for this irq
 	{
@@ -162,13 +156,7 @@ bool coreEnableIrq (uint8_t irq)
 
 bool coreDisableIrq (uint8_t irq)
 {
-	uint32_t coreId;
-	#if __aarch64__ == 1
-	__asm("mrs %0, MPIDR_EL1 \t\n" : "=r" (coreId));				// Read Core ID from CPU register AARCH64
-	#else
-	__asm("mrc  p15, 0, %0, c0, c0, 5 \t\n" : "=r" (coreId));		// Read Core ID from CPU register AARCH32
-	#endif
-	coreId &= 3;													// Mask off all but core number
+	unsigned int coreId = getCoreID();								// Fetch core id
 	if ((coreId < RPi_CoresReady) && (irq < BCM2837_INTC_TOTAL_IRQ))// Core number and irq number are valid
 	{
 		uint32_t mask = 1 << (irq % 32);							// Bit shift mask position
@@ -191,14 +179,8 @@ bool coreDisableIrq (uint8_t irq)
 
 void irqHandler (void)
 {
-	uint32_t coreId;
 	uint32_t ulMaskedStatus = (*BCM2835_INTC_IRQ_BASIC);			// Read the interrupt basic register
-	#if __aarch64__ == 1
-	__asm("mrs %0, MPIDR_EL1 \t\n" : "=r" (coreId));				// Read Core ID from CPU register AARCH64
-	#else
-	__asm("mrc  p15, 0, %0, c0, c0, 5 \t\n" : "=r" (coreId));		// Read Core ID from CPU register AARCH32
-	#endif
-	coreId &= 3;													// Mask off all but core number
+	unsigned int coreId = getCoreID();								// Fetch core id
 	// Bit 8 in IRQBasic indicates interrupts in Pending1 (interrupts 31-0):
 	if (ulMaskedStatus & (1 << 8))
 		handleRange(coreId, (*BCM2835_IRQ_PENDING1) & coreICB[coreId].enabled[0], 0);

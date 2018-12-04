@@ -3,40 +3,47 @@
 # download "make-4.2.1-without-guile-w32-bin.zip" and set it on the enviroment path
 # There is no need to install cygwin or any of that sort of rubbish
 
+# This little section enables us to make compatible windows and linux make files
 ifeq ($(OS), Windows_NT)
 	#WINDOWS USE THESE DEFINITIONS
-	RM = -del /q /f
+	RM = -del /q
 	SLASH = \\
-	SWALLOW_OUTPUT = >nul 2>nul
 else
 	#LINUX USE THESE DEFINITIONS
 	RM = -rm -f
 	SLASH = /
-	SWALLOW_OUTPUT =
 endif 
-ARMGNU ?= arm-none-eabi
+
+# You will need to change the first line (ARMGNU) of these to match your compiler directories
+ifeq ($(MAKECMDGOALS),Pi3-64)
+ARMGNU := D:/gcc_linaro_7_1/bin/aarch64-elf
+SMARTSTART := SmartStart64.S
+SPECIAL_FLAGS := -mcpu=cortexa53 -mstrict-align -fno-tree-loop-vectorize -fno-tree-slp-vectorize
+LINKER_FILE := rpi64.ld
+else
+ARMGNU := D:/gcc_pi_7_2/bin/arm-none-eabi
+SMARTSTART := SmartStart32.S
+SPECIAL_FLAGS := -mno-unaligned-access
+LINKER_FILE := rpi32.ld
+endif
+
 INCLUDEPATH ?= FreeRTOS
 
 # Temp directory for object files to go into
 TOP_DIR := .
 BUILD_DIR ?= ${TOP_DIR}/build
 
-# Set the C compilation flags common to all Embedded Xinu platforms.
-# platformVars can add more flags if desired.
+# Set the C compilation flags common to all platforms.
 CFLAGS  :=
 
-# Optimize for size.
-# XXX CFLAGS  += -Os
+# Optimize for speed.
 CFLAGS += -O3
+
 # Enable most useful compiler warnings.
 CFLAGS  += -Wall
 
 # Require full prototypes for all functions.
 CFLAGS  += -Wstrict-prototypes
-
-# Do not search standard system directories such as "/usr/include" for header
-# files, since Embedded Xinu is freestanding and only uses its own headers.
-###CFLAGS  += -nostdinc
 
 # Do not allow gcc to replace function calls with calls to gcc builtins, except
 # when explicitly requested through a __builtin prefix.  This ensures that gcc
@@ -48,9 +55,6 @@ CFLAGS  += -fno-builtin
 # the C standard.  Enabling this option is fairly common, since most programmers
 # don't fully understand aliasing in C, and this forces the "expected" behavior.
 CFLAGS  += -fno-strict-aliasing
-
-# On ARM7/8 with MMU on unaligned access will raise an exception so we need to stop it
-CFLAGS  += -mno-unaligned-access
 
 # Do not allow multiple definitions of uninitialized global variables.
 CFLAGS  += -fno-common 
@@ -70,28 +74,24 @@ CFLAGS  += -fno-pic
 # behavior.
 CFLAGS  += -fwrapv
 
+# ADD any special AARCH compile mode flags
+CFLAGS  += $(SPECIAL_FLAGS)
+
+Pi3-64: CFLAGS += -ffreestanding -nostartfiles -std=c11 -mcpu=cortex-a53
+Pi3-64: IMGFILE := kernel8.img
+
 Pi3: CFLAGS += -ffreestanding -nostartfiles -std=c11 -mcpu=cortex-a53
-Pi3: IMGFILE = kernel8-32.img
+Pi3: IMGFILE := kernel8-32.img
+
 Pi2: CFLAGS += -ffreestanding -nostartfiles -std=c11 -mcpu=cortex-a7 
-Pi2: IMGFILE = kernel7.img
+Pi2: IMGFILE := kernel7.img
+
 Pi1: CFLAGS += -ffreestanding -nostartfiles -std=c11 -mcpu=arm1176jzf-s
-Pi1: IMGFILE = kernel.img
-
-Pi3: freertos.elf
-BINARY = $(IMGFILE)
-.PHONY: Pi3
-
-Pi2: freertos.elf
-BINARY = $(IMGFILE)
-.PHONY: Pi2
-
-Pi1: freertos.elf
-BINARY = $(IMGFILE)
-.PHONY: Pi1
+Pi1: IMGFILE := kernel.img
 
 # Set linker flags common to all platforms.  platformVars can add additional
 # flags if needed.  Do not use the "-Wl," prefix either here on in platformVars.
-LDFLAGS := -Wl,-T raspberrypi.ld -Wl,--gc-sections
+LDFLAGS := -Wl,-T $(LINKER_FILE) -Wl,--gc-sections -Wl,--build-id=none
 
 # Set default external libraries.  Embedded Xinu is, of course, stand-alone and
 # ordinarily does not need to be linked to any external libraries; however,
@@ -112,21 +112,17 @@ INCLUDEPATH3 ?=  $(TOP_DIR)/FreeRTOS/Source/portable/gcc/$(PLATFORM)
 
 INCLUDE = -I$(INCLUDEPATH1) -I$(INCLUDEPATH2) -I$(INCLUDEPATH3) -I$(TOP_DIR)/Demo
 
-# List of device driver components to build into Xinu.  Generated from DEVICES,
-# which should have been set in platformVars.
+# Directory which has our demo files to compile
 DEMOCOMPS := $(TOP_DIR)/Demo
 
-# List of device driver components to build into Xinu.  Generated from DEVICES,
-# which should have been set in platformVars.
+# Directory that has the FreeRTOS source
 RTOSCOMPS := $(TOP_DIR)/FreeRTOS/source
 
-
-# List of all components to include ... This is the loader files from above plus any other components you do
-# For the moment SYSCOMPS = COMPS because we have no extra components
+# List of all components to include  ... Loader + FreeRTOS + Demo
 COMPS := $(SYSCOMPS) $(RTOSCOMPS) $(DEMOCOMPS)
 
 # Include component files, each should add its part to the compile source
-# This builds two lists C_FILES and S_FILES from iteration thru the makerules
+# This builds two lists C_FILES and S_FILES from iteration thru the makerules files
 COMP_SRC :=
 include $(COMPS:%=%/Makerules)
 
@@ -144,7 +140,6 @@ clean :
 	$(RM) build$(SLASH)*.d
 	$(RM) *.elf
 	$(RM) *.list
-	$(RM) *.img
 	$(RM) *.map
 .PHONY: clean
 
@@ -152,16 +147,27 @@ clean :
 $(SOFILES): $(SFILES)
 	$(ARMGNU)-gcc -MMD -MP -g -c $(CFLAGS) $(INCLUDE) $(filter %/$(patsubst %.o,%.S,$(notdir $@)), $(SFILES)) -c -o $@ -lc -lm -lgcc
 
-# How we compile C  files
-#####$(COFILES)/%.o:	$(CFILES)
+# How we compile C files
  $(COFILES): $(CFILES)
 	$(ARMGNU)-gcc -MMD -MP -g -c $(CFLAGS) $(INCLUDE) $(filter %/$(patsubst %.o,%.c,$(notdir $@)), $(CFILES)) -c -o $@ -lc -lm -lgcc
 
 $(SFILES): ;
 $(CFILES): ;
 
+Pi3-64: freertos.elf
+.PHONY: Pi3-64
+
+Pi3: freertos.elf
+.PHONY: Pi3
+
+Pi2: freertos.elf
+.PHONY: Pi2
+
+Pi1: freertos.elf
+.PHONY: Pi1
+
 freertos.elf : $(SOFILES) $(COFILES)
 	$(ARMGNU)-gcc $(CFLAGS) -o $@ $(LDFLAGS) $^ $(LDLIBS)
 	$(ARMGNU)-objdump -d freertos.elf > freertos.list
-	$(ARMGNU)-objcopy freertos.elf -O binary $(BINARY)
+	$(ARMGNU)-objcopy freertos.elf -O binary DiskImg$(SLASH)$(IMGFILE)
 	$(ARMGNU)-nm -n freertos.elf > freertos.map

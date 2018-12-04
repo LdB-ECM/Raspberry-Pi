@@ -3,7 +3,7 @@ COMP = loader/RaspberryPi
 
 # Source files for this component
 C_FILES = $(wildcard $(TOP_DIR)/$(COMP)/*.c)
-S_FILES = SmartStart32.S
+S_FILES = $(SMARTSTART)
 
 # Add the files to the compile source path
 DIR = ${TOP_DIR}/${COMP}

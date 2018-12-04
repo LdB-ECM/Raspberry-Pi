@@ -297,7 +297,7 @@ set_svc_stack:
 ;@"========================================================================="
 @#        Finally that all done jump to the C compiler entry point
 ;@"========================================================================="
-   	 bl kernel_main										;@ Call main
+   	 bl main											;@ Call main
 hang:
 	b hang												;@ Hang if it returns from main call
 .balign	4
@@ -320,13 +320,11 @@ _isr_Table:
 
 _reset_h:                           .word   _start
 _undefined_instruction_vector_h:    .word   hang
-//#_software_interrupt_vector_h:       .word   swi_handler_stub
-_software_interrupt_vector_h:       .word   vPortYieldProcessor
+_software_interrupt_vector_h:       .word   swi_handler_stub
 _prefetch_abort_vector_h:           .word   hang
 _data_abort_vector_h:               .word   hang
 _unused_handler_h:                  .word   hang
-//#_interrupt_vector_h:                .word   irq_handler_stub
-_interrupt_vector_h:                .word   vFreeRTOS_ISR
+_interrupt_vector_h:                .word   irq_handler_stub
 _fast_interrupt_vector_h:           .word   fiq_handler_stub	
 
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -359,6 +357,76 @@ atags:  .4byte 0x100
 .balign	4
 .ltorg													;@ Tell assembler ltorg data for this code can go here
 
+.macro portSAVE_CONTEXT
+	/* Push R0 as we are going to use the register. */
+	STMDB	SP!, {R0}
+
+	/* Set R0 to point to the task stack pointer. */
+	STMDB	SP,{SP}^	/* ^ means get the user mode SP value. */
+	SUB	SP, SP, #4
+	LDMIA	SP!,{R0}
+
+	/* Push the return address onto the stack. */
+	STMDB	R0!, {LR}
+
+	/* Now we have saved LR we can use it instead of R0. */
+	MOV	LR, R0
+
+	/* Pop R0 so we can save it onto the system mode stack. */
+	LDMIA	SP!, {R0}
+
+	/* Push all the system mode registers onto the task stack. */
+	STMDB	LR,{R0-LR}^
+	NOP
+	SUB	LR, LR, #60
+
+	/* Push the SPSR onto the task stack. */
+	MRS	R0, SPSR
+	STMDB	LR!, {R0}
+
+	LDR	R0, =ulCriticalNesting
+	LDR	R0, [R0]
+	STMDB	LR!, {R0}
+
+	/* Store the new top of stack for the task. */
+	LDR	R0, =pxCurrentTCB
+	LDR	R0, [R0]
+	STR	LR, [R0]
+.endm
+
+.macro portRESTORE_CONTEXT
+	/* Put the address of the current TCB into R1. */
+	LDR	R0, =pxCurrentTCB
+	/* Load the 32-bit value stored at the address in R1.					*/
+	/* First item in the TCB is the top of the stack for the current TCB.	*/
+	LDR R0, [R0]
+
+	/* Move the value into the Link Register! */
+	LDR	LR, [R0]
+
+	/* The critical nesting depth is the first item on the stack. */
+	/* Load it into the ulCriticalNesting variable. */
+	LDR	R0, =ulCriticalNesting
+	LDMFD	LR!, {R1}
+	STR	R1, [R0]
+
+	/* Get the SPSR from the stack. */
+	LDMFD	LR!, {R0}
+	MSR	SPSR_cxsf, R0
+
+	/* Restore all system mode registers for the task. */
+	LDMFD	LR, {R0-R14}^
+	NOP
+
+	/* Restore the return address. */
+	LDR	LR, [LR, #+60]
+
+	/* And return - correcting the offset in the LR to obtain the */
+	/* correct address. */
+	SUBS		PC, LR, #4
+	NOP
+	NOP
+.endm
 
 
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
@@ -368,29 +436,62 @@ atags:  .4byte 0x100
 
 .weak irq_handler_stub
 irq_handler_stub:
-    sub lr, lr, #4										;@ Use SRS to save LR_irq and SPSP_irq
-    srsfd sp!, #0x13									;@ on to the SVC mode stack
 
-    cps #0x13											;@ Switch to SVC mode
-    push {r0-r3, r12}									;@ Store AAPCS regs on to SVC stack
+	portSAVE_CONTEXT
 
+	/* According to the document "Procedure Call Standard for the ARM Architecture",	*/
+	/* the stack pointer is 4-byte aligned at all times, but it must be 8-byte aligned	*/
+	/* when calling an externally visible function. This is important because this code */
+	/* is reached from an IRQ and therefore the stack currently may be 4-byte aligned.	*/
+	/* If this is so, the stack must be padded to an 8-byte boundary before calling any */
+	/* external C code																	*/
+    mov r1, sp
+    and r1, r1, #0x7									;@ Ensure 8-byte stack alignment
+    sub sp, sp, r1										;@ adjust stack as necessary
+    push {r1, lr}										;@ Store adjustment and LR_svc
+
+	bl irqHandler										;@ Call irqhandler
+
+	/* Reverse out 8 byte padding from above */
+    pop {r1, lr}										;@ Restore LR_svc
+    add sp, sp, r1										;@ Un-adjust stack
+
+	/* restore context which includes a return from interrupt */
+	portRESTORE_CONTEXT
+
+	/* code should never reach this deadloop */
+	b .
+
+
+.weak swi_handler_stub
+swi_handler_stub:
+	ADD	LR, LR, #4
+
+	portSAVE_CONTEXT
+
+	/* According to the document "Procedure Call Standard for the ARM Architecture",	*/
+	/* the stack pointer is 4-byte aligned at all times, but it must be 8-byte aligned	*/
+	/* when calling an externally visible function. This is important because this code */
+	/* is reached from an IRQ and therefore the stack currently may be 4-byte aligned.	*/
+	/* If this is so, the stack must be padded to an 8-byte boundary before calling any */
+	/* external C code																	*/
     mov r1, sp
     and r1, r1, #4										;@ Ensure 8-byte stack alignment
     sub sp, sp, r1										;@ adjust stack as necessary
     push {r1, lr}										;@ Store adjustment and LR_svc
 
-  	ldr r0, =RPi_IrqFuncAddr							;@ Address to IrqFuncAddr
-	ldr r0, [r0]										;@ Load IrqFuncAddr value
-	cmp r0, #0											;@ compare to zero
-	beq no_irqset										;@ If zero no irq set 
-	blx r0												;@ Call Irqhandler that has been set  
-no_irqset:	
+	bl vTaskSwitchContext
 
+	/* Reverse out 8 byte padding from above */
     pop {r1, lr}										;@ Restore LR_svc
     add sp, sp, r1										;@ Un-adjust stack
 
-    pop {r0-r3, r12}									;@ Restore AAPCS registers
-    rfefd sp!											;@ Return from the SVC mode stack
+	/* restore context which includes a return from interrupt */
+	portRESTORE_CONTEXT
+
+	/* code should never reach this deadloop */
+	b .
+
 
 .weak fiq_handler_stub
 fiq_handler_stub:
@@ -417,33 +518,6 @@ no_fiqset:
 
     pop {r0-r3, r12}									;@ Restore AAPCS registers
     rfefd sp!											;@ Return from the SVC mode stack
-
-.weak swi_handler_stub
-swi_handler_stub:
-    sub lr, lr, #4										;@ Use SRS to save LR_irq and SPSP_irq
-    srsfd sp!, #0x13									;@ on to the SVC mode stack
-
-    cps #0x13											;@ Switch to SVC mode
-    push {r0-r3, r12}									;@ Store AAPCS regs on to SVC stack
-
-    mov r1, sp
-    and r1, r1, #4										;@ Ensure 8-byte stack alignment
-    sub sp, sp, r1										;@ adjust stack as necessary
-    push {r1, lr}										;@ Store adjustment and LR_svc
-
-  	ldr r0, =RPi_SwiFuncAddr							;@ Address to SwiFuncAddr
-	ldr r0, [r0]										;@ Load SwiFuncAddr value
-	cmp r0, #0											;@ compare to zero
-	beq no_swiset										;@ If zero no swi set 
-	blx r0												;@ Call Irqhandler that has been set  
-no_swiset:	
-
-    pop {r1, lr}										;@ Restore LR_svc
-    add sp, sp, r1										;@ Un-adjust stack
-
-    pop {r0-r3, r12}									;@ Restore AAPCS registers
-    rfefd sp!											;@ Return from the SVC mode stack
-
 
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 @#			GLOBAL INTERRUPT CONTROL PROVIDE BY RPi-SmartStart API
@@ -519,8 +593,31 @@ GPUaddrToARMaddr:
 .size	GPUaddrToARMaddr, .-GPUaddrToARMaddr
 
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-@#	   	RPi-SmartStart API TO SET CORE EXECUTE ROUTINE AT ADDRESS
+@#				RPi-SmartStart API TO MULTICORE FUNCTIONS
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+;@"========================================================================="
+@#		getCoreID -- Composite Pi1, Pi2 & Pi3 code
+@#		C Function: unsigned int getCoreID (void);
+@#		Return: Returns the multicore id of the core calling the function 
+;@"========================================================================="
+.section .text.getCoreID, "ax", %progbits
+.balign	4
+.globl getCoreID		
+.type getCoreID, %function
+getCoreID:
+	mov r0, #0
+	mrc p15, 0, r1, c0, c0, 0
+	ldr r2, =#ARM6_CPU_ID
+	cmp r2, r1
+	beq isARM6
+	mrc  p15, 0, r0, c0, c0, 5
+isARM6:
+	and r0, r0, #3
+	bx   lr	
+.balign	4
+.ltorg
+.size	getCoreID, .-getCoreID
 
 ;@"========================================================================="
 @#		CoreExcute -- Composite Pi1, Pi2 & Pi3 code
@@ -528,7 +625,7 @@ GPUaddrToARMaddr:
 @#		Entry: R0 will have core number, R1 will carry address to set core
 @#		Return: failure = 0, Success = 1 or any non zero value 
 ;@"========================================================================="
-.section .text.CoreExcute, "ax", %progbits
+.section .text.CoreExecute, "ax", %progbits
 .balign	4
 .globl CoreExecute		
 .type CoreExecute, %function
@@ -547,31 +644,11 @@ CoreExecuteFail:
 	bx  lr												;@ Return
 .balign	4
 .ltorg
+.size	CoreExecute, .-CoreExecute
 
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-@#		 IRQ, FIQ & SWI HELPER ROUTINES PROVIDE BY RPi-SmartStart API		    
+@#				 FIQ HELPER ROUTINES PROVIDE BY RPi-SmartStart API		    
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-
-;@"========================================================================="
-@#		setIrqFuncAddress -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: uintptr_t setIrqFuncAddress (void (*ARMaddress)(void));
-@#		Entry: R0 will have ARMAddress value
-@#		Return: R0 will return with the previous Irq function address
-;@"========================================================================="
-.section .text.setIrqFuncAddress, "ax", %progbits
-.balign	4
-.globl setIrqFuncAddress;
-.type setIrqFuncAddress, %function
-setIrqFuncAddress:
-    cpsid i												// Disable irq interrupts as we are clearly changing call
-	ldr r1, =RPi_IrqFuncAddr							// Load address of function to call on interrupt 
-	ldr r2, [r1]										// Load current irq call address
-	str r0, [r1]										// Store the new function pointer address we were given
-	mov r0, r2											// return the old call function
-	bx  lr												// Return
-.balign	4
-.ltorg													// Tell assembler ltorg data for this code can go here
-.size	setIrqFuncAddress, .-setIrqFuncAddress
 
 ;@"========================================================================="
 @#		setFiqFuncAddress -- Composite Pi1, Pi2 & Pi3 code
@@ -593,28 +670,6 @@ setFiqFuncAddress:
 .balign	4
 .ltorg													// Tell assembler ltorg data for this code can go here
 .size	setFiqFuncAddress, .-setFiqFuncAddress
-
-;@"========================================================================="
-@#		setSSwiFuncAddress -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: uintptr_t setSwiFuncAddress (void (*ARMaddress)(void));
-@#		Entry: R0 will have ARMAddress value
-@#		Return: R0 will return with the previous Swi function address
-;@"========================================================================="
-.section .text.setSwiFuncAddress, "ax", %progbits
-.balign	4
-.globl setSwiFuncAddress;
-.type setSwiFuncAddress, %function
-setSwiFuncAddress:
-    cpsid i												// Disable irq interrupts as we are clearly changing call
-	ldr r1, =RPi_SwiFuncAddr							// Load address of function to call on interrupt 
-	ldr r2, [r1]										// Load current fiq call address
-	str r0, [r1]										// Store the new function pointer address we were given
-	mov r0, r2											// return the old call function
-	bx  lr												// Return
-.balign	4
-.ltorg													// Tell assembler ltorg data for this code can go here
-.size	setSwiFuncAddress, .-setSwiFuncAddress
-
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 {	  RPi-SmartStart Compatability for David Welch CALLS he always uses	    }
@@ -653,17 +708,28 @@ GET32:
 .ltorg													// Tell assembler ltorg data for this code can go here
 .size	GET32, .-GET32
 
+;@"========================================================================="
+@#		restore_context -- Composite Pi1, Pi2 & Pi3 code
+@#		C Function: void restore_context (void);
+;@"========================================================================="
+.section .text.restore_context, "ax", %progbits
+.balign	4
+.globl restore_context;
+.type restore_context, %function
+restore_context:
+	/* Start the first task. */
+	portRESTORE_CONTEXT
+.balign	4
+.ltorg										// Tell assembler ltorg data for this code can go here
+.size	.restore_context, .-restore_context
+
 ;@"*************************************************************************"
 @#          INTERNAL DATA FOR SMARTSTART NOT EXPOSED TO INTERFACE			
 ;@"*************************************************************************"
 .section ".data.smartstart", "aw"
 .balign 4
-.globl RPi_IrqFuncAddr;
-RPi_IrqFuncAddr : .4byte 0;								;@ Irq function address
 .globl RPi_FiqFuncAddr;
 RPi_FiqFuncAddr : .4byte 0;								;@ Fiq function address
-.globl RPi_SwiFuncAddr;
-RPi_SwiFuncAddr : .4byte 0;								;@ Swi function address
 
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 @#     	          DATA FOR SMARTSTART32 EXPOSED TO INTERFACE 

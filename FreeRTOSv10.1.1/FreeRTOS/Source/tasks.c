@@ -551,16 +551,6 @@ static void prvAddCurrentTaskToDelayedList( TickType_t xTicksToWait, const BaseT
  */
 static void prvResetNextTaskUnblockTime( void );
 
-#if ( ( configUSE_TRACE_FACILITY == 1 ) && ( configUSE_STATS_FORMATTING_FUNCTIONS > 0 ) )
-
-	/*
-	 * Helper function used to pad task names with spaces when printing out
-	 * human readable tables of task information.
-	 */
-	static char *prvWriteNameToBuffer( char *pcBuffer, const char *pcTaskName ) PRIVILEGED_FUNCTION;
-
-#endif
-
 unsigned int xLoadPercentCPU (void)
 {
 	return ((configTICK_RATE_HZ - uxPercentLoadCPU) * 100 / configTICK_RATE_HZ);
@@ -4213,30 +4203,6 @@ TCB_t *pxTCB;
 #endif /* portCRITICAL_NESTING_IN_TCB */
 /*-----------------------------------------------------------*/
 
-#if ( ( configUSE_TRACE_FACILITY == 1 ) && ( configUSE_STATS_FORMATTING_FUNCTIONS > 0 ) )
-
-	static char *prvWriteNameToBuffer( char *pcBuffer, const char *pcTaskName )
-	{
-	size_t x;
-
-		/* Start by copying the entire string. */
-		strcpy( pcBuffer, pcTaskName );
-
-		/* Pad the end of the string with spaces to ensure columns line up when
-		printed out. */
-		for( x = strlen( pcBuffer ); x < ( size_t ) ( configMAX_TASK_NAME_LEN - 1 ); x++ )
-		{
-			pcBuffer[ x ] = ' ';
-		}
-
-		/* Terminate. */
-		pcBuffer[ x ] = ( char ) 0x00;
-
-		/* Return the new end of string. */
-		return &( pcBuffer[ x ] );
-	}
-
-#endif /* ( configUSE_TRACE_FACILITY == 1 ) && ( configUSE_STATS_FORMATTING_FUNCTIONS > 0 ) */
 /*-----------------------------------------------------------*/
 
 #if ( ( configUSE_TRACE_FACILITY == 1 ) && ( configUSE_STATS_FORMATTING_FUNCTIONS > 0 ) && ( configSUPPORT_DYNAMIC_ALLOCATION == 1 ) )
@@ -4246,7 +4212,6 @@ TCB_t *pxTCB;
 	TaskStatus_t *pxTaskStatusArray;
 	UBaseType_t uxArraySize, x;
 	char cStatus;
-
 		/*
 		 * PLEASE NOTE:
 		 *
@@ -4278,6 +4243,7 @@ TCB_t *pxTCB;
 		/* Take a snapshot of the number of tasks in case it changes while this
 		function is executing. */
 		uxArraySize = uxCurrentNumberOfTasks;
+
 
 		/* Allocate an array index for each task.  NOTE!  if
 		configSUPPORT_DYNAMIC_ALLOCATION is set to 0 then pvPortMalloc() will
@@ -4315,14 +4281,13 @@ TCB_t *pxTCB;
 										cStatus = ( char ) 0x00;
 										break;
 				}
-
-				/* Write the task name to the string, padding with spaces so it
-				can be printed in tabular form more easily. */
-				pcWriteBuffer = prvWriteNameToBuffer( pcWriteBuffer, pxTaskStatusArray[ x ].pcTaskName );
-
+			
 				/* Write the rest of the string. */
-				sprintf( pcWriteBuffer, "\t%c\t%u\t%u\t%u\r\n", cStatus, ( unsigned int ) pxTaskStatusArray[ x ].uxCurrentPriority, ( unsigned int ) pxTaskStatusArray[ x ].usStackHighWaterMark, ( unsigned int ) pxTaskStatusArray[ x ].xTaskNumber ); /*lint !e586 sprintf() allowed as this is compiled with many compilers and this is a utility function only - not part of the core kernel implementation. */
-				pcWriteBuffer += strlen( pcWriteBuffer ); /*lint !e9016 Pointer arithmetic ok on char pointers especially as in this case where it best denotes the intent of the code. */
+				pcWriteBuffer += sprintf(pcWriteBuffer, "%-*s\t%c\t%u\t%u\t%u\r\n", 
+					configMAX_TASK_NAME_LEN - 1, pxTaskStatusArray[x].pcTaskName,
+					cStatus, ( unsigned int ) pxTaskStatusArray[ x ].uxCurrentPriority, 
+					( unsigned int ) pxTaskStatusArray[ x ].usStackHighWaterMark, 
+					( unsigned int ) pxTaskStatusArray[ x ].xTaskNumber ); /*lint !e586 sprintf() allowed as this is compiled with many compilers and this is a utility function only - not part of the core kernel implementation. */
 			}
 
 			/* Free the array again.  NOTE!  If configSUPPORT_DYNAMIC_ALLOCATION
@@ -4408,22 +4373,22 @@ TCB_t *pxTCB;
 					ulTotalRunTimeDiv100 has already been divided by 100. */
 					ulStatsAsPercentage = pxTaskStatusArray[ x ].ulRunTimeCounter / ulTotalTime;
 
-					/* Write the task name to the string, padding with
-					spaces so it can be printed in tabular form more
-					easily. */
-					pcWriteBuffer = prvWriteNameToBuffer( pcWriteBuffer, pxTaskStatusArray[ x ].pcTaskName );
-
 					if( ulStatsAsPercentage > 0UL )
 					{
 						#ifdef portLU_PRINTF_SPECIFIER_REQUIRED
 						{
-							sprintf( pcWriteBuffer, "\t%lu\t\t%lu%%\r\n", pxTaskStatusArray[ x ].ulRunTimeCounter, ulStatsAsPercentage );
+							pcWriteBuffer += sprintf( pcWriteBuffer, "%-*s\t%lu\t\t%lu%%\r\n",
+								configMAX_TASK_NAME_LEN - 1, pxTaskStatusArray[x].pcTaskName, 
+								pxTaskStatusArray[ x ].ulRunTimeCounter, ulStatsAsPercentage );
 						}
 						#else
 						{
 							/* sizeof( int ) == sizeof( long ) so a smaller
 							printf() library can be used. */
-							sprintf( pcWriteBuffer, "\t%u\t\t%u%%\r\n", ( unsigned int ) pxTaskStatusArray[ x ].ulRunTimeCounter, ( unsigned int ) ulStatsAsPercentage ); /*lint !e586 sprintf() allowed as this is compiled with many compilers and this is a utility function only - not part of the core kernel implementation. */
+							pcWriteBuffer += sprintf( pcWriteBuffer, "%-*s\t%u\t\t%u%%\r\n",
+								configMAX_TASK_NAME_LEN - 1, pxTaskStatusArray[x].pcTaskName,
+								( unsigned int ) pxTaskStatusArray[ x ].ulRunTimeCounter, 
+								( unsigned int ) ulStatsAsPercentage ); /*lint !e586 sprintf() allowed as this is compiled with many compilers and this is a utility function only - not part of the core kernel implementation. */
 						}
 						#endif
 					}
@@ -4433,18 +4398,21 @@ TCB_t *pxTCB;
 						consumed less than 1% of the total run time. */
 						#ifdef portLU_PRINTF_SPECIFIER_REQUIRED
 						{
-							sprintf( pcWriteBuffer, "\t%lu\t\t<1%%\r\n", pxTaskStatusArray[ x ].ulRunTimeCounter );
+							pcWriteBuffer += sprintf( pcWriteBuffer, "%-*s\t%lu\t\t<1%%\r\n",
+								configMAX_TASK_NAME_LEN - 1, pxTaskStatusArray[x].pcTaskName,
+								pxTaskStatusArray[ x ].ulRunTimeCounter );
 						}
 						#else
 						{
 							/* sizeof( int ) == sizeof( long ) so a smaller
 							printf() library can be used. */
-							sprintf( pcWriteBuffer, "\t%u\t\t<1%%\r\n", ( unsigned int ) pxTaskStatusArray[ x ].ulRunTimeCounter ); /*lint !e586 sprintf() allowed as this is compiled with many compilers and this is a utility function only - not part of the core kernel implementation. */
+							pcWriteBuffer += sprintf( pcWriteBuffer, "%-*s\t%u\t\t<1%%\r\n",
+								configMAX_TASK_NAME_LEN - 1, pxTaskStatusArray[x].pcTaskName,
+								( unsigned int ) pxTaskStatusArray[ x ].ulRunTimeCounter ); /*lint !e586 sprintf() allowed as this is compiled with many compilers and this is a utility function only - not part of the core kernel implementation. */
 						}
 						#endif
 					}
 
-					pcWriteBuffer += strlen( pcWriteBuffer ); /*lint !e9016 Pointer arithmetic ok on char pointers especially as in this case where it best denotes the intent of the code. */
 				}
 			}
 			else

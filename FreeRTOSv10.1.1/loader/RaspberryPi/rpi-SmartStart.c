@@ -1250,103 +1250,6 @@ const char* RPi_CpuIdString (void)
 }
 
 /*==========================================================================}
-{		PUBLIC CONTEXT SWITCH ROUTINES PROVIDED BY RPi-SmartStart API		}
-{==========================================================================*/
-/* The standard ARM calling convention passes first four arguments in r0-r3; the rest spill onto the stack.  */
-#define MAX_REG_ARGS 4
-
-#define ARM_MODE_SYS 0x1F											// System Running Priviledged Operating System Tasks Mode
-#define ARM_F_BIT 0x40												// FIQs disabled when set to 1
-
-/* This is what the context stack actually looks like .. remember its  a stack it loads from bottom */
-struct Context_Stack
-{
-	#if (__ARM_FP == 12)											// Hard FPU on check these register dont exist if soft compiles
-	uint32_t fpexc;													// FPU exeception register
-	uint32_t fpscr;													// FPU status and control register
-	uint64_t d[16];													// FPU registers D0-15
-	#endif
-	uint32_t _reserved;												// simply used to keep align 8 on stack
-	uint32_t r[15];													// Registers R0-R14
-} __packed;
-
-
-/*-[Setup_Context_Stack]----------------------------------------------------}
-. Sets up the initial values in a context stack ready to execute the given
-. task function call provided. The task end return setup is done as well as
-. place all vardiac arguments correctly for task function to start. The stack
-. memory is assumed to be valid/allocated and at least 256 bytes in size but
-. usually a lot more depending on your task stack use.
-. RETURN: The address in your stack that is top of stack set for 1st switch
-.--------------------------------------------------------------------------*/
-uint32_t Setup_Context_Stack (uint32_t* stackaddr,					// Context stack address ... must be allocated and valid
-							  void* procaddr,						// Address of task procedure you want to run
-							  void* retaddr,						// Return address if task ever ends
-							  unsigned int nargs,					// Number of uint32_t arguments following
-							  va_list ap)							// Variadic arguments list described by that number
-{
-	//uint32_t* saddr = stackaddr;									// Working stack address starts at address given
-	unsigned int spilled_nargs = 0;									// Preset no spilled arguments to start with
-	unsigned int reg_nargs = nargs;									// Preset register args as arg number
-	struct Context_Stack* saddr;
-
-	/* Determine if any arguments will spill onto the stack (outside the contextrecord).  If so, reserve space for them on stack */
-	if (nargs > MAX_REG_ARGS) {
-		spilled_nargs = nargs - MAX_REG_ARGS;						// Calculate how many registers will spill
-		reg_nargs = MAX_REG_ARGS;									// Set the register arguments down to the maxiumum
-		stackaddr -= spilled_nargs;									// Use pointer arthmetic to move the stack pointer down to make space
-	}
-
-	/* Possibly skip a word to ensure the stack is aligned on 8-byte boundary after the new thread pops off the context record.  */
-	if ((uint32_t)stackaddr & 0x4)
-	{
-		stackaddr--;												// Make address align8
-	}
-
-	/* The address we will pass back is the top of the context stack  */
-	saddr = (struct Context_Stack*)stackaddr;						// Set the structure pointer at the address
-	saddr--;														// Use pointer arthmetic to move 1 struct up
-
-
-#if (__ARM_FP == 12)
-	__asm volatile ("fmrx %0, fpexc" : "=r" (saddr->fpexc));		// Save FPU execption register to context stack 
-	__asm volatile ("fmrx %0, fpscr" : "=r" (saddr->fpscr));		// Save FPU statuc control register to context stack
-	for (int i = 0; i < 16; i++) saddr->d[i] = 0;					// Zero all the FPU data registers
-#endif
-
-	/* Set the arguments passed in registers which will be r0-r3 in record */
-	for (int i = 0; i < reg_nargs; i++)
-	{
-		saddr->r[i] = va_arg(ap, uint32_t);							// Read and store register arguments
-	}
-
-	/* For rest of general registers zero them */
-	for (int i = reg_nargs; i < 12; i++)
-	{
-		saddr->r[i] = 0;											// Zero the register
-	}
-
-	/* Control bits of program status register (SYS mode, IRQs initially enabled) */
-	saddr->r[12] = ARM_MODE_SYS | ARM_F_BIT;						// Set the program status register
-
-	/* return address */
-	saddr->r[13] = (uint32_t)retaddr;								// Set the return address
-
-	/* task function process  */
-	saddr->r[14] = (uint32_t)procaddr;								// Set the link
-
-	/* Arguments spilled onto stack (not part of context record)  */
-	for (int i = 0; i < spilled_nargs; i++)
-	{
-		stackaddr[i] = va_arg(ap, uint32_t);						// Set the spill arguments these might be backwards
-	}
-
-	/* Return "top" of stack (lowest address).  */
-	return (uint32_t)saddr;											// Return the top of stack address
-}
-
-
-/*==========================================================================}
 {			 PUBLIC GPIO ROUTINES PROVIDED BY RPi-SmartStart API			}
 {==========================================================================*/
 #define MAX_GPIO_NUM 54												// GPIO 0..53 are valid
@@ -1582,7 +1485,7 @@ bool mailbox_tag_message (uint32_t* response_buf,					// Pointer to response buf
 						  ...)										// Variadic uint32_t values for call
 {
 	uint32_t __attribute__((aligned(16))) message[32];
-	uint32_t addr = (uint32_t)&message[0];
+	uint32_t addr = (uint32_t)(uintptr_t)&message[0];
 	va_list list;
 	va_start(list, data_count);										// Start variadic argument
 	message[0] = (data_count + 3) * 4;								// Size of message needed
@@ -1595,7 +1498,7 @@ bool mailbox_tag_message (uint32_t* response_buf,					// Pointer to response buf
 #if __aarch64__ == 1
 	__asm volatile ("dc civac, %0" : : "r" (addr) : "memory");		// Ensure coherence
 #endif
-	mailbox_write(MB_CHANNEL_TAGS, ARMaddrToGPUaddr((void*)addr));	// Write message to mailbox
+	mailbox_write(MB_CHANNEL_TAGS, ARMaddrToGPUaddr((void*)(uintptr_t)addr));// Write message to mailbox
 	mailbox_read(MB_CHANNEL_TAGS);									// Read the response
 #if __aarch64__ == 1
 	__asm volatile ("dc civac, %0" : : "r" (addr) : "memory");		// Ensure coherence
@@ -1625,15 +1528,12 @@ void ClearTimerIrq(void)
 }
 
 /*-[TimerIrqSetup]----------------------------------------------------------}
-. Allocates the given TimerIrqHandler function pointer to be the irq call
-. when a timer interrupt occurs. The interrupt rate is set by providing a
-. period in usec between triggers of the interrupt. If the IRQ function is
-. redirected by another means use 0 which causes handler set to be ignored.
+. The interrupt rate is set by providing a period in usec between triggers 
+. of the interrupt. The irq function is hard set in FreeRTOS implementation.
 . Largest period is around 16 million usec (16 sec) it varies on core speed
-. RETURN: The old function pointer that was in use (will return 0 for 1st).
+. RETURN: 1 for success and 0 for any failure
 .--------------------------------------------------------------------------*/
-uintptr_t TimerIrqSetup(uint32_t period_in_us,						// Period between timer interrupts in usec
-	void(*ARMaddress)(void))					// Function to call on interrupt
+uintptr_t TimerIrqSetup(uint32_t period_in_us)						// Period between timer interrupts in usec
 {
 	uint32_t Buffer[5] = { 0 };
 	uint32_t OldHandler = 0;
@@ -1645,13 +1545,13 @@ uintptr_t TimerIrqSetup(uint32_t period_in_us,						// Period between timer inte
 		Buffer[4] /= 10000;											// Divid by 10000 we are trying to hold some precision should be in low hundreds (160'ish)
 		Buffer[4] *= period_in_us;									// Multiply by the micro seconds result
 		Buffer[4] /= 100;											// This completes the division by 1000000 (done as /10000 and /100)
-		if (Buffer[4] == 0) return 0;								// Invalid divisor so return with fail
-		if (ARMaddress) OldHandler = setIrqFuncAddress(ARMaddress);	// Set new interrupt handler
-		IRQ->EnableBasicIRQs.Enable_Timer_IRQ = true;				// Enable the timer interrupt IRQ
-		ARMTIMER->Load = Buffer[4];									// Set the load value to divisor
-		ARMTIMER->Control.Counter32Bit = true;						// Counter in 32 bit mode
-		ARMTIMER->Control.Prescale = Clkdiv1;						// Clock divider = 1
-		ARMTIMER->Control.TimerIrqEnable = true;					// Enable timer irq
+		if (Buffer[4] != 0) {										// Invalid divisor of zero will return with fail
+			IRQ->EnableBasicIRQs.Enable_Timer_IRQ = true;			// Enable the timer interrupt IRQ
+			ARMTIMER->Load = Buffer[4];								// Set the load value to divisor
+			ARMTIMER->Control.Counter32Bit = true;					// Counter in 32 bit mode
+			ARMTIMER->Control.Prescale = Clkdiv1;					// Clock divider = 1
+			ARMTIMER->Control.TimerIrqEnable = true;				// Enable timer irq
+		}
 		ARMTIMER->Control.TimerEnable = true;						// Now start the clock
 	}
 	return OldHandler;												// Return last function pointer	
@@ -1669,15 +1569,12 @@ void ClearLocalTimerIrq(void)
 
 
 /*-[LocalTimerIrqSetup]-----------------------------------------------------}
-. Allocates the given IrqHandler function pointer to be the irq call
-. when a timer interrupt occurs. The interrupt rate is set by providing a
-. period in usec between triggers of the interrupt. If the IRQ function is
-. redirected by another means use 0 which causes handler set to be ignored.
+. The interrupt rate is set by providing a period in usec between triggers 
+. of the interrupt. The irq function is hard set in FreeRTOS implementation.
 . RETURN: The old function pointer that was in use (will return 0 for 1st).
 .--------------------------------------------------------------------------*/
 bool LocalTimerSetup (uint32_t period_in_us,						// Period between timer interrupts in usec
-					  uint8_t coreNum,								// Core number
-					  void(*ARMaddress)(void))						// Function to call on interrupt
+					  uint8_t coreNum)								// Core number
 {
 	if (coreNum < RPi_CoresReady)
 	{
@@ -1693,7 +1590,6 @@ bool LocalTimerSetup (uint32_t period_in_us,						// Period between timer interr
 
 		QA7->CoreTimerIntControl[coreNum].nCNTPNSIRQ_IRQ = 1;		// We are in NS EL1 so enable IRQ to core0 that level
 		QA7->CoreTimerIntControl[coreNum].nCNTPNSIRQ_FIQ = 0;		// Make sure FIQ is zero
-		if (ARMaddress) setIrqFuncAddress(ARMaddress);				// Set new interrupt handler
 		return true;												// Timer successfully set
 	}
 	return false;

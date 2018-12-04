@@ -50,9 +50,8 @@ extern "C" {									// Put extern C directive wrapper around
 #define _countof(_Array) (sizeof(_Array) / sizeof(_Array[0])) 
 #endif
 
-/* As we are compiling for Raspberry Pi if main, winmain make them kernel_main */
-#define WinMain(...) kernel_main (uint32_t r0, uint32_t r1, uint32_t atags)
-#define main(...) kernel_main (uint32_t r0, uint32_t r1, uint32_t atags)
+/* As we are compiling for Raspberry Pi if winmain make it main */
+#define WinMain(...) main(uint32_t r0, uint32_t r1, uint32_t atags)
 
 /* System font is 8 wide and 16 height so these are preset for the moment */
 #define BitFontHt 16
@@ -480,22 +479,6 @@ typedef union {
 {		  INTERRUPT HELPER ROUTINES PROVIDE BY RPi-SmartStart API	        }
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-/*-[ setSwiFuncAddress ]----------------------------------------------------}
-. NOTE: Public C interface only to code located in SmartsStartxx.S
-. Sets the function pointer to be the called when an SWI interrupt occurs.
-. CPU interrupts will be disabled so they can't trigger while changing.
-. RETURN: Old function pointer that was in use (will return 0 if never set).
-.--------------------------------------------------------------------------*/
-uintptr_t setSwiFuncAddress (void(*ARMaddress)(void));
-
-/*-[ setIrqFuncAddress ]----------------------------------------------------}
-. NOTE: Public C interface only to code located in SmartsStartxx.S
-. Sets the function pointer to be the called when an Irq interrupt occurs. 
-. CPU interrupts will be disabled so they can't trigger while changing.
-. RETURN: Old function pointer that was in use (will return 0 if never set). 
-.--------------------------------------------------------------------------*/
-uintptr_t setIrqFuncAddress (void(*ARMaddress)(void));
-
 /*-[setFiqFuncAddress]------------------------------------------------------}
 . NOTE: Public C interface only to code located in SmartsStartxx.S
 . Sets the function pointer to be the called when an Fiq interrupt occurs.
@@ -503,7 +486,6 @@ uintptr_t setIrqFuncAddress (void(*ARMaddress)(void));
 . RETURN: Old function pointer that was in use (will return 0 if never set).
 .--------------------------------------------------------------------------*/
 uintptr_t setFiqFuncAddress (void(*ARMaddress)(void));
-
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 {			GLOBAL INTERRUPT CONTROL PROVIDE BY RPi-SmartStart API		    }
@@ -522,8 +504,14 @@ void EnableInterrupts (void);
 void DisableInterrupts (void);
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
-{	   	RPi-SmartStart API TO SET CORE EXECUTE ROUTINE AT ADDRESS 		    }
+{			 RPi-SmartStart API TO MULTICORE FUNCTIONS					    }
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*-[getCoreID]------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Returns the multicore id of the core calling the function
+.--------------------------------------------------------------------------*/
+unsigned int getCoreID (void);
 
 /*-[CoreExecute]------------------------------------------------------------}
 . NOTE: Public C interface only to code located in SmartsStartxx.S
@@ -692,8 +680,7 @@ void ClearTimerIrq (void);
 . Largest period is around 16 million usec (16 sec) it varies on core speed
 . RETURN: The old function pointer that was in use (will return 0 for 1st).
 .--------------------------------------------------------------------------*/
-uintptr_t TimerIrqSetup (uint32_t period_in_us,						// Period between timer interrupts in usec
-						 void (*ARMaddress)(void) );				// Function to call on interrupt
+uintptr_t TimerIrqSetup (uint32_t period_in_us);					// Period between timer interrupts in usec
 
 /*-[ClearLocalTimerIrq]-----------------------------------------------------}
 . Simply clear the local timer interupt by hitting the clear registers. Any
@@ -709,8 +696,7 @@ void ClearLocalTimerIrq (void);
 . RETURN: The old function pointer that was in use (will return 0 for 1st).
 .--------------------------------------------------------------------------*/
 bool LocalTimerSetup (uint32_t period_in_us,						// Period between timer interrupts in usec
-					  uint8_t coreNum,								// Core number
-					  void(*ARMaddress)(void));						// Function to call on interrupt
+					  uint8_t coreNum);								// Core number
 
 /*==========================================================================}
 {				           MINIUART ROUTINES								}

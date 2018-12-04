@@ -84,7 +84,7 @@ void task1(void *pParam) {
 			/* We have finished accessing the shared resource.  Release the
 			semaphore. */
 			xSemaphoreGive(barSemaphore);
-		}	
+		}
 		vTaskDelay(10);
 	}
 }
@@ -112,13 +112,32 @@ void task2(void *pParam) {
 }
 
 
-void task3 (void *pParam) {
-	char buf[128];
+static bool lit = false;
+void task3(void *pvParameters)
+{
+	/* As per most tasks, this task is implemented in an infinite loop. */
+	for (;; )
+	{
+		/* Print out the name of this task AND the number of times ulIdleCycleCount has been incremented. */
+		if (xSemaphoreTake(barSemaphore, 40) == pdTRUE)
+		{
+			GotoXY(0, 14);
+			printf("Cpu usage: %u%%    FreeRTOS: %s\n", xLoadPercentCPU(), tskKERNEL_VERSION_NUMBER);
+			xSemaphoreGive(barSemaphore);
+		}
+		if (lit) lit = false; else lit = true;							// Flip lit flag
+		set_Activity_LED(lit);											// Turn LED on/off as per new flag
+		vTaskDelay(configTICK_RATE_HZ);
+	}
+}
+
+void task4 (void *pParam) {
+	char buf[256];
 	while (1) 
 	{
 		if (xSemaphoreTake(barSemaphore, 40) == pdTRUE)
 		{
-			GotoXY(0, 15);
+			GotoXY(0, 16);
 			printf("[Task]       [State]  [Prio]  [Stack] [Num]\n");
 			vTaskList(&buf[0]);
 			printf(&buf[0]);
@@ -133,79 +152,6 @@ void task3 (void *pParam) {
 	}
 }
 
-void task4(void *pvParameters)
-{
-	/* As per most tasks, this task is implemented in an infinite loop. */
-	for (;; )
-	{	
-		/* Print out the name of this task AND the number of times ulIdleCycleCount has been incremented. */
-		if (xSemaphoreTake(barSemaphore, 40) == pdTRUE)
-		{
-			GotoXY(0, 14);
-			printf("Cpu usage: %u%%    FreeRTOS: %s\n", xLoadPercentCPU(), tskKERNEL_VERSION_NUMBER);
-			xSemaphoreGive(barSemaphore);
-		}
-		vTaskDelay(configTICK_RATE_HZ);
-	}
-}
-
-void Write_Hello(uint8_t coreNum, uint8_t irq, void *pParam)
-{
-	(void)coreNum;
-	(void)irq;
-	(void)pParam;
-	printf("Hello from core%u\n", (unsigned int)coreNum);
-}
-
-void FreeRTOSon3(void)
-{
-//	Init_EmbStdio(WriteText);										// Initialize embedded stdio
-//	PiConsole_Init(0, 0, 0, printf);								// Auto resolution console, message to screen
-//	displaySmartStart(printf);										// Display smart start details
-//	ARM_setmaxspeed(printf);										// ARM CPU to max speed
-	printf("Task tick rate: %u\n", configTICK_RATE_HZ);
-	/* Attempt to create a semaphore. */
-	//barSemaphore = xSemaphoreCreateBinary();
-
-	irqRegisterHandler(3, 83, &Write_Hello, &ClearLocalTimerIrq, NULL);
-	irqEnableHandler(3, 83);
-	LocalTimerSetup(1000000, 3, 0);
-	EnableInterrupts();
-	while (1) {}
-
-	vSemaphoreCreateBinary(barSemaphore);
-
-	if (barSemaphore != NULL)
-	{
-		/* The semaphore can now be used. Its handle is stored in the
-		xSemahore variable.  Calling xSemaphoreTake() on the semaphore here
-		will fail until the semaphore has first been given. */
-		xSemaphoreGive(barSemaphore);
-	}
-
-	xTaskCreate(task1, "HARE  ", 512, NULL, 4, NULL);
-	xTaskCreate(task2, "TURTLE", 512, NULL, 4, NULL);
-	xTaskCreate(task3, "DETAIL", 512, NULL, 1, NULL);
-	xTaskCreate(task4, "TIMER ", 512, NULL, 1, NULL);
-	
-	vTaskStartScheduler();
-	/*
-	 *	We should never get here, but just in case something goes wrong,
-	 *	we'll place the CPU into a safe loop.
-	 */
-	while(1) {
-	}
-}
-
-static bool lit = false;
-void Flash_LED(uint8_t coreNum, uint8_t irq, void *pParam)
-{
-	(void)coreNum;
-	(void)irq;
-	(void)pParam;
-	if (lit) lit = false; else lit = true;							// Flip lit flag
-	set_Activity_LED(lit);											// Turn LED on/off as per new flag
-}
 
 void main (void)
 {
@@ -227,10 +173,10 @@ void main (void)
 		xSemaphoreGive(barSemaphore);
 	}
 
-	xTaskCreate(task1, "HARE  ", 512, NULL, 4, NULL);
-	xTaskCreate(task2, "TURTLE", 512, NULL, 4, NULL);
-	xTaskCreate(task3, "DETAIL", 512, NULL, 1, NULL);
-	xTaskCreate(task4, "TIMER ", 512, NULL, 1, NULL);
+	xTaskCreate(task1, "HARE  ", 2048, NULL, 4, NULL);
+	xTaskCreate(task2, "TURTLE", 2048, NULL, 4, NULL);
+	xTaskCreate(task3, "TIMER ", 2048, NULL, 3, NULL);
+	xTaskCreate(task4, "DETAIL", 2048, NULL, 2, NULL);
 
 	vTaskStartScheduler();
 	/*
@@ -242,21 +188,3 @@ void main (void)
 }
 
 
-
-
-void aaaamain(void)
-{
-	Init_EmbStdio(WriteText);										// Initialize embedded stdio
-	PiConsole_Init(0, 0, 0, printf);								// Auto resolution console, message to screen
-	displaySmartStart(printf);										// Display smart start details
-	ARM_setmaxspeed(printf);										// ARM CPU to max speed
-	printf("Okay here goes nothing lets try FreeRTOS on core3\n");
-	CoreExecute(3, FreeRTOSon3);
-
-	//Let see if we can also use interrupts on core 0
-	irqRegisterHandler(0, 64, &Flash_LED, &ClearTimerIrq, NULL);
-	irqEnableHandler(0, 64);
-	TimerIrqSetup(1000000, 0);
-	EnableInterrupts();
-	while (1);
-}
