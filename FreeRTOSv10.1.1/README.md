@@ -3,6 +3,9 @@
 >
 I have been messing around with Task Switchers (Single/Multicore) in 32Bit or 64Bit mode and have decided to put some up. This is the easiest one to understand and start with being a simple FreeRTOS 10.1.1 port. Yes it all boots from the standard SmartStart system as usual so it autodetect models etc.  So on this example we have the RTOS simply running on one core doing the boring time slicing. 
 >
+Technically it probably should be called 10.1.2 because it has a couple of minor changes I added. I improved a couple of task display string functions and added CPU load percentage as a standard funtion
+#### unsigned int xLoadPercentCPU(void);
+>
 Sorry it's a pretty boring example just moving a couple bars backwards forward, I will try and make some more advanced samples.
 >
 ### > As usual you can copy prebuilt files in "DiskImg" directory on formatted SD card to test <
