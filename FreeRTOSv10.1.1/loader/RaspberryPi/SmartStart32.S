@@ -1,3 +1,48 @@
+//"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+//"																			"			
+//"      Filename: smartstart32.S											"
+//"      Copyright(c): Leon de Boer(LdB) 2017, 2018							"
+//"      Version: 2.12														"
+//"																			"		
+//"***************[ THIS CODE IS FREEWARE UNDER CC Attribution]*************"
+//"																			"
+//"    This sourcecode is released for the purpose to promote programming   "
+//"  on the Raspberry Pi. You may redistribute it and/or modify with the    "
+//"  following disclaimer and condition.									"
+//"																			"
+//"      The SOURCE CODE is distributed "AS IS" WITHOUT WARRANTIES AS TO	"
+//"   PERFORMANCE OF MERCHANTABILITY WHETHER EXPRESSED OR IMPLIED.			"
+//"   Redistributions of source code must retain the copyright notices to	"
+//"   maintain the author credit (attribution) .							"
+//"																			"
+//"*************************************************************************"
+//"                                                                         "
+//"      This code expands on my earlier SmartStart bootstub assembler for  "
+//" the Pi2/3. It directly supports multicore operation in C/C++ to do that "
+//" it provides stack space to each core and provides modified bootloader   " 
+//" spinlock that protects against registers r0-r3 trashed. As any C/C++    "
+//" 32 bit compiler will trash those registers, to use C/C++ in multicore   "
+//" programming this protection must be done.								"
+//"       This is a matching paired AARCH32 stub for the 32bit linker file  "
+//" and carries the same arrangement as AARCH64 pairs to ease porting.	    "
+//"																			"
+//"+++++++++++++++++++++++[ REVISIONS ]+++++++++++++++++++++++++++++++++++++"
+//"  1.01 Initial release .. Pi autodetection main aim                      "
+//"  1.02 Many functions moved out C to aide 32/64 bit compatability        "
+//"  2.01 Futher reductions to bare minmum assembeler code                  "
+//"  2.02 Multicore functionality added                                     "
+//"  2.03 Timer Irq support added  											"
+//"  2.04 David Welch routines GET32/PUT32 compability added                "
+//"  2.05 Irq stub made weak linked so it can be easily overridden          "
+//"  2.06 Added SmartStartVer											    "
+//"  2.07 Fiq stub made weak linked so it can be easily overridden          "
+//"  2.08 Added setIrqFuncAddress & setFiqFuncAddress                       "
+//"  2.09 Added Hard/Soft float compiler support							"
+//"  2.10 Context_switch support added										"
+//"  2.11 MiniUart, PL011 Uart and console uart support added				"
+//"  2.12 New FIQ, DAIF flag support added									"
+//"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
 ;@"========================================================================="
 ;@#				 	 ARM CPU ID CONSTANT DEFINITIONS
 ;@"========================================================================="
@@ -318,7 +363,7 @@ _isr_Table:
     ldr pc, _interrupt_vector_h
     ldr pc, _fast_interrupt_vector_h
 
-_reset_h:                           .word   _start
+_reset_h:                           .word   hang
 _undefined_instruction_vector_h:    .word   hang
 _software_interrupt_vector_h:       .word   swi_handler_stub
 _prefetch_abort_vector_h:           .word   hang
@@ -476,7 +521,7 @@ swi_handler_stub:
 	/* If this is so, the stack must be padded to an 8-byte boundary before calling any */
 	/* external C code																	*/
     mov r1, sp
-    and r1, r1, #4										;@ Ensure 8-byte stack alignment
+    and r1, r1, #0x7									;@ Ensure 8-byte stack alignment
     sub sp, sp, r1										;@ adjust stack as necessary
     push {r1, lr}										;@ Store adjustment and LR_svc
 
@@ -499,10 +544,10 @@ fiq_handler_stub:
     srsfd sp!, #0x13									;@ on to the SVC mode stack
 
     cps #0x13											;@ Switch to SVC mode
-    push {r0-r3, r12}									;@ Store AAPCS regs on to SVC stack
+    push {r0-r7}										;@ Store AAPCS regs on to SVC stack
 
     mov r1, sp
-    and r1, r1, #4										;@ Ensure 8-byte stack alignment
+    and r1, r1, #0x7									;@ Ensure 8-byte stack alignment
     sub sp, sp, r1										;@ adjust stack as necessary
     push {r1, lr}										;@ Store adjustment and LR_svc
 
@@ -516,20 +561,14 @@ no_fiqset:
     pop {r1, lr}										;@ Restore LR_svc
     add sp, sp, r1										;@ Un-adjust stack
 
-    pop {r0-r3, r12}									;@ Restore AAPCS registers
+    pop {r0-r7}											;@ Restore AAPCS registers
     rfefd sp!											;@ Return from the SVC mode stack
 
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 @#			GLOBAL INTERRUPT CONTROL PROVIDE BY RPi-SmartStart API
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-
-;@"========================================================================="
-@#		EnableInterrupts -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: void EnableInterrupts ( void );
-@#		Entry: nothing
-@#		Return: nothing
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: void EnableInterrupts (void);" */
 .section .text.EnableInterrupts, "ax", %progbits
 .balign	4
 .globl EnableInterrupts
@@ -538,12 +577,7 @@ EnableInterrupts:
 	cpsie i												;@ Enable IRQ
 	bx  lr												;@ Return
 
-;@"========================================================================="
-@#		DisableInterrupts -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: void DisableInterrupts ( void );
-@#		Entry: nothing
-@#		Return: nothing
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: void DisableInterrupts (void);" */
 .section .text.DisableInterrupts, "ax", %progbits
 .balign	4
 .globl DisableInterrupts
@@ -552,15 +586,50 @@ DisableInterrupts:
     cpsid i												;@ Disable IRQ
 	bx  lr												;@ Return
 
+/* "PROVIDE C FUNCTION: void EnableFIQ (void);" */
+.section .text.EnableFIQ, "ax", %progbits
+.balign	4
+.globl EnableFIQ
+.type EnableFIQ, %function
+EnableFIQ:
+	cpsie f												;@ Enable FIQ
+	bx  lr												;@ Return
+
+/* "PROVIDE C FUNCTION: void DisableFIQ (void);" */
+.section .text.DisableFIQ, "ax", %progbits
+.balign	4
+.globl DisableFIQ
+.type DisableFIQ, %function
+DisableFIQ:
+    cpsid f												;@ Disable FIQ
+	bx  lr												;@ Return
+
+/* "PROVIDE C FUNCTION: unsigned long getDAIF (void);" */
+.section .text.getDAIF, "ax", %progbits
+.balign	4
+.globl getDAIF
+.type getDAIF, %function
+getDAIF:
+	mrs r0, cpsr										;@ fetch flags
+	bx  lr												;@ Return
+
+
+/* "PROVIDE C FUNCTION: void setDAIF (unsigned long flags);" */
+.section .text.setDAIF, "ax", %progbits
+.balign	8
+.globl setDAIF
+.type setDAIF, %function
+setDAIF:
+	msr cpsr, r0										;@ set flags
+	bx  lr												;@ Return
+
+
+
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 @#		VC4 GPU ADDRESS HELPER ROUTINES PROVIDE BY RPi-SmartStart API	   
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-;@"========================================================================="
-@#		ARMaddrToGPUaddr -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: uint32_t ARMaddrToGPUaddr (void* ARMaddress);
-@#		Entry: R0 will have ARMAddress value
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: uint32_t ARMaddrToGPUaddr (void* ARMaddress);" */
 .section .text.ARMaddrToGPUaddr, "ax", %progbits
 .balign	4
 .globl ARMaddrToGPUaddr;		
@@ -574,11 +643,7 @@ ARMaddrToGPUaddr:
 .ltorg													;@ Tell assembler ltorg data for this code can go here
 .size	ARMaddrToGPUaddr, .-ARMaddrToGPUaddr
 
-;@"========================================================================="
-@#		GPUaddrToARMaddr -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: uint32_t GPUaddrToARMaddr (uint32_t BUSaddress);
-@#		Entry: R0 will have GPUAddress value
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: uint32_t GPUaddrToARMaddr (uint32_t BUSaddress);" */
 .section .text.GPUaddrToARMaddr, "ax", %progbits
 .balign	4
 .globl GPUaddrToARMaddr;		
@@ -596,11 +661,7 @@ GPUaddrToARMaddr:
 @#				RPi-SmartStart API TO MULTICORE FUNCTIONS
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-;@"========================================================================="
-@#		getCoreID -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: unsigned int getCoreID (void);
-@#		Return: Returns the multicore id of the core calling the function 
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: uint8_t getCoreID (void);" */
 .section .text.getCoreID, "ax", %progbits
 .balign	4
 .globl getCoreID		
@@ -619,12 +680,7 @@ isARM6:
 .ltorg
 .size	getCoreID, .-getCoreID
 
-;@"========================================================================="
-@#		CoreExcute -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: bool CoreExcute (uint8_t corenum, uint32_t call_addr);
-@#		Entry: R0 will have core number, R1 will carry address to set core
-@#		Return: failure = 0, Success = 1 or any non zero value 
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: bool CoreExecute (uint8_t core, void (*func)(void));" */
 .section .text.CoreExecute, "ax", %progbits
 .balign	4
 .globl CoreExecute		
@@ -650,18 +706,13 @@ CoreExecuteFail:
 @#				 FIQ HELPER ROUTINES PROVIDE BY RPi-SmartStart API		    
 ;@"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-;@"========================================================================="
-@#		setFiqFuncAddress -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: uintptr_t setFiqFuncAddress (void (*ARMaddress)(void));
-@#		Entry: R0 will have ARMAddress value
-@#		Return: R0 will return with the previous Fiq function address
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: uintptr_t setFiqFuncAddress (void (*ARMaddress)(void));" */
 .section .text.setFiqFuncAddress, "ax", %progbits
 .balign	4
 .globl setFiqFuncAddress;
 .type setFiqFuncAddress, %function
 setFiqFuncAddress:
-    cpsid i												// Disable irq interrupts as we are clearly changing call
+    cpsid f												// Disable fiq interrupts as we are clearly changing call
 	ldr r1, =RPi_FiqFuncAddr							// Load address of function to call on interrupt 
 	ldr r2, [r1]										// Load current fiq call address
 	str r0, [r1]										// Store the new function pointer address we were given
@@ -675,11 +726,7 @@ setFiqFuncAddress:
 {	  RPi-SmartStart Compatability for David Welch CALLS he always uses	    }
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-;@"========================================================================="
-@#		PUT32 -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: void PUT32 (uint32_t addr, uint32_t value);
-@#		Entry: R0 will have ARM address for write, R1 value to write
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: void PUT32 (uint32_t addr, uint32_t value);" */
 .section .text.PUT32, "ax", %progbits
 .balign	4
 .globl PUT32;
@@ -691,12 +738,7 @@ PUT32:
 .ltorg													// Tell assembler ltorg data for this code can go here
 .size	PUT32, .-PUT32
 
-;@"========================================================================="
-@#		GET32 -- Composite Pi1, Pi2 & Pi3 code
-@#		C Function: uint32_t GET32 (uint32_t addr);
-@#		Entry: R0 will have ARM address to read
-@#		Return: R0 will return value read from the address
-;@"========================================================================="
+/* "PROVIDE C FUNCTION: uint32_t GET32 (uint32_t addr);" */
 .section .text.GET32, "ax", %progbits
 .balign	4
 .globl GET32;

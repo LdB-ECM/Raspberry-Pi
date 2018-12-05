@@ -2,7 +2,7 @@
 {																			}
 {       Filename: rpi-smartstart.c											}
 {       Copyright(c): Leon de Boer(LdB) 2017, 2018							}
-{       Version: 2.11														}
+{       Version: 2.12														}
 {																			}
 {***************[ THIS CODE IS FREEWARE UNDER CC Attribution]***************}
 {																            }
@@ -29,6 +29,7 @@
 {  2.09 Added Hard/Soft float compiler support								}
 {  2.10 Context Switch support API calls added								}
 {  2.11 MiniUart, PL011 Uart and console uart support added					}
+{  2.12 New FIQ, DAIF flag support added									}
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 #include <stdbool.h>		// C standard unit needed for bool and true/false
@@ -1520,7 +1521,7 @@ bool mailbox_tag_message (uint32_t* response_buf,					// Pointer to response buf
 
 /*-[ClearTimerIrq]----------------------------------------------------------}
 . Simply clear the timer interupt by hitting the clear register. Any timer
-. interrupt should call this before exiting.
+. irq/fiq interrupt should call this before exiting.
 .--------------------------------------------------------------------------*/
 void ClearTimerIrq(void)
 {
@@ -1528,16 +1529,15 @@ void ClearTimerIrq(void)
 }
 
 /*-[TimerIrqSetup]----------------------------------------------------------}
-. The interrupt rate is set by providing a period in usec between triggers 
-. of the interrupt. The irq function is hard set in FreeRTOS implementation.
+. The irq interrupt rate is set to the period in usec between triggers.
 . Largest period is around 16 million usec (16 sec) it varies on core speed
-. RETURN: 1 for success and 0 for any failure
+. RETURN: TRUE if successful,  FALSE for any failure
 .--------------------------------------------------------------------------*/
-uintptr_t TimerIrqSetup(uint32_t period_in_us)						// Period between timer interrupts in usec
+bool TimerIrqSetup (uint32_t period_in_us)							// Period between timer interrupts in usec
 {
 	uint32_t Buffer[5] = { 0 };
-	uint32_t OldHandler = 0;
-	ARMTIMER->Control.TimerEnable = false;							// Make sure clock is stopped, illegal to change anything while running
+	bool resValue = false;
+	ARMTIMER->Control.TimerEnable = 0;								// Make sure clock is stopped, illegal to change anything while running
 	if (mailbox_tag_message(&Buffer[0], 5, MAILBOX_TAG_GET_CLOCK_RATE,
 		8, 8, 4, 0))												// Get GPU clock (it varies between 200-450Mhz)
 	{
@@ -1546,20 +1546,56 @@ uintptr_t TimerIrqSetup(uint32_t period_in_us)						// Period between timer inte
 		Buffer[4] *= period_in_us;									// Multiply by the micro seconds result
 		Buffer[4] /= 100;											// This completes the division by 1000000 (done as /10000 and /100)
 		if (Buffer[4] != 0) {										// Invalid divisor of zero will return with fail
-			IRQ->EnableBasicIRQs.Enable_Timer_IRQ = true;			// Enable the timer interrupt IRQ
+			IRQ->EnableBasicIRQs.Enable_Timer_IRQ = 1;				// Enable the timer interrupt IRQ
 			ARMTIMER->Load = Buffer[4];								// Set the load value to divisor
-			ARMTIMER->Control.Counter32Bit = true;					// Counter in 32 bit mode
+			ARMTIMER->Control.Counter32Bit = 1;						// Counter in 32 bit mode
 			ARMTIMER->Control.Prescale = Clkdiv1;					// Clock divider = 1
-			ARMTIMER->Control.TimerIrqEnable = true;				// Enable timer irq
+			ARMTIMER->Control.TimerIrqEnable = 1;					// Enable timer irq
+			resValue = true;										// Set success result
 		}
-		ARMTIMER->Control.TimerEnable = true;						// Now start the clock
+		ARMTIMER->Control.TimerEnable = 1;							// Now start the clock
 	}
-	return OldHandler;												// Return last function pointer	
+	return resValue;												// Return result value	
+}
+
+/*-[TimerFiqSetup]----------------------------------------------------------}
+. Allocates the given TimerFiqHandler function pointer to be the fiq call
+. when a timer interrupt occurs. The interrupt rate is set by providing a
+. period in usec between triggers of the interrupt. If the FIQ function is
+. redirected by another means use 0 which causes handler set to be ignored.
+. Largest period is around 16 million usec (16 sec) it varies on core speed
+. RETURN: The old function pointer that was in use (will return 0 for 1st).
+.--------------------------------------------------------------------------*/
+uintptr_t TimerFiqSetup (uint32_t period_in_us, 					// Period between timer interrupts in usec
+						 void(*ARMaddress)(void))					// Function to call (0 = ignored)
+{
+	uint32_t Buffer[5] = { 0 };
+	uintptr_t oldHandler = 0;
+	ARMTIMER->Control.TimerEnable = 0;								// Make sure clock is stopped, illegal to change anything while running
+	if (mailbox_tag_message(&Buffer[0], 5, MAILBOX_TAG_GET_CLOCK_RATE,
+		8, 8, 4, 0))												// Get GPU clock (it varies between 200-450Mhz)
+	{
+		Buffer[4] /= 250;											// The prescaler divider is set to 250 (based on GPU=250MHz to give 1Mhz clock)
+		Buffer[4] /= 10000;											// Divid by 10000 we are trying to hold some precision should be in low hundreds (160'ish)
+		Buffer[4] *= period_in_us;									// Multiply by the micro seconds result
+		Buffer[4] /= 100;											// This completes the division by 1000000 (done as /10000 and /100)
+		if (Buffer[4] != 0) {										// Invalid divisor of zero will return with fail
+			if (ARMaddress) oldHandler = setFiqFuncAddress(ARMaddress);// Change the handler
+			ARMTIMER->Load = Buffer[4];								// Set the load value to divisor
+			ARMTIMER->Control.Counter32Bit = 1;						// Counter in 32 bit mode
+			ARMTIMER->Control.Prescale = Clkdiv1;					// Clock divider = 1
+			ARMTIMER->Control.TimerIrqEnable = 1;					// Enable timer irq
+			IRQ->FIQControl.SelectFIQSource = 64;					// Select FIQ source as the ARM timer
+			IRQ->FIQControl.EnableFIQ = 1;							// Enable the FIQ
+		}
+		ARMTIMER->Control.TimerEnable = 1;							// Now start the clock
+	}
+	return oldHandler;												// Return old handler	
 }
 
 /*-[ClearLocalTimerIrq]-----------------------------------------------------}
 . Simply clear the local timer interupt by hitting the clear registers. Any
-. local timer interrupt should call this before exiting.
+. irq/fiq local timer interrupt should call this before exiting.
 .--------------------------------------------------------------------------*/
 void ClearLocalTimerIrq(void)
 {
@@ -1567,16 +1603,16 @@ void ClearLocalTimerIrq(void)
 	QA7->TimerClearReload.Reload = 1;								// Reload now
 }
 
-
 /*-[LocalTimerIrqSetup]-----------------------------------------------------}
-. The interrupt rate is set by providing a period in usec between triggers 
-. of the interrupt. The irq function is hard set in FreeRTOS implementation.
-. RETURN: The old function pointer that was in use (will return 0 for 1st).
+. The local timer irq interrupt rate is set to the period in usec between
+. triggers. On BCM2835 (ARM6) it does not have core timer so this call fails.
+. Largest period is around 20 million usec (20 sec) it varies on core speed
+. RETURN: TRUE if successful, FALSE for any failure
 .--------------------------------------------------------------------------*/
 bool LocalTimerSetup (uint32_t period_in_us,						// Period between timer interrupts in usec
 					  uint8_t coreNum)								// Core number
 {
-	if (coreNum < RPi_CoresReady)
+	if ((RPi_CpuId.PartNumber != 0xB76) && (coreNum < RPi_CoresReady))// Not an ARM6 cpu and a valid core number
 	{
 		uint32_t divisor = 384 * period_in_us;						// Transfer the period * 384
 		divisor /= 10;												// That is divisor required as clock is 38.4Mhz (2*19.2Mhz)

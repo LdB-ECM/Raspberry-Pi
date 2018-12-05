@@ -1,28 +1,3 @@
-/*
-    FreeRTOS V7.2.0 - Copyright (C) 2012 Real Time Engineers Ltd.
-	
-
-    ***************************************************************************
-     *                                                                       *
-     *    FreeRTOS tutorial books are available in pdf and paperback.        *
-     *    Complete, revised, and edited pdf reference manuals are also       *
-     *    available.                                                         *
-     *                                                                       *
-     *    Purchasing FreeRTOS documentation will not only help you, by       *
-     *    ensuring you get running as quickly as possible and with an        *
-     *    in-depth knowledge of how to use FreeRTOS, it will also help       *
-     *    the FreeRTOS project to continue with its mission of providing     *
-     *    professional grade, cross platform, de facto standard solutions    *
-     *    for microcontrollers - completely free of charge!                  *
-     *                                                                       *
-     *    >>> See http://www.FreeRTOS.org/Documentation for details. <<<     *
-     *                                                                       *
-     *    Thank you for using FreeRTOS, and thank you for your support!      *
-     *                                                                       *
-    ***************************************************************************
-
-*/
-
 #include <stdint.h>
 #include <string.h>
 #include "rpi-smartstart.h"
@@ -137,7 +112,7 @@ void task4 (void *pParam) {
 	{
 		if (xSemaphoreTake(barSemaphore, 40) == pdTRUE)
 		{
-			GotoXY(0, 16);
+			GotoXY(0, 15);
 			printf("[Task]       [State]  [Prio]  [Stack] [Num]\n");
 			vTaskList(&buf[0]);
 			printf(&buf[0]);
@@ -161,8 +136,6 @@ void main (void)
 	ARM_setmaxspeed(printf);										// ARM CPU to max speed
 	printf("Task tick rate: %u\n", configTICK_RATE_HZ);
 	/* Attempt to create a semaphore. */
-	//barSemaphore = xSemaphoreCreateBinary();
-
 	vSemaphoreCreateBinary(barSemaphore);
 
 	if (barSemaphore != NULL)

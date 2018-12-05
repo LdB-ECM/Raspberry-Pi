@@ -9,7 +9,7 @@ extern "C" {									// Put extern C directive wrapper around
 {																			}			
 {       Filename: rpi-smartstart.h											}
 {       Copyright(c): Leon de Boer(LdB) 2017, 2018							}
-{       Version: 2.11														}
+{       Version: 2.12														}
 {																			}		
 {***************[ THIS CODE IS FREEWARE UNDER CC Attribution]***************}
 {																            }
@@ -35,6 +35,7 @@ extern "C" {									// Put extern C directive wrapper around
 {  2.09 Added Hard/Soft float compiler support								}
 {  2.10 Context Switch support API calls added								}
 {  2.11 MiniUart, PL011 Uart and console uart support added					}
+{  2.12 New FIQ, DAIF flag support added									}
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 #include <stdbool.h>		// C standard unit needed for bool and true/false
@@ -482,7 +483,7 @@ typedef union {
 /*-[setFiqFuncAddress]------------------------------------------------------}
 . NOTE: Public C interface only to code located in SmartsStartxx.S
 . Sets the function pointer to be the called when an Fiq interrupt occurs.
-. CPU interrupts will be disabled so they can't trigger while changing.
+. CPU fiq interrupts will be disabled so they can't trigger while changing.
 . RETURN: Old function pointer that was in use (will return 0 if never set).
 .--------------------------------------------------------------------------*/
 uintptr_t setFiqFuncAddress (void(*ARMaddress)(void));
@@ -502,6 +503,30 @@ void EnableInterrupts (void);
 . Disable global interrupts on any CPU core calling this function.
 .--------------------------------------------------------------------------*/
 void DisableInterrupts (void);
+
+/*-[EnableFIQ]--------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Enable global fast interrupts on any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void EnableFIQ(void);
+
+/*-[DisableFIQ]-------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Disable global fast interrupts on any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void DisableFIQ(void);
+
+/*-[getDAIF]----------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Return the DAIF flags for any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+unsigned long getDAIF(void);
+
+/*-[setDAIF]----------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Sets the DAIF flags for any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void setDAIF (unsigned long flags);
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 {			 RPi-SmartStart API TO MULTICORE FUNCTIONS					    }
@@ -668,32 +693,39 @@ bool mailbox_tag_message (uint32_t* response_buf,					// Pointer to response buf
 
 /*-[ClearTimerIrq]----------------------------------------------------------}
 . Simply clear the timer interupt by hitting the clear register. Any timer
-. interrupt should call this before exiting.
+. fiq/irq interrupt should call this before exiting.
 .--------------------------------------------------------------------------*/
 void ClearTimerIrq (void);
 
 /*-[TimerIrqSetup]----------------------------------------------------------}
-. Allocates the given TimerIrqHandler function pointer to be the irq call
+. The timer irq interrupt rate is set to the period in usec between triggers.
+. Largest period is around 16 million usec (16 sec) it varies on core speed
+. RETURN: TRUE if successful,  FALSE for any failure
+.--------------------------------------------------------------------------*/
+bool TimerIrqSetup (uint32_t period_in_us);							// Period between timer interrupts in usec
+
+/*-[TimerFiqSetup]----------------------------------------------------------}
+. Allocates the given TimerFiqHandler function pointer to be the fiq call
 . when a timer interrupt occurs. The interrupt rate is set by providing a
-. period in usec between triggers of the interrupt. If the IRQ function is
+. period in usec between triggers of the interrupt. If the FIQ function is
 . redirected by another means use 0 which causes handler set to be ignored.
 . Largest period is around 16 million usec (16 sec) it varies on core speed
 . RETURN: The old function pointer that was in use (will return 0 for 1st).
 .--------------------------------------------------------------------------*/
-uintptr_t TimerIrqSetup (uint32_t period_in_us);					// Period between timer interrupts in usec
+uintptr_t TimerFiqSetup (uint32_t period_in_us, 					// Period between timer interrupts in usec
+						 void (*ARMaddress)(void));					// Function to call (0 = ignored)
 
 /*-[ClearLocalTimerIrq]-----------------------------------------------------}
 . Simply clear the local timer interupt by hitting the clear registers. Any
-. local timer interrupt should call this before exiting.
+. local timer irq/fiq interrupt should call this before exiting.
 .--------------------------------------------------------------------------*/
 void ClearLocalTimerIrq (void);
 
 /*-[LocalTimerIrqSetup]-----------------------------------------------------}
-. Allocates the given IrqHandler function pointer to be the irq call
-. when a timer interrupt occurs. The interrupt rate is set by providing a
-. period in usec between triggers of the interrupt. If the IRQ function is
-. redirected by another means use 0 which causes handler set to be ignored.
-. RETURN: The old function pointer that was in use (will return 0 for 1st).
+. The local timer irq interrupt rate is set to the period in usec between 
+. triggers. On BCM2835 (ARM6) it does not have core timer so call fails. 
+. Largest period is around 16 million usec (16 sec) it varies on core speed
+. RETURN: TRUE if successful, FALSE for any failure
 .--------------------------------------------------------------------------*/
 bool LocalTimerSetup (uint32_t period_in_us,						// Period between timer interrupts in usec
 					  uint8_t coreNum);								// Core number

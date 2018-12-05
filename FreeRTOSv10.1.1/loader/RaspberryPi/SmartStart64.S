@@ -1,8 +1,8 @@
 //"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 //"																			"			
 //"      Filename: smartstart64.s											"
-//"      Copyright(c): Leon de Boer(LdB) 2017. 2018							"
-//"      Version: 2.11														"
+//"      Copyright(c): Leon de Boer(LdB) 2017, 2018							"
+//"      Version: 2.12														"
 //"																			"		
 //"***************[ THIS CODE IS FREEWARE UNDER CC Attribution]*************"
 //"																			"
@@ -40,6 +40,7 @@
 //"  2.09 Added Hard/Soft float compiler support							"
 //"  2.10 Context_switch support added										"
 //"  2.11 MiniUart, PL011 Uart and console uart support added				"
+//"  2.12 New FIQ, DAIF flag support added									"
 //"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 .section ".init", "ax", %progbits
@@ -259,7 +260,9 @@ StartSecondarySpin:
 .balign	8
 .ltorg										/* Tell assembler ltorg data for code above can go here */
 
-
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+{							Save Context MACRO								}
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .macro portSAVE_CONTEXT
 	/* Save the entire context. */
 	STP 	X0, X1, [SP, #-0x10]!
@@ -324,6 +327,9 @@ StartSecondarySpin:
 	STR 	X0, [X1]
 .endm
 
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+{							restore Context MACRO							}
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .macro portRESTORE_CONTEXT
 
 	/* Set the SP to point to the stack of the task being restored. */
@@ -420,7 +426,7 @@ irq_handler_stub:
 
 
 	MOV X1, SP
-    AND X1, X1, #8										// Ensure 16-byte stack alignment
+    AND X1, X1, #0xF									// Ensure 16-byte stack alignment
     SUB SP, SP, X1										// adjust stack as necessary
     STP	X1, XZR, [SP, #-16]!							// Store adjustment
 
@@ -458,11 +464,19 @@ fiq_handler_stub:
 	stp	x2, x3,  [sp, #-16]!							// Save register x2, x3 as C will trash them
 	stp	x0, x1,  [sp, #-16]!							// Save register x0, x1 as C will trash them
 
+	mov x1, sp
+    and x1, x1, #0xF									// Ensure 16-byte stack alignment
+    sub sp, sp, x1										// adjust stack as necessary
+    stp	x1, xzr, [sp, #-16]!							// Store adjustment
+
 	ldr x0, =RPi_FiqFuncAddr							// Address to FiqFuncAddr
 	ldr x0, [x0]										// Load FiqFuncAddr value
 	cbz x0, no_fiqset									// If zero no fiq function set so ignore 
 	blr x0												// Call Irqhandler that has been set
 no_fiqset:
+
+	ldp	x1, xzr,  [sp], #16								// Reload adjustment
+    add sp, sp, x1										// Un-adjust stack
 
 	ldp	x0, x1,  [sp], #16								// Restore register x0, x1
 	ldp	x2, x3,  [sp], #16								// Restore register x2, x3
@@ -491,7 +505,7 @@ b	\handler
 .globl	VectorTable
 VectorTable:
 	/* from current EL with sp_el0 */
-	vector	_start			/* Synchronous */
+	vector	hang			/* Synchronous */
 	vector  hang			/* IRQ */
 	vector	hang			/* FIQ */
 	vector	hang			/* SErrorStub */
@@ -542,15 +556,59 @@ DisableInterrupts:
 .ltorg										// Tell assembler ltorg data for this code can go here
 .size	DisableInterrupts, .-DisableInterrupts
 
+/* "PROVIDE C FUNCTION: void EnableFIQ (void);" */
+.section .text.EnableFIQ, "ax", %progbits
+.balign	8
+.globl EnableFIQ
+.type EnableFIQ, %function
+EnableFIQ:
+	msr daifclr, #1
+	ret
+.balign	8
+.ltorg										// Tell assembler ltorg data for this code can go here
+.size	EnableFIQ, .-EnableFIQ
+
+/* "PROVIDE C FUNCTION: void DisableFIQ (void);" */
+.section .text.DisableFIQ, "ax", %progbits
+.balign	8
+.globl DisableFIQ
+.type DisableFIQ, %function
+DisableFIQ:
+	msr daifset, #1
+	ret
+.balign	8
+.ltorg										// Tell assembler ltorg data for this code can go here
+.size	DisableFIQ, .-DisableFIQ
+
+/* "PROVIDE C FUNCTION: unsigned long getDAIF (void);" */
+.section .text.getDAIF, "ax", %progbits
+.balign	8
+.globl getDAIF
+.type getDAIF, %function
+getDAIF:
+	mrs x0, daif
+	ret
+.balign	8
+.ltorg										// Tell assembler ltorg data for this code can go here
+.size	getDAIF, .-getDAIF
+
+/* "PROVIDE C FUNCTION: void setDAIF (unsigned long flags);" */
+.section .text.setDAIF, "ax", %progbits
+.balign	8
+.globl setDAIF
+.type setDAIF, %function
+setDAIF:
+	msr daif, x0
+	ret
+.balign	8
+.ltorg										// Tell assembler ltorg data for this code can go here
+.size	setDAIF, .-setDAIF
+
 //"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 //				RPi-SmartStart API TO MULTICORE FUNCTIONS
 //"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-//"========================================================================="
-//		getCoreID -- Pi3 AARCH64 code
-//		C Function: unsigned int getCoreID (void);
-//		Return: Returns the multicore id of the core calling the function 
-//"========================================================================="
+/* "PROVIDE C FUNCTION: uint8_t getCoreID (void);" */
 .section .text.getCoreID, "ax", %progbits
 .balign	8
 .globl getCoreID		
@@ -563,12 +621,7 @@ getCoreID:
 .ltorg
 .size	getCoreID, .-getCoreID
 
-//"========================================================================="
-//	CoreExecute -- AARCH64 Pi3 code
-//	C Function: "bool CoreExecute (uint8_t core, void (*func)(void));"
-//	Entry: X0 will have core id  X1 will have address of function to run
-//	Return: nothing
-//"========================================================================="
+/* "PROVIDE C FUNCTION: bool CoreExecute (uint8_t core, void (*func)(void));" */
 .section .text.CoreExecute, "ax", %progbits
 .balign	8
 .globl CoreExecute;
@@ -596,20 +649,12 @@ CoreExecuteFail:
 .ltorg										// Tell assembler ltorg data for this code can go here
 .size	CoreExecute, .-CoreExecute
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
-{	  RPi-SmartStart Compatability for David Welch CALLS he always uses	    }
-{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 //"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 //	  RPi-SmartStart Compatability for David Welch CALLS he always uses	    }
 //"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-//"========================================================================="
-//	PUT32 -- AARCH64 Pi3 code
-//	C Function: "void PUT32 (uint32_t addr, uint32_t value);"
-//	Entry: W0 contains address   W1 contains value
-//	Return: nothing
-//"========================================================================="
+/* "PROVIDE C FUNCTION: void PUT32 (uint32_t addr, uint32_t value);" */
 .section .text.PUT32, "ax", %progbits
 .balign	8
 .globl PUT32
@@ -621,12 +666,7 @@ PUT32:
 .ltorg										// Tell assembler ltorg data for this code can go here
 .size	PUT32, .-PUT32
 
- //"========================================================================="
-//	GET32 -- AARCH64 Pi3 code
-//	C Function: "uint32_t GET32 (uint32_t addr);"
-//	Entry: X0 contains address
-//	Return: X) conatins value read
-//"========================================================================="
+/* "PROVIDE C FUNCTION: uint32_t GET32 (uint32_t addr);" */
  .section .text.GET32, "ax", %progbits
 .balign	8
 .globl GET32
@@ -648,11 +688,6 @@ GET32:
 .balign	8
 .globl ARMaddrToGPUaddr;		
 .type ARMaddrToGPUaddr, %function
-//"================================================================"
-// ARMaddrToGPUaddr -- AARCH64 Pi3 code
-// C Function: uint32_t ARMaddrToGPUaddr (void* ARMaddress);
-// Entry: x0 will have ARMAddress value
-//"================================================================"
 ARMaddrToGPUaddr:
 	mov x1, #0xC0000000						// ARM to VC conversion value
 	orr x0, x0, x1							// Create bus address
@@ -667,11 +702,6 @@ ARMaddrToGPUaddr:
 .balign	8
 .globl GPUaddrToARMaddr;		
 .type GPUaddrToARMaddr, %function
-//"================================================================"
-// GPUaddrToARMaddr -- AARCH64 Pi3 code
-// C Function: uint32_t GPUaddrToARMaddr (uint32_t BUSaddress);
-// Entry: x0 will have GPUAddress value
-//"================================================================"
 GPUaddrToARMaddr:
 	mov x1, ~0xC0000000						// ARM to VC conversion value	
 	and x0, x0, x1							// Create arm address
@@ -684,18 +714,13 @@ GPUaddrToARMaddr:
 {			FIQ HELPER ROUTINES PROVIDE BY RPi-SmartStart API		        }
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-/*"========================================================================="
-#*	  setFiqFuncAddress -- Composite AARCH64 code                           *
-#*	  C Function: uintptr_t setFiqFuncAddress (void (*ARMaddress)(void));   *
-#*	  Entry: R0 will have ARMAddress value                                  *
-#*	  Return: R0 will return with the previous Irq function address         *
-"=========================================================================="*/
+/* "PROVIDE C FUNCTION: uintptr_t setFiqFuncAddress (void (*ARMaddress)(void));" */
 .section .text.setFiqFuncAddress, "ax", %progbits
 .balign	8
 .globl setFiqFuncAddress;
 .type setFiqFuncAddress, %function
 setFiqFuncAddress:
-	msr daifset,#2							// Disable irq interrupts as we are clearly changing call
+	msr daifset,#1							// Disable fiq interrupts as we are clearly changing call
 	ldr x1, =RPi_FiqFuncAddr				// Load address of function to call on interrupt 
 	ldr x2, [x1]							// Load current fiq call address
 	str x0, [x1]							// Store the new function pointer address we were given
@@ -765,4 +790,4 @@ RPi_CpuId : .4byte 0;					// CPU Id is 4 byte variable in 64bit mode
 RPi_CompileMode : .4byte 0;				// Compile mode is 4 byte variable in 64bit mode
 
 .globl RPi_SmartStartVer;				// Make sure RPi_SmartStartVer label is global
-RPi_SmartStartVer : .4byte 0x00021001;  // SmartStart version is 4 byte variable in 32bit mode
+RPi_SmartStartVer : .4byte 0x00021002;  // SmartStart version is 4 byte variable in 32bit mode
