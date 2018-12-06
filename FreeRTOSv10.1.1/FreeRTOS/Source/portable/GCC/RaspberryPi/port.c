@@ -4,8 +4,8 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
-#include "rpi-smartstart.h"
-#include "rpi-irq.h"
+#include "rpi-SmartStart.h"
+#include "rpi-Irq.h"
 
  /* Constants required to setup the task context. */
 #define portNO_CRITICAL_NESTING					( 0 )

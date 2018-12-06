@@ -1,6 +1,6 @@
 #include <stdbool.h>		// C standard unit needed for bool and true/false
 #include <stdint.h>			// C standard unit needed for uint8_t, uint32_t, etc
-#include "rpi-smartstart.h"	// SmartStart unit needed for getCoreID
+#include "rpi-SmartStart.h"	// SmartStart unit needed for getCoreID
 #include "rpi-Irq.h"		// This units header
 
 /*--------------------------------------------------------------------------}
