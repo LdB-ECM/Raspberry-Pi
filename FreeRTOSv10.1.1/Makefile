@@ -16,12 +16,20 @@ endif
 
 # You will need to change the first line (ARMGNU) of these to match your compiler directories
 ifeq ($(MAKECMDGOALS),Pi3-64)
+ifeq ($(OS), Windows_NT)
 ARMGNU := D:/gcc_linaro_7_1/bin/aarch64-elf
+else
+ARMGNU := aarch64-elf
+endif
 SMARTSTART := SmartStart64.S
 SPECIAL_FLAGS := -mcpu=cortexa53 -mstrict-align -fno-tree-loop-vectorize -fno-tree-slp-vectorize
 LINKER_FILE := rpi64.ld
 else
+ifeq ($(OS), Windows_NT)
 ARMGNU := D:/gcc_pi_7_2/bin/arm-none-eabi
+else
+ARMGNU := arm-none-eabi
+endif
 SMARTSTART := SmartStart32.S
 SPECIAL_FLAGS := -mno-unaligned-access
 LINKER_FILE := rpi32.ld
@@ -108,7 +116,7 @@ PLATFORM := RaspberryPi
 SYSCOMPS := $(TOP_DIR)/loader/$(PLATFORM)
 INCLUDEPATH1 ?=  $(TOP_DIR)/loader/$(PLATFORM)
 INCLUDEPATH2 ?=  $(TOP_DIR)/FreeRTOS/Source/include
-INCLUDEPATH3 ?=  $(TOP_DIR)/FreeRTOS/Source/portable/gcc/$(PLATFORM)
+INCLUDEPATH3 ?=  $(TOP_DIR)/FreeRTOS/Source/portable/GCC/$(PLATFORM)
 
 INCLUDE = -I$(INCLUDEPATH1) -I$(INCLUDEPATH2) -I$(INCLUDEPATH3) -I$(TOP_DIR)/Demo
 
@@ -116,7 +124,7 @@ INCLUDE = -I$(INCLUDEPATH1) -I$(INCLUDEPATH2) -I$(INCLUDEPATH3) -I$(TOP_DIR)/Dem
 DEMOCOMPS := $(TOP_DIR)/Demo
 
 # Directory that has the FreeRTOS source
-RTOSCOMPS := $(TOP_DIR)/FreeRTOS/source
+RTOSCOMPS := $(TOP_DIR)/FreeRTOS/Source
 
 # List of all components to include  ... Loader + FreeRTOS + Demo
 COMPS := $(SYSCOMPS) $(RTOSCOMPS) $(DEMOCOMPS)

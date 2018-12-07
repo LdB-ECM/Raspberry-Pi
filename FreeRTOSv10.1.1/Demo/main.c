@@ -1,10 +1,10 @@
 #include <stdint.h>
 #include <string.h>
-#include "rpi-smartstart.h"
+#include "rpi-SmartStart.h"
 #include "emb-stdio.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "rpi-irq.h"
+#include "rpi-Irq.h"
 #include "semphr.h"
 
 
