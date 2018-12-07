@@ -101,7 +101,7 @@ Pi1: IMGFILE := kernel.img
 # flags if needed.  Do not use the "-Wl," prefix either here on in platformVars.
 LDFLAGS := -Wl,-T $(LINKER_FILE) -Wl,--gc-sections -Wl,--build-id=none
 
-# Set default external libraries.  Embedded Xinu is, of course, stand-alone and
+# Set default external libraries.  FreeRTOS is, of course, stand-alone and
 # ordinarily does not need to be linked to any external libraries; however,
 # platformVars can add -lgcc to this if needed by the platform.
 LDLIBS  := -lc -lm -lgcc
