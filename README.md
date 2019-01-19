@@ -1,6 +1,14 @@
-# **** Xmas holidays coming with some time for big updates
+# **** Holidays over
+
 >
-# New Work
+So I spent much of my holidays learning a new programming language in RUST which has many sprouting its virtues but turned out to be time wasted. Higher level stuff which you can write in safe code and fits a couple of standard patterns works well and I can see the attraction. However once you have to invoke unsafe mode or some patterns that don't fit the usual modes you disaapear into this dark abyss which is every bit as pragmatic and dangerous as C and in many cases more so.
+
+Anyhow that all done I did get a chance to finish some series with Single and Multicore task switchers. Now there is one large change this has forced on my SmartStart system which is to solidify the concept of a Device Context (DC). On my original smartstart source the DC wasn't that real it existed to semi match Windows API calls and only as a thing that held the console pen and brush colours etc. What has changed now is there are actually multiple DC's on the system and if a core wites to the screen it is encouraged to take its own device context. The reason is obvious just that acts stops cores clashing with writing to the screen. The alternative was to do a mutex system or a re-entrant system both which are slower and carry more side-effects. The problem is this leads to SmartStart API changes which means I must update all the code in the repository to work with the now updated version of SmartStart.
+
+So in the next week the new samples will appear first and then each repository directory in turn will be updated to the new smartstart code. For most samples this is minor additions of values to the SmartStart API calls. 
+
+>
+# FreeRTOS
 So I am starting a series on Task Switchers on Single and Multicores. We are going to start out with the simple standard task switcher (FreeRTOS 10.1.1) on a single core. Yeah it's boring but we need to sort out base code stability before we start to fly.
 >
 https://github.com/LdB-ECM/Raspberry-Pi/tree/master/FreeRTOSv10.1.1
