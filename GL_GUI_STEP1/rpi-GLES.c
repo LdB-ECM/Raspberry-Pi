@@ -766,6 +766,8 @@ static uint32_t shader1[18] = {  // Vertex Color Shader
 
 static RENDER_STRUCT scene = { 0 };
 
+static int window_dx[3] = { 1, 1, 1 };
+static int window_dy[3] = { 1, 1, 1 };
 static int window_xdir[3] = { 1, -1, 1 };
 static int window_ydir[3] = { 1, -1, 1 };
 static int window_x[3] = { 20, 700, 400 };
@@ -773,6 +775,8 @@ static int window_y[3] = { 20, 600, 200 };
 static int window_width[3] = { 200, 200, 400 };
 static int window_height[3] = { 200, 200, 200 };
 
+
+#include <stdlib.h> // needed for rand
 void Desktop_Start (void)
 {
 	InitV3D();														// Initialize 3D graphics
@@ -799,51 +803,62 @@ void Desktop_Start (void)
 
 	// Step 6: Render the scene
 	V3D_RenderScene(&scene);
+
+	for (int i = 0; i < 2; i++)
+	{
+		window_dx[i] = rand() % 10 + 1;
+		window_dy[i] = rand() % 10 + 1;
+	}
 }
 
-#include <stdlib.h>
 void Move_Windows (void)
 {
 	for (int i = 0; i < 2; i++)
 	{
-		int dx = rand() % 10;
-		int dy = rand() % 10;
 		if (window_xdir[i] > 0) {
-			if (window_x[i] + window_width[i] + dx < scene.renderWth)
+			if (window_x[i] + window_width[i] + window_dx[i] < scene.renderWth)
 			{
-				window_x[i] += dx;
+				window_x[i] += window_dx[i];
 			}
 			else {
 				window_x[i] = scene.renderWth - window_width[i];
+				window_dx[i] = rand() % 10 + 1;
+				window_dy[i] = rand() % 10 + 1;
 				window_xdir[i] = -1;
 			}
 		}
 		else {
-			if (window_x[i] > dx) {
-				window_x[i] -= dx;
+			if (window_x[i] > window_dx[i]) {
+				window_x[i] -= window_dx[i];
 			}
 			else {
 				window_x[i] = 0;
+				window_dx[i] = rand() % 10 + 1;
+				window_dy[i] = rand() % 10 + 1;
 				window_xdir[i] = 1;
 			}
 		}
 
 		if (window_ydir[i] > 0) {
-			if (window_y[i] + window_height[i] + dy < scene.renderHt)
+			if (window_y[i] + window_height[i] + window_dy[i] < scene.renderHt)
 			{
-				window_y[i] += dy;
+				window_y[i] += window_dy[i];
 			}
 			else {
 				window_y[i] = scene.renderHt - window_height[i];
+				window_dx[i] = rand() % 10 + 1;
+				window_dy[i] = rand() % 10 + 1;
 				window_ydir[i] = -1;
 			}
 		}
 		else {
-			if (window_y[i] > dy) {
-				window_y[i] -= dy;
+			if (window_y[i] > window_dy[i]) {
+				window_y[i] -= window_dy[i];
 			}
 			else {
 				window_y[i] = 0;
+				window_dx[i] = rand() % 10 + 1;
+				window_dy[i] = rand() % 10 + 1;
 				window_ydir[i] = 1;
 			}
 		}
