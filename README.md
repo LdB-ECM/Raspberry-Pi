@@ -3,7 +3,7 @@ Finally started the series on multicore task schedulers and concepts. This code 
 
 The first step is xRTOS our start point with a 4 core switcher with simple round robin task schedule. Each core is manually loaded with 2 tasks and will create an idle task when started. The 2 tasks are simple moving the bars on screen at this stage.
 >
-The second step with the MMU turned on has now also been added.
+**Update:** The second step with the MMU turned on has now also been added.
 >
 Multicore code has been given it's own repository
 >
