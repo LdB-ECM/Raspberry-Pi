@@ -5,7 +5,7 @@ The first step is xRTOS our start point with a 4 core switcher with simple round
 >
 Multicore code has been given it's own repository
 >
-https://github.com/LdB-ECM/Raspberry-Pi-Multicore/tree/master/xRTOS
+https://github.com/LdB-ECM/Raspberry-Pi-Multicore
 >
 ![](https://github.com/LdB-ECM/Docs_and_Images/blob/master/Images/xRTOS.jpg?raw=true)
 >
