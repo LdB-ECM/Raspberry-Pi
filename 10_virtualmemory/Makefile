@@ -1,32 +1,54 @@
-###############################################################################
-#	makefile
-#	by Leon de Boer
-#
-#	A makefile script for use from command line or VS2017
-###############################################################################
-OSFLAG := $(OS)
-ifeq ($(OSFLAG), Windows_NT)
-	#WINDOWS LIKES THESE DEFINITIONS
-	RM=-del /Q
-	DIRSLASH=\\
+# If cross compiling from windows use native GNU-Make 4.2.1
+# https://sourceforge.net/projects/ezwinports/files/
+# download "make-4.2.1-without-guile-w32-bin.zip" and set it on the enviroment path
+# There is no need to install cygwin or any of that sort of rubbish
+
+ifeq ($(OS), Windows_NT)
+	#WINDOWS USE THESE DEFINITIONS
+	RM = -del /q
+	SLASH = \\
 else
-	#LINUX LIKES THESE DEFINITIONS
-	RM=-rm -f
-	DIRSLASH=/
+	#LINUX USE THESE DEFINITIONS
+	RM = -rm -f
+	SLASH = /
 endif 
 
-# The toolchain to use. Common name part and path 
-ARMGNU ?= g:\pi\gcc_linaro_7_1\bin\aarch64-elf
 
-Pi3: AFLAGS = -march=armv8-a+simd -mtune=cortex-a53
-Pi3: CFLAGS = -Wall -O3 -mstrict-align -fno-tree-loop-vectorize -fno-tree-slp-vectorize
-Pi3: IMGFILE = kernel8.img
+Pi3-64: CFLAGS = -Wall -O3 -mcpu=cortex-a53+fp+simd -ffreestanding -nostartfiles -std=c11 -mstrict-align -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi3-64: ARMGNU = D:/gcc-linaro-7.4.1-2019.02-i686-mingw32_aarch64-elf/bin/aarch64-elf
+Pi3-64: LINKERFILE = rpi64.ld
+Pi3-64: SMARTSTART = SmartStart64.S
+Pi3-64: IMGFILE = kernel8.img
 
-LDFLAGS = -nostdlib -nodefaultlibs -nostartfiles -ffreestanding -fno-asynchronous-unwind-tables -fomit-frame-pointer -specs=nosys.specs
+Pi3: CFLAGS = -Wall -O3 -mcpu=cortex-a53 -mfpu=neon-vfpv4 -mfloat-abi=hard -ffreestanding -nostartfiles -std=c11 -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi3: ARMGNU = D:/gcc_pi_7_2/bin/arm-none-eabi
+Pi3: LINKERFILE = rpi32.ld
+Pi3: SMARTSTART = SmartStart32.S
+Pi3: IMGFILE = kernel8-32.img
 
-LIBFLAGS=-lc -lm -lgcc
+Pi2: CFLAGS = -Wall -O3 -mcpu=cortex-a7 -mfpu=neon -mfloat-abi=hard -ffreestanding -nostartfiles -std=c11 -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi2: ARMGNU = D:/gcc_pi_7_2/bin/arm-none-eabi
+Pi2: LINKERFILE = rpi32.ld
+Pi2: SMARTSTART = SmartStart32.S
+Pi2: IMGFILE = kernel7.img
 
-LINKERFLAGS=-Wl,-gc-sections -Wl,--build-id=none -Wl,-Bdynamic
+Pi1:
+	ifeq("Pi1")
+	$(error This is a multicore project Pi1 is not a valid target being single core)
+	exit
+	endif
+
+######## PI1 NOT A VALID TARGET FOR THIS PROJECT #########
+##Pi1: CFLAGS = -Wall -O3 -mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard -ffreestanding -nostartfiles -std=c11 -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+##Pi1: ARMGNU = D:/gcc_pi_7_2/bin/arm-none-eabi
+##Pi1: LINKERFILE = rpi32.ld
+##Pi1: SMARTSTART = SmartStart32.S
+##Pi1: IMGFILE = kernel.img
+
+# The directory in which source files are stored.
+SOURCE = ${CURDIR}
+BUILD = Build
+
 
 # The name of the assembler listing file to generate.
 LIST = kernel.list
@@ -34,30 +56,53 @@ LIST = kernel.list
 # The name of the map file to generate.
 MAP = kernel.map
 
-# The name of the linker script to use.
-LINKERFILE = rpi64.ld
+# The names of all object files that must be generated. Deduced from the 
+# assembly code files in source.
+ASMOBJS = $(patsubst $(SOURCE)/%.S,$(BUILD)/%.o,$(SMARTSTART))
+COBJS = $(patsubst $(SOURCE)/%.c,$(BUILD)/%.o,$(wildcard $(SOURCE)/*.c))
 
-# Source files.
-SRCFILES :=  $(filter-out main.c, $(wildcard *.c))
 
-# Rule to make everything.
-Pi3: $(LIST)
-	
-# Rule to remake everything. Does not include clean.
-all: Pi3
+Pi3-64: kernel.elf
+BINARY = $(IMGFILE)
+.PHONY: Pi3-64
 
-# Rule to make the image & listing files.
-$(LIST) : kernel.elf
+Pi3: kernel.elf
+BINARY = $(IMGFILE)
+.PHONY: Pi3
+
+Pi2: kernel.elf
+BINARY = $(IMGFILE)
+.PHONY: Pi2
+
+##Pi1: kernel.elf
+##BINARY = $(IMGFILE)
+##.PHONY: Pi1
+
+$(BUILD)/%.o: $(SOURCE)/%.s
+	$(ARMGNU)-gcc -MMD -MP -g $(CFLAGS) -c  $< -o $@ -lc -lm -lgcc
+
+$(BUILD)/%.o: $(SOURCE)/%.S
+	$(ARMGNU)-gcc -MMD -MP -g $(CFLAGS) -c  $< -o $@ -lc -lm -lgcc
+
+$(BUILD)/%.o: $(SOURCE)/%.c
+	$(ARMGNU)-gcc -MMD -MP -g $(CFLAGS) -c  $< -o $@ -lc -lm -lgcc
+
+kernel.elf: $(ASMOBJS) $(COBJS) 
+	$(ARMGNU)-gcc $(CFLAGS) $(ASMOBJS) $(COBJS) -T $(LINKERFILE) -o kernel.elf -lc -lm -lgcc
 	$(ARMGNU)-objdump -d kernel.elf > $(LIST)
-	$(ARMGNU)-objcopy kernel.elf -O binary $(IMGFILE)
+	$(ARMGNU)-objcopy kernel.elf -O binary DiskImg/$(BINARY)
 	$(ARMGNU)-nm -n kernel.elf > $(MAP)
 
-# Rule to make the elf file.
-kernel.elf : $(SRCFILES)
-	$(ARMGNU)-gcc $(CFLAGS) $(LDFLAGS) $(LINKERFLAGS) -Wl,-T,$(LINKERFILE) SmartStart64.S main.c $(SRCFILES) -o $@ $(LIBFLAGS)
+# Control silent mode  .... we want silent in clean
+.SILENT: clean
 
+# cleanup temp files
 clean:
-	$(RM) $(MAP)
-	$(RM) kernel.elf
-	$(RM) $(LIST)
-	
+	$(RM) $(MAP) 
+	$(RM) kernel.elf 
+	$(RM) $(LIST) 
+	$(RM) $(BUILD)$(SLASH)*.o 
+	$(RM) $(BUILD)$(SLASH)*.d 
+	echo CLEAN COMPLETED
+.PHONY: clean
+

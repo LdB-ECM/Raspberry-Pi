@@ -8,7 +8,7 @@ extern "C" {									// Pu,t extern C directive wrapper arou,nd
 
 #include <stdint.h>								// Needed for uint8_t, uint32_t, etc
 
-static const uint32_t __attribute__((aligned(4))) BitFont[1024] = {
+static const uint32_t __attribute((aligned(4))) BitFont[1024] = {
 		0x00000000u, 0x00000000u, 0x00000000u, 0x00000000u,     // 0 .. 3
 
 		0x00007E81u, 0xA58181BDu, 0x9981817Eu, 0x00000000u,	    // 4 .. 7

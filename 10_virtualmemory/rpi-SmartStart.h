@@ -1,5 +1,5 @@
-#ifndef _SMART_START_
-#define _SMART_START_
+#ifndef _SMART_START_H_
+#define _SMART_START_H_
 
 #ifdef __cplusplus								// If we are including to a C++
 extern "C" {									// Put extern C directive wrapper around
@@ -8,8 +8,8 @@ extern "C" {									// Put extern C directive wrapper around
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 {																			}			
 {       Filename: rpi-smartstart.h											}
-{       Copyright(c): Leon de Boer(LdB) 2017								}
-{       Version: 2.02														}
+{       Copyright(c): Leon de Boer(LdB) 2017, 2018							}
+{       Version: 2.14														}
 {																			}		
 {***************[ THIS CODE IS FREEWARE UNDER CC Attribution]***************}
 {																            }
@@ -30,10 +30,19 @@ extern "C" {									// Put extern C directive wrapper around
 {	   There file also provides access to the basic hardware of the PI.     }
 {  It is also the easy point to insert a couple of important very useful    }
 {  Macros that make C development much easier.		        				} 
-{																            }
+{++++++++++++++++++++++++[ REVISIONS ]++++++++++++++++++++++++++++++++++++++}
+{  2.08 Added setIrqFuncAddress & setFiqFuncAddress							}
+{  2.09 Added Hard/Soft float compiler support								}
+{  2.10 Context Switch support API calls added								}
+{  2.11 MiniUart, PL011 Uart and console uart support added					}
+{  2.12 New FIQ, DAIF flag support added									}
+{  2.13	Graphics routines relocated to there own unit						}
+{  2.14 Multicore task switcher support Added								}
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-#include <stdbool.h>							// Needed for bool and true/false
-#include <stdint.h>								// Needed for uint8_t, uint32_t, etc
+
+#include <stdbool.h>		// C standard unit needed for bool and true/false
+#include <stdint.h>			// C standard unit needed for uint8_t, uint32_t, etc
+#include <stdarg.h>			// C standard unit needed for variadic functions
 
 /***************************************************************************}
 {		  PUBLIC MACROS MUCH AS WE HATE THEM SOMETIMES YOU NEED THEM        }
@@ -45,63 +54,55 @@ extern "C" {									// Put extern C directive wrapper around
 #endif
 
 /* As we are compiling for Raspberry Pi if winmain make it main */
-#define WinMain(...) main (uint32_t r0, uint32_t r1, uint32_t atags)
-
-/* System font is 8 wide and 16 height so these are preset for the moment */
-#define BitFontHt 16
-#define BitFontWth 8
-
-/* Timer interrupt handler function proto type */
-typedef void (*TimerIrqHandler) (void);
-
-/***************************************************************************}
-{						  PUBLIC MEMORY BARRIER ROUTINES				    }
-{***************************************************************************/
-#if (__ARM_ARCH == 6)							// Compiling for ARM 6
-#define ISB(x) asm volatile ("mcr p15, 0, r3, c7, c5, 4" : : "r3" : "memory")
-#define DSB(x) asm volatile ("mcr p15, 0, r3, c7, c10, 4" : : "r3" : "memory")
-#define DMB(x) asm volatile ("mcr p15, 0, r3, c7, c10, 5" : : "r3" : "memory")
-#endif
-#if (__ARM_ARCH == 7)							// Compiling for ARM 7
-#define ISB(option) asm volatile ("isb " #option : : : "memory")
-#define DSB(option) asm volatile ("dsb " #option : : : "memory")
-#define DMB(option) asm volatile ("dmb " #option : : : "memory")
-#endif
-
-#if (__ARM_ARCH == 8)  							// Compiling for an ARM 8
-#define ISB(option) asm volatile ("isb " #option : : : "memory")
-#define DSB(option) asm volatile ("dsb " #option : : : "memory")
-#define DMB(option) asm volatile ("dmb " #option : : : "memory")
-#endif
+#define WinMain(...) main(uint32_t r0, uint32_t r1, uint32_t atags)
 
 /***************************************************************************}
 {					     PUBLIC ENUMERATION CONSTANTS			            }
 ****************************************************************************/
 
 /*--------------------------------------------------------------------------}
+;{				  ENUMERATED AN ID FOR DIFFERENT PI MODELS					}
+;{-------------------------------------------------------------------------*/
+typedef enum {
+	MODEL_1A		= 0x0,
+	MODEL_1B		= 0x1,
+	MODEL_1A_PLUS	= 0x2,
+	MODEL_1B_PLUS	= 0x3,
+	MODEL_2B		= 0x4,
+	MODEL_ALPHA		= 0x5,
+	MODEL_CM		= 0x6,		// Compute Module
+	MODEL_2A        = 0x7,
+	MODEL_PI3		= 0x8,
+	MODEL_PI_ZERO	= 0x9,
+	MODEL_CM3       = 0x0A,      // Compute module 3
+	MODEL_PI_ZEROW	= 0x0C,
+	MODEL_PI3B_PLUS = 0x0D,
+	MODEL_PI3A_PLUS = 0x0E,
+	MODEL_CM3_PLUS  = 0x10,     // Compute module 3a plus
+} RPI_BOARD_TYPE;
+
+/*--------------------------------------------------------------------------}
 ;{	      ENUMERATED FSEL REGISTERS ... BCM2835.PDF MANUAL see page 92		}
 ;{-------------------------------------------------------------------------*/
 /* In binary so any error is obvious */
-typedef enum {
-	GPIO_INPUT = 0b000,									// 0
-	GPIO_OUTPUT = 0b001,								// 1
-	GPIO_ALTFUNC5 = 0b010,								// 2
-	GPIO_ALTFUNC4 = 0b011,								// 3
-	GPIO_ALTFUNC0 = 0b100,								// 4
-	GPIO_ALTFUNC1 = 0b101,								// 5
-	GPIO_ALTFUNC2 = 0b110,								// 6
-	GPIO_ALTFUNC3 = 0b111,								// 7
-} GPIOMODE;
+#define GPIO_INPUT		0b000							// 0
+#define GPIO_OUTPUT		0b001							// 1
+#define GPIO_ALTFUNC5	0b010							// 2
+#define GPIO_ALTFUNC4	0b011							// 3
+#define GPIO_ALTFUNC0	0b100							// 4
+#define	GPIO_ALTFUNC1	0b101							// 5
+#define	GPIO_ALTFUNC2	0b110							// 6
+#define GPIO_ALTFUNC3	0b111							// 7
+typedef uint8_t GPIOMODE;
 
 /*--------------------------------------------------------------------------}
 ;{	    ENUMERATED GPIO FIX RESISTOR ... BCM2835.PDF MANUAL see page 101	}
 ;{-------------------------------------------------------------------------*/
 /* In binary so any error is obvious */
-typedef enum {
-	NO_RESISTOR = 0b00,									// 0
-	PULLUP = 0b01,										// 1
-	PULLDOWN = 0b10,									// 2
-} GPIO_FIX_RESISTOR;
+#define NO_RESISTOR		0b00							// 0
+#define PULLUP			0b01							// 1
+#define PULLDOWN		0b10							// 2
+typedef uint8_t GPIO_FIX_RESISTOR;
 
 /*--------------------------------------------------------------------------}
 {	ENUMERATED TIMER CONTROL PRESCALE ... BCM2835.PDF MANUAL see page 197	}
@@ -291,9 +292,19 @@ typedef enum {
 	AARCH64 = 1,										// AARCH64 - 64 bit
 } AARCH_MODE;
 
+
 /***************************************************************************}
-{		 		    PUBLIC STRUCTURE DEFINITIONS				            }
+{		 		        PUBLIC STRUCTURE DEFINITIONS			            }
 ****************************************************************************/
+
+/*--------------------------------------------------------------------------}
+{			     RegType_t DEFINES A REGISTER TYPE AND SIZE					}
+{--------------------------------------------------------------------------*/
+#if __aarch64__ == 1
+typedef uint64_t RegType_t;											// Registers are 64bit in AARCH64
+#else
+typedef uint32_t RegType_t;											// Registers are 32bits in AARCH32
+#endif
 
 /*--------------------------------------------------------------------------}
 {				 COMPILER TARGET SETTING STRUCTURE DEFINED					}
@@ -302,10 +313,11 @@ typedef union
 {
 	struct 
 	{
-		ARM_CODE_TYPE ArmCodeTarget : 4;							// @0  Compiler code target
-		AARCH_MODE AArchMode : 1;									// @5  Code AARCH type compiler is producing
-		unsigned CoresSupported : 3;								// @6  Cores the code is setup to support
-		unsigned reserved : 24;										// @9-31 reserved
+		ARM_CODE_TYPE ArmCodeTarget : 4;							// @0		Compiler code target
+		AARCH_MODE AArchMode : 1;									// @5		Code AARCH type compiler is producing
+		unsigned CoresSupported : 3;								// @6		Cores the code is setup to support
+		unsigned reserved : 23;										// @9-31	reserved
+		unsigned HardFloats : 1;									// @31		Compiler code for hard floats
 	};
 	uint32_t Raw32;													// Union to access all 32 bits as a uint32_t
 } CODE_TYPE;
@@ -317,63 +329,205 @@ typedef union
 {
 	struct 
 	{
-		unsigned Revision : 4;										// @0-3  CPU minor revision 
-		unsigned PartNumber: 12;									// @4-15  Partnumber
-		unsigned Architecture : 4;									// @16-19 Architecture
-		unsigned Variant : 4;										// @20-23 Variant
-		unsigned Implementer : 8;									// @24-31 reserved
+		unsigned Revision : 4;										// @0-3		CPU minor revision 
+		unsigned PartNumber: 12;									// @4-15	Partnumber
+		unsigned Architecture : 4;									// @16-19	Architecture
+		unsigned Variant : 4;										// @20-23	Variant
+		unsigned Implementer : 8;									// @24-31	reserved
 	};
 	uint32_t Raw32;													// Union to access all 32 bits as a uint32_t
 } CPU_ID;
+
+/*--------------------------------------------------------------------------}
+{				SMARTSTART VERSION STRUCTURE DEFINED						}
+{--------------------------------------------------------------------------*/
+typedef union
+{
+	struct
+	{
+		unsigned LoVersion : 16;									// @0-15	SmartStart minor version 
+		unsigned HiVersion : 8;										// @16-23	SmartStart major version
+		unsigned _reserved : 8;										// @24-31	reserved
+	};
+	uint32_t Raw32;													// Union to access all 32 bits as a uint32_t
+} SMARTSTART_VER;
 
 /***************************************************************************}
 {                      PUBLIC INTERFACE MEMORY VARIABLES                    }
 {***************************************************************************/
 extern uint32_t RPi_IO_Base_Addr;				// RPI IO base address auto-detected by SmartStartxx.S
+extern uint32_t RPi_ARM_TO_GPU_Alias;			// RPI ARM_TO_GPU_Alias auto-detected by SmartStartxx.S
 extern uint32_t RPi_BootAddr;					// RPI address processor booted from auto-detected by SmartStartxx.S
 extern uint32_t RPi_CoresReady;					// RPI cpu cores made read for use by SmartStartxx.S
+extern uint32_t RPi_CPUBootMode;				// RPI cpu mode it was in when it booted
 extern CPU_ID RPi_CpuId;						// RPI CPU type auto-detected by SmartStartxx.S
 extern CODE_TYPE RPi_CompileMode;				// RPI code type that compiler produced
-extern uint32_t RPi_CPUBootMode;				// RPI cpu mode it was in when it booted
 extern uint32_t RPi_CPUCurrentMode;				// RPI cpu current operation mode
+extern SMARTSTART_VER RPi_SmartStartVer;		// SmartStart version
+extern void* RPi_coreCB_PTR[4];					// RPI pointer to the TCB block for each core .. needs to be set by task system	
 
 /***************************************************************************}
 {                       PUBLIC C INTERFACE ROUTINES                         }
 {***************************************************************************/
 
-/*==========================================================================}
-{			 PUBLIC CPU ID ROUTINES PROVIDED BY RPi-SmartStart API			}
-{==========================================================================*/
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+{		  INTERRUPT HELPER ROUTINES PROVIDE BY RPi-SmartStart API	        }
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-/*-[ RPi_CpuIdString]-------------------------------------------------------}
-. Returns the CPU id string of the CPU auto-detected by the SmartStart code
-. 30Jun17 LdB
+/*-[setFiqFuncAddress]------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Sets the function pointer to be the called when an Fiq interrupt occurs.
+. CPU fiq interrupts will be disabled so they can't trigger while changing.
+. RETURN: Old function pointer that was in use (will return 0 if never set).
 .--------------------------------------------------------------------------*/
-const char* RPi_CpuIdString (void);
+uintptr_t setFiqFuncAddress (void(*ARMaddress)(void));
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 {			GLOBAL INTERRUPT CONTROL PROVIDE BY RPi-SmartStart API		    }
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-extern void EnableInterrupts (void);			// Enable global interrupts
-extern void DisableInterrupts (void);			// Disable global interrupts
 
+/*-[EnableInterrupts]-------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Enable global interrupts on any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void EnableInterrupts (void);
+
+/*-[DisableInterrupts]------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Disable global interrupts on any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void DisableInterrupts (void);
+
+/*-[EnableFIQ]--------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Enable global fast interrupts on any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void EnableFIQ(void);
+
+/*-[DisableFIQ]-------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Disable global fast interrupts on any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void DisableFIQ(void);
+
+/*-[getDAIF]----------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Return the DAIF flags for any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+unsigned long getDAIF(void);
+
+/*-[setDAIF]----------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Sets the DAIF flags for any CPU core calling this function.
+.--------------------------------------------------------------------------*/
+void setDAIF (unsigned long flags);
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
-{	 	RPi-SmartStart API TO GET CORE ID & EXECUTE ROUTINE AT ADDRESS 	    }
+{			 RPi-SmartStart API TO MULTICORE FUNCTIONS					    }
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-uint8_t GetCoreID (void);
 
-/* Execute function on (1..CoresReady) */
-bool CoreExecute (uint8_t coreNum, void (*func) (void)); 
+/*-[getCoreID]--------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Returns the multicore id of the core calling the function
+.--------------------------------------------------------------------------*/
+unsigned int getCoreID (void);
+
+/*-[CoreExecute]------------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Commands the given parked core to execute the function provided. The core
+. called must be parked in the secondary spinloop. All secondary cores are
+. automatically parked by the normal SmartStart boot so are ready to deploy
+.--------------------------------------------------------------------------*/
+bool CoreExecute (uint8_t coreNum, void (*func) (void) );
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+{		   EL0 TIMER HELPER ROUTINES PROVIDE BY RPi-SmartStart API		    }
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*-[EL0_Timer_Frequency]----------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. NOTE1: Called on single core processor it will simply return zero.
+. On multicore processors this will return CNTFRQ_EL0 value. Typically this
+. is the clock frequency of the timer used for task switching.
+.--------------------------------------------------------------------------*/
+RegType_t EL0_Timer_Frequency (void);
+
+/*-[EL0_Timer_Set]----------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. NOTE1: Called on single core processor it will simply return false.
+. On multicore processors this adds nextCount to CNTP_CVAL_EL0 count. This
+. timer is typically for task switching on each core to generate interrupts
+. giving the scheduler a chance to select different tasks to progress.
+.--------------------------------------------------------------------------*/
+void EL0_Timer_Set (RegType_t nextCount);
+
+/*-[EL0_Timer_Irq_Setup]----------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. NOTE1: Called on single core processor it will simply return false.
+. On multicore processors this checks the 19.2Mhz prescaler clock is 1 then
+. enables nCNTPNSIRQ IRQ on the calling core.
+.--------------------------------------------------------------------------*/
+bool EL0_Timer_Irq_Setup (void);
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+{	 	TASK SWITCHER HELPER ROUTINES PROVIDE BY RPi-SmartStart API		    }
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*-[ xStartFirstTask ]------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. This will restore the current context which if the first context has been
+. setup by taskInitialiseStack will effectively start that task running.
+.--------------------------------------------------------------------------*/
+void xStartFirstTask (void);
+
+/*-[taskInitialiseStack]----------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Each task when created needs to initialize its task stack which this code
+. does. You provide the top of the stack area, the task code to execute and 
+. a private task parameter for the task. For registers not set to required
+. values the register number pattern is set to help with debugging.
+.--------------------------------------------------------------------------*/
+RegType_t* taskInitialiseStack (RegType_t* pxTopOfStack, void (*pxCode) (void* pvParameters), void* pvParameters);
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+{			  SEMAPHORE ROUTINES PROVIDE BY RPi-SmartStart API			    }
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*-[ semaphore_take ]--------------------------------------------------------}
+.  Uses LDREX/STREX primitive to take Binary Semaphore
+.--------------------------------------------------------------------------*/
+void semaphore_take (uint32_t* sem);
+
+/*-[ semaphore_give ]-------------------------------------------------------}
+.  Gives a Binary Semaphore back
+.--------------------------------------------------------------------------*/
+void semaphore_give (uint32_t* sem);
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+{			MMU HELPER ROUTINES PROVIDE BY RPi-SmartStart API			    }
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*-[ enable_mmu_tables ]----------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. The given map1to1 TLB table and virtual map TLB table are enabled. The
+. assumption is you have built valid TLB tables.
+.--------------------------------------------------------------------------*/
+void enable_mmu_tables (void* map1to1, void* virtualmap);
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
 {		VC4 GPU ADDRESS HELPER ROUTINES PROVIDE BY RPi-SmartStart API	    }
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-/* ARM bus address to GPU bus address */
-uint32_t ARMaddrToGPUaddr (void* ARMaddress);
+/*-[ARMaddrToGPUaddr]-------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Converts an ARM address to GPU address by using the GPU_alias offset
+.--------------------------------------------------------------------------*/
+uint32_t ARMaddrToGPUaddr (uint32_t ARMaddress);
 
-/* GPU bus address to ARM bus address */
+/*-[GPUaddrToARMaddr]-------------------------------------------------------}
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Converts a GPU address to an ARM address by using the GPU_alias offset
+.--------------------------------------------------------------------------*/
 uint32_t GPUaddrToARMaddr (uint32_t GPUaddress);
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
@@ -381,16 +535,25 @@ uint32_t GPUaddrToARMaddr (uint32_t GPUaddress);
 {++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 /*-[ PUT32 ]----------------------------------------------------------------}
-. Put the 32bit value out to the given address
-. 15May18 LdB
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Put the 32bit value out to the given address (Match Davids calls)
 .--------------------------------------------------------------------------*/
-void PUT32(uint32_t addr, uint32_t value);
+void PUT32 (uint32_t addr, uint32_t value);
 
 /*-[ GET32 ]----------------------------------------------------------------}
-. Get the 32bit value from the given address
-. 15May18 LdB
+. NOTE: Public C interface only to code located in SmartsStartxx.S
+. Get the 32bit value from the given address (Match Davids calls)
 .--------------------------------------------------------------------------*/
-uint32_t GET32(uint32_t addr);
+uint32_t GET32 (uint32_t addr);
+
+/*==========================================================================}
+{			 PUBLIC CPU ID ROUTINES PROVIDED BY RPi-SmartStart API			}
+{==========================================================================*/
+
+/*-[ RPi_CpuIdString]-------------------------------------------------------}
+. Returns the CPU id string of the CPU auto-detected by the SmartStart code
+.--------------------------------------------------------------------------*/
+const char* RPi_CpuIdString (void);
 
 /*==========================================================================}
 {			 PUBLIC GPIO ROUTINES PROVIDED BY RPi-SmartStart API			}
@@ -399,81 +562,68 @@ uint32_t GET32(uint32_t addr);
 /*-[gpio_setup]-------------------------------------------------------------}
 . Given a valid GPIO port number and mode sets GPIO to given mode
 . RETURN: true for success, false for any failure
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
-bool gpio_setup (uint_fast8_t gpio, GPIOMODE mode);
+bool gpio_setup (unsigned int gpio, GPIOMODE mode);
 
 /*-[gpio_output]------------------------------------------------------------}
 . Given a valid GPIO port number the output is set high(true) or Low (false)
 . RETURN: true for success, false for any failure
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
-bool gpio_output (uint_fast8_t gpio, bool on);
+bool gpio_output (unsigned int gpio, bool on);
 
 /*-[gpio_input]-------------------------------------------------------------}
 . Reads the actual level of the GPIO port number
 . RETURN: true = GPIO input high, false = GPIO input low
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
-bool gpio_input (uint_fast8_t gpio);
+bool gpio_input (unsigned int gpio);
 
 /*-[gpio_checkEvent]--------------------------------------------------------}
 . Checks the given GPIO port number for an event/irq flag.
 . RETURN: true for event occured, false for no event
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
-bool gpio_checkEvent (uint_fast8_t gpio);
+bool gpio_checkEvent (unsigned int gpio);
 
 /*-[gpio_clearEvent]--------------------------------------------------------}
 . Clears the given GPIO port number event/irq flag.
 . RETURN: true for success, false for any failure
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
-bool gpio_clearEvent (uint_fast8_t gpio);
+bool gpio_clearEvent (unsigned int gpio);
 
 /*-[gpio_edgeDetect]--------------------------------------------------------}
 . Sets GPIO port number edge detection to lifting/falling in Async/Sync mode
 . RETURN: true for success, false for any failure
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
-bool gpio_edgeDetect (uint_fast8_t gpio, bool lifting, bool Async);
+bool gpio_edgeDetect (unsigned int gpio, bool lifting, bool Async);
 
 /*-[gpio_fixResistor]-------------------------------------------------------}
 . Set the GPIO port number with fix resistors to pull up/pull down.
 . RETURN: true for success, false for any failure
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
-bool gpio_fixResistor (uint_fast8_t gpio, GPIO_FIX_RESISTOR resistor);
+bool gpio_fixResistor (unsigned int gpio, GPIO_FIX_RESISTOR resistor);
 
 /*==========================================================================}
 {		   PUBLIC TIMER ROUTINES PROVIDED BY RPi-SmartStart API				}
 {==========================================================================*/
 
-/*-[timer_getTickCount]-----------------------------------------------------}
-. Get 1Mhz ARM system timer tick count in full 64 bit.
-. The timer read is as per the Broadcom specification of two 32bit reads
-. RETURN: tickcount value as an unsigned 64bit value in milliseconds (msec)
-. 30Jun17 LdB
-.--------------------------------------------------------------------------*/
-uint64_t timer_getTickCount (void);
-
 /*-[timer_getTickCount64]---------------------------------------------------}
 . Get 1Mhz ARM system timer tick count in full 64 bit.
 . The timer read is as per the Broadcom specification of two 32bit reads
+. This is lockfree reads and can be done off any core and concurrently.
 . RETURN: tickcount value as an unsigned 64bit value in microseconds (usec)
-. 30Jun17 LdB
 .--------------------------------------------------------------------------*/
 uint64_t timer_getTickCount64 (void);
 
 /*-[timer_Wait]-------------------------------------------------------------}
 . This will simply wait the requested number of microseconds before return.
-. 02Jul17 LdB
+. This is lockfree reads and can be done off any core and concurrently.
+. This is fully blocking and in an O/S situations you should use the O/S
+. timed wait so the processor can be redeployed while waiting.
 .--------------------------------------------------------------------------*/
-void timer_wait (uint64_t us);
+void timer_wait (uint64_t usec);
 
 /*-[tick_Difference]--------------------------------------------------------}
 . Given two timer tick results it returns the time difference between them.
-. 02Jul17 LdB
+. If (us1 > us2) it is assumed the timer rolled as we expect (us2 > us1)
 .--------------------------------------------------------------------------*/
 uint64_t tick_difference (uint64_t us1, uint64_t us2);
 
@@ -483,16 +633,15 @@ uint64_t tick_difference (uint64_t us1, uint64_t us2);
 
 /*-[mailbox_write]----------------------------------------------------------}
 . This will execute the sending of the given data block message thru the
-. mailbox system on the given channel.
+. mailbox system on the given channel. It is normal for a response back so
+. usually you need to follow the write up with a read.
 . RETURN: True for success, False for failure.
-. 04Jul17 LdB
 .--------------------------------------------------------------------------*/
 bool mailbox_write (MAILBOX_CHANNEL channel, uint32_t message);
 
 /*-[mailbox_read]-----------------------------------------------------------}
 . This will read any pending data on the mailbox system on the given channel.
 . RETURN: The read value for success, 0xFEEDDEAD for failure.
-. 04Jul17 LdB
 .--------------------------------------------------------------------------*/
 uint32_t mailbox_read (MAILBOX_CHANNEL channel);
 
@@ -504,7 +653,6 @@ uint32_t mailbox_read (MAILBOX_CHANNEL channel);
 . do not want the response data back the use NULL for response_buffer.
 . RETURN: True for success and the response data will be set with data
 .         False for failure and the response buffer is untouched.
-. 04Jul17 LdB
 .--------------------------------------------------------------------------*/
 bool mailbox_tag_message (uint32_t* response_buf,					// Pointer to response buffer (NULL = no response wanted)
 						  uint8_t data_count,						// Number of uint32_t data to be set for call
@@ -514,25 +662,120 @@ bool mailbox_tag_message (uint32_t* response_buf,					// Pointer to response buf
 {	  PUBLIC PI TIMER INTERRUPT ROUTINES PROVIDED BY RPi-SmartStart API		}
 {==========================================================================*/
 
-/*-[setTimerIrqAddress]-----------------------------------------------------}
-. Allocates the given TimerIrqHandler function pointer to be the call when
-. a timer interrupt occurs. As we are undoubtedly setting up the interrupt
-. the interrupt is disabled. 
-. RETURN: The old function pointer that was in use (will return 0 for 1st).
-. 19Sep17 LdB
+/*-[ClearTimerIrq]----------------------------------------------------------}
+. Simply clear the timer interupt by hitting the clear register. Any timer
+. fiq/irq interrupt should call this before exiting.
 .--------------------------------------------------------------------------*/
-TimerIrqHandler setTimerIrqAddress (TimerIrqHandler ARMaddress);
+void ClearTimerIrq (void);
 
 /*-[TimerIrqSetup]----------------------------------------------------------}
-. Allocates the given TimerIrqHandler function pointer to be the irq call 
-. when a timer interrupt occurs. The interrupt rate is set by providing a 
-. period in usec between triggers of the interrupt.
-. RETURN: The old function pointer that was in use (will return 0 for 1st).
-. 19Sep17 LdB
+. The timer irq interrupt rate is set to the period in usec between triggers.
+. Largest period is around 16 million usec (16 sec) it varies on core speed
+. RETURN: TRUE if successful,  FALSE for any failure
 .--------------------------------------------------------------------------*/
-TimerIrqHandler TimerIrqSetup (uint32_t period_in_us,				// Period between timer interrupts in usec
-							   TimerIrqHandler ARMaddress);         // Function to call on interrupt
+bool TimerIrqSetup (uint32_t period_in_us);							// Period between timer interrupts in usec
 
+/*-[TimerFiqSetup]----------------------------------------------------------}
+. Allocates the given TimerFiqHandler function pointer to be the fiq call
+. when a timer interrupt occurs. The interrupt rate is set by providing a
+. period in usec between triggers of the interrupt. If the FIQ function is
+. redirected by another means use 0 which causes handler set to be ignored.
+. Largest period is around 16 million usec (16 sec) it varies on core speed
+. RETURN: The old function pointer that was in use (will return 0 for 1st).
+.--------------------------------------------------------------------------*/
+uintptr_t TimerFiqSetup (uint32_t period_in_us, 					// Period between timer interrupts in usec
+						 void (*ARMaddress)(void));					// Function to call (0 = ignored)
+
+
+/*==========================================================================}
+{  PUBLIC PI MULTICORE LOCAL TIMER ROUTINES PROVIDED BY RPi-SmartStart API	}
+{==========================================================================*/
+
+/*-[ClearLocalTimerIrq]-----------------------------------------------------}
+. Simply clear the local timer interupt by hitting the clear registers. Any
+. local timer irq/fiq interrupt function should call this before exiting.
+.--------------------------------------------------------------------------*/
+void ClearLocalTimerIrq (void);
+
+/*-[LocalTimerSetup]--------------------------------------------------------}
+. Sets the clock rate to the period in usec for the local clock timer.
+. Largest period is around 16 million usec (16 sec) it varies on core speed.
+. All cores share this clock so setting it from any core changes all cores.
+. RETURN: TRUE if successful,  FALSE for any failure
+.--------------------------------------------------------------------------*/
+bool LocalTimerSetup (uint32_t period_in_us);						// Period between timer interrupts in usec
+
+/*-[LocalTimerIrqSetup]-----------------------------------------------------}
+. The local timer irq interrupt rate is set to the period in usec between
+. triggers. On BCM2835 (ARM6) it does not have core timer so call fails.
+. Largest period is around 16 million usec (16 sec) it varies on core speed
+. RETURN: TRUE if successful, FALSE for any failure
+.--------------------------------------------------------------------------*/
+bool LocalTimerIrqSetup (uint32_t period_in_us,						// Period between timer interrupts in usec
+						 uint8_t coreNum);							// Core number
+
+/*-[LocalTimerFiqSetup]-----------------------------------------------------}
+. The local timer fiq interrupt rate is set to the period in usec between
+. triggers. On BCM2835 (ARM6) it does not have core timer so call fails.
+. Largest period is around 16 million usec (16 sec) it varies on core speed
+. RETURN: TRUE if successful, FALSE for any failure
+.--------------------------------------------------------------------------*/
+bool LocalTimerFiqSetup (uint32_t period_in_us,						// Period between timer interrupts in usec
+						 uint8_t coreNum);							// Core number
+
+/*==========================================================================}
+{				           MINIUART ROUTINES								}
+{==========================================================================*/
+
+/*-[miniuart_init]----------------------------------------------------------}
+. Initializes the miniuart (NS16550 compatible one) to the given baudrate
+. with 8 data bits, no parity and 1 stop bit. On the PI models 1A, 1B, 1B+
+. and PI ZeroW this is external GPIO14 & GPIO15 (Pin header 8 & 10).
+. RETURN: true if successfuly set, false on any error
+.--------------------------------------------------------------------------*/
+bool miniuart_init (unsigned int baudrate);
+
+/*-[miniuart_getc]----------------------------------------------------------}
+. Wait for an retrieve a character from the uart.
+.--------------------------------------------------------------------------*/
+char miniuart_getc (void);
+
+/*-[miniuart_putc]----------------------------------------------------------}
+. Send a character out via uart.
+.--------------------------------------------------------------------------*/
+void miniuart_putc (char c);
+
+/*-[miniuart_puts]----------------------------------------------------------}
+. Send a '\0' terminated character string out via uart.
+.--------------------------------------------------------------------------*/
+void miniuart_puts (char *str);
+
+/*==========================================================================}
+{				           PL011 UART ROUTINES								}
+{==========================================================================*/
+
+/*-[pl011_uart_init]--------------------------------------------------------}
+. Initializes the pl011 uart to the given baudrate with 8 data, no parity
+. and 1 stop bit. On the PI models 2B, Pi3, Pi3B+, Pi Zero and CM this is
+. external GPIO14 & GPIO15 (Pin header 8 & 10).
+. RETURN: true if successfuly set, false on any error
+.--------------------------------------------------------------------------*/
+bool pl011_uart_init (unsigned int baudrate);
+
+/*-[pl011_uart_getc]--------------------------------------------------------}
+. Wait for an retrieve a character from the uart.
+.--------------------------------------------------------------------------*/
+char pl011_uart_getc (void);
+
+/*-[pl011_uart_putc]--------------------------------------------------------}
+. Send a character out via uart.
+.--------------------------------------------------------------------------*/
+void pl011_uart_putc (char c);
+
+/*-[pl011_uart_puts]--------------------------------------------------------}
+. Send a '\0' terminated character string out via uart.
+.--------------------------------------------------------------------------*/
+void pl011_uart_puts (char *str);
 
 /*==========================================================================}
 {	   PUBLIC PI ACTIVITY LED ROUTINE PROVIDED BY RPi-SmartStart API		}
@@ -542,7 +785,6 @@ TimerIrqHandler TimerIrqSetup (uint32_t period_in_us,				// Period between timer
 . This will set the PI activity LED on or off as requested. The SmartStart
 . stub provides the Pi board autodetection so the right GPIO port is used.
 . RETURN: True the LED state was successfully change, false otherwise
-. 04Jul17 LdB
 .--------------------------------------------------------------------------*/
 bool set_Activity_LED (bool on);
 
@@ -552,229 +794,21 @@ bool set_Activity_LED (bool on);
 
 /*-[ARM_setmaxspeed]--------------------------------------------------------}
 . This will set the ARM cpu to the maximum. You can optionally print confirm
-. message to screen but providing a print handler.
+. message to screen or uart etc by providing a print function handler.
+. The print handler can be screen or a uart/usb/eth handler for monitoring.
 . RETURN: True maxium speed was successfully set, false otherwise
-. 04Jul17 LdB
 .--------------------------------------------------------------------------*/
-bool ARM_setmaxspeed ( int(*printhandler) (const char *fmt, ...) );
+bool ARM_setmaxspeed (int (*prn_handler) (const char *fmt, ...) );
 
 /*==========================================================================}
 {				      SMARTSTART DISPLAY ROUTINES							}
 {==========================================================================*/
 
 /*-[displaySmartStart]------------------------------------------------------}
-. This will print 2 lines of basic smart start details to given print handler
-. 04Jul17 LdB
+. Will print 2 lines of basic smart start details to given print handler
+. The print handler can be screen or a uart/usb/eth handler for monitoring.
 .--------------------------------------------------------------------------*/
-void displaySmartStart ( int(*printhandler) (const char *fmt, ...) );
-
-/*==========================================================================}
-{		 PUBLIC PI MINIUART ROUTINE PROVIDED BY RPi-SmartStart API	    	}
-{==========================================================================*/
-bool miniuart_init (uint32_t baudrate);
-char miniuart_getc (void);
-void miniuart_putc (const char c);
-void miniuart_puts (const char *str);
-
-/*==========================================================================}
-{		PUBLIC PI PL011 UART ROUTINE PROVIDED BY RPi-SmartStart API	    	}
-{==========================================================================*/
-bool pl011_uart_init (uint32_t baudrate);
-char pl011_uart_getc (void);
-void pl011_uart_putc (const char c);
-void pl011_uart_puts (const char *str);
-
-void semaphore_inc(uint32_t* sem);
-void semaphore_dec(uint32_t* sem);
-
-
-typedef int32_t		BOOL;							// BOOL is defined to an int32_t ... yeah windows is weird -1 is often returned
-typedef char		TCHAR;							// TCHAR is a char
-typedef uintptr_t	HDC;							// HDC is really a pointer
-typedef uintptr_t	HANDLE;							// HANDLE is really a pointer
-typedef uintptr_t	HINSTANCE;						// HINSTANCE is really a pointer
-typedef uint32_t	UINT;							// UINT is an unsigned 32bit int
-typedef char*		LPCTSTR;						// LPCTSTR is a char pointer
-
-#define TRUE 1
-#define FALSE 0
-
-#define IMAGE_BITMAP	0
-#define IMAGE_ICON		1
-#define IMAGE_CURSOR	2
-
-#define LR_DEFAULTCOLOR			0x00000000
-#define LR_MONOCHROME			0x00000001
-#define LR_COLOR				0x00000002
-#define LR_COPYRETURNORG		0x00000004
-#define LR_COPYDELETEORG		0x00000008
-#define	LR_LOADFROMFILE			0x00000010
-#define LR_LOADTRANSPARENT		0x00000020
-#define LR_DEFAULTSIZE			0x00000040
-#define LR_VGACOLOR				0x00000080
-#define LR_LOADMAP3DCOLORS		0x00001000
-#define LR_CREATEDIBSECTION		0x00002000
-#define LR_COPYFROMRESOURCE		0x00004000
-#define LR_SHARED				0x00008000
-
-
-/***************************************************************************}
-{		 		    PUBLIC STRUCTURE DEFINITIONS				            }
-****************************************************************************/
-
-typedef struct __attribute__((__packed__, aligned(1)))
-{
-	uint8_t rgbBlue;								// Blue
-	uint8_t rgbGreen;								// Green
-	uint8_t rgbRed;									// Red
-} RGBTRIPLE;
-
-
-typedef union 
-{
-	struct __attribute__((__packed__, aligned(1)))
-	{
-		uint8_t rgbBlue;							// Blue
-		uint8_t rgbGreen;							// Green
-		uint8_t rgbRed;								// Red
-		uint8_t rgbAlpha;							// Alpha
-	};
-	RGBTRIPLE rgb;									// RGB triple (1st 3 bytes)
-	uint32_t Raw32;									// Raw access to all 32 bits
-} RGBA;
-
-typedef union 
-{
-	struct __attribute__((__packed__, aligned(1)))
-	{
-		unsigned B : 5;								// Blue
-		unsigned G : 6;								// Green
-		unsigned R : 5;								// Red
-	};
-	uint16_t Raw16;									// Access all 16 bits as one
-} RGB565;
-
-
-typedef union
-{
-	RGBA rgba;										// RGBA 
-	RGBTRIPLE rgb;									// RGB triple (1st 3 bytes)
-	uint32_t Raw32;									// Raw access to all 32 bits								
-} COLORREF;
-
-/*--------------------------------------------------------------------------}
-{	                 HBITMAP - HANDLE TO BITMAP IN MEMORY					}
-{--------------------------------------------------------------------------*/
-typedef union 
-{
-	uint8_t* rawImage;								// Pointer to raw byte format array
-	RGB565* __attribute__((aligned(2))) ptrRGB565;	// Pointer to RGB565 format array
-	RGBTRIPLE* __attribute__((aligned(1))) ptrRGB;	// Pointer to RGB format array
-	RGBA* __attribute__((aligned(4))) ptrRGBA;		// Pointer to RGBA format array
-	uintptr_t rawPtr;								// Pointer address
-} HBITMAP;
-
-
-typedef struct 
-{
-	int_fast32_t x;									// x co-ordinate
-	int_fast32_t y;									// y co-ordinate
-} POINT, *LPPOINT;									// Typedef define POINT and LPPOINT
-
-
-/*--------------------------------------------------------------------------}
-{                        BITMAP FILE HEADER DEFINITION                      }
-{--------------------------------------------------------------------------*/
-typedef struct __attribute__((__packed__, aligned(2))) 
-{
-	uint16_t  bfType; 												// Bitmap type should be "BM"
-	uint32_t  bfSize; 												// Bitmap size in bytes
-	uint16_t  bfReserved1; 											// reserved short1
-	uint16_t  bfReserved2; 											// reserved short2
-	uint32_t  bfOffBits; 											// Offset to bmp data
-} BITMAPFILEHEADER;
-
-/*--------------------------------------------------------------------------}
-{                    BITMAP FILE INFO HEADER DEFINITION						}
-{--------------------------------------------------------------------------*/
-typedef struct __attribute__((__packed__, aligned(2))) 
-{
-	uint32_t biSize; 												// Bitmap file size
-	uint32_t biWidth; 												// Bitmap width
-	uint32_t biHeight;												// Bitmap height
-	uint16_t biPlanes; 												// Planes in image
-	uint16_t biBitCount; 											// Bits per byte
-	uint32_t biCompression; 										// Compression technology
-	uint32_t biSizeImage; 											// Image byte size
-	uint32_t biXPelsPerMeter; 										// Pixels per x meter
-	uint32_t biYPelsPerMeter; 										// Pixels per y meter
-	uint32_t biClrUsed; 											// Number of color indexes needed
-	uint32_t biClrImportant; 										// Min colours needed
-} BITMAPINFOHEADER;
-
-
-bool PiConsole_Init(int Width, int Height, int Depth, int(*printhandler) (const char *fmt, ...) );
-void WriteText(int x, int y, char* txt);
-void Embedded_Console_WriteChar (char Ch);
-bool TransparentTextOut (int nXStart, int nYStart, const char* lpString);
-
-HDC GetConsoleDC(void);
-uint32_t GetConsole_FrameBuffer(void);
-uint32_t GetConsole_Width (void);
-uint32_t GetConsole_Height (void);
-void WhereXY(uint32_t* x, uint32_t* y);
-void GotoXY (uint32_t x, uint32_t y);
-
-
-COLORREF SetPixel(HDC hdc, uint_fast32_t x, uint_fast32_t y, COLORREF crColor);
-
-COLORREF SetDCPenColor(HDC      hdc,							// Handle to the DC
-					  COLORREF crColor);						// The new pen color
-
-COLORREF SetDCBrushColor(HDC      hdc,						// Handle to the DC
-	COLORREF crColor);					// The new brush color
-
-COLORREF SetTextColor(HDC      hdc,
-	COLORREF crColor
-);
-
-BOOL MoveToEx(HDC hdc,
-	int_fast32_t X,
-	int_fast32_t Y,
-	POINT* lpPoint);
-
-BOOL LineTo(HDC hdc,
-	int nXEnd,
-	int nYEnd);
-
-BOOL TextOut(HDC				hdc,
-	int_fast32_t     nXStart,
-	int_fast32_t     nYStart,
-	const TCHAR*		lpString,
-	int_fast32_t     cchString);
-
-BOOL Rectangle(HDC hdc,
-	int_fast32_t nLeftRect,
-	int_fast32_t nTopRect,
-	int_fast32_t nRightRect,
-	int_fast32_t nBottomRect);
-
-BOOL BmpOut(HDC hdc,
-	uint32_t nXStart,
-	uint32_t nYStart,
-	uint32_t cX,
-	uint32_t cY,
-	uint8_t* imgSrc);
-
-BOOL CvtBmpLine(HDC hdc,
-	uint32_t nXStart,
-	uint32_t nYStart,
-	uint32_t cX,
-	uint32_t imgDepth,
-	uint8_t* imgSrc);
-
-typedef char* caddr_t;
-caddr_t __attribute__((weak)) _sbrk(int incr);
+void displaySmartStart (int (*prn_handler) (const char *fmt, ...));
 
 #ifdef __cplusplus								// If we are including to a C++ file
 }												// Close the extern C directive wrapper
