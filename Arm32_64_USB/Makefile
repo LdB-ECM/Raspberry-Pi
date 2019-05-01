@@ -5,14 +5,12 @@
 
 ifeq ($(OS), Windows_NT)
 	#WINDOWS USE THESE DEFINITIONS
-	RM = -del /q /f
+	RM = -del /q
 	SLASH = \\
-	SWALLOW_OUTPUT = >nul 2>nul
 else
 	#LINUX USE THESE DEFINITIONS
 	RM = -rm -f
 	SLASH = /
-	SWALLOW_OUTPUT =
 endif 
 
 
