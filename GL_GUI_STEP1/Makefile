@@ -7,12 +7,10 @@ ifeq ($(OS), Windows_NT)
 	#WINDOWS USE THESE DEFINITIONS
 	RM = -del /q /f
 	SLASH = \\
-	SWALLOW_OUTPUT = >nul 2>nul
 else
 	#LINUX USE THESE DEFINITIONS
 	RM = -rm -f
 	SLASH = /
-	SWALLOW_OUTPUT =
 endif 
 
 
@@ -42,7 +40,7 @@ Pi1: IMGFILE = kernel.img
 
 # The directory in which source files are stored.
 SOURCE = ${CURDIR}
-BUILD = build
+BUILD = Build
 
 
 # The name of the assembler listing file to generate.
@@ -54,7 +52,7 @@ MAP = kernel.map
 # The names of all object files that must be generated. Deduced from the 
 # assembly code files in source.
 
-ASMOBJS = $(SOURCE)/$(SMARTSTART)
+ASMOBJS = $(patsubst $(SOURCE)/%.c,$(BUILD)/%.o,$(SMARTSTART))
 COBJS = $(patsubst $(SOURCE)/%.c,$(BUILD)/%.o,$(wildcard $(SOURCE)/*.c))
 
 
