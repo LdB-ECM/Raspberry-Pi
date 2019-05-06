@@ -13,39 +13,42 @@ else
 	SLASH = /
 endif 
 
-# The toolchain path and prefix for 32bit compiler .. 64bit compiler will override
-ARMGNU = D:/gcc-arm-none-eabi-7/bin/arm-none-eabi
 
-# The name of the linker script to use for 32 bit compiler ...  64bit compiler will override
-LINKERFILE = rpi32.ld
-
-# The bootloader file defaut is 32bit ... 64bit compiler will override
-SMARTSTART = SmartStart32.S
-
-Pi3-64: CFLAGS = -Wall -O3 -mcpu=cortex-a53+simd+fp -mstrict-align -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
-Pi3-64: IMGFILE = kernel8.img
-Pi3-64: ARMGNU  = D:/gcc_linaro_7_1/bin/aarch64-elf
+Pi3-64: CFLAGS = -Wall -O3 -mcpu=cortex-a53+fp+simd -ffreestanding -nostartfiles -std=c11 -mstrict-align -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi3-64: ARMGNU = D:/gcc-linaro-7.4.1-2019.02-i686-mingw32_aarch64-elf/bin/aarch64-elf
 Pi3-64: LINKERFILE = rpi64.ld
 Pi3-64: SMARTSTART = SmartStart64.S
+Pi3-64: IMGFILE = kernel8.img
 
-Pi3: CFLAGS = -Wall -O3 -mcpu=cortex-a53 -mfpu=neon-vfpv4 -mfloat-abi=hard -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi3: CFLAGS = -Wall -O3 -mcpu=cortex-a53 -mfpu=neon-vfpv4 -mfloat-abi=hard -ffreestanding -nostartfiles -std=c11 -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi3: ARMGNU = D:/gcc_pi_7_2/bin/arm-none-eabi
+Pi3: LINKERFILE = rpi32.ld
+Pi3: SMARTSTART = SmartStart32.S
 Pi3: IMGFILE = kernel8-32.img
 
-
-Pi2: CFLAGS = -Wall -O3 -mcpu=cortex-a7 -mfpu=neon -mfloat-abi=hard -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi2: CFLAGS = -Wall -O3 -mcpu=cortex-a7 -mfpu=neon -mfloat-abi=hard -ffreestanding -nostartfiles -std=c11 -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+Pi2: ARMGNU = D:/gcc_pi_7_2/bin/arm-none-eabi
+Pi2: LINKERFILE = rpi32.ld
+Pi2: SMARTSTART = SmartStart32.S
 Pi2: IMGFILE = kernel7.img
 
-Pi1: CFLAGS = -Wall -O3 -mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
-Pi1: IMGFILE = kernel.img
+Pi1:
+	ifeq("Pi1")
+	$(error This is a multicore project Pi1 is not a valid target being single core)
+	exit
+	endif
 
-LDFLAGS = -nostdlib -nodefaultlibs -nostartfiles -ffreestanding -fno-asynchronous-unwind-tables -fomit-frame-pointer
-
-LIBFLAGS=-lc -lm -lgcc
-
-LINKERFLAGS=-Wl,-gc-sections -Wl,--build-id=none -Wl,-Bdynamic
+######## PI1 NOT A VALID TARGET FOR THIS PROJECT #########
+##Pi1: CFLAGS = -Wall -O3 -mcpu=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard -ffreestanding -nostartfiles -std=c11 -mno-unaligned-access -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
+##Pi1: ARMGNU = D:/gcc_pi_7_2/bin/arm-none-eabi
+##Pi1: LINKERFILE = rpi32.ld
+##Pi1: SMARTSTART = SmartStart32.S
+##Pi1: IMGFILE = kernel.img
 
 # The directory in which source files are stored.
 SOURCE = ${CURDIR}
+BUILD = Build
+
 
 # The name of the assembler listing file to generate.
 LIST = kernel.list
@@ -55,54 +58,51 @@ MAP = kernel.map
 
 # The names of all object files that must be generated. Deduced from the 
 # assembly code files in source.
-C_FILES := $(filter-out main.c, $(wildcard *.c))
+ASMOBJS = $(patsubst $(SOURCE)/%.S,$(BUILD)/%.o,$(SMARTSTART))
+COBJS = $(patsubst $(SOURCE)/%.c,$(BUILD)/%.o,$(wildcard $(SOURCE)/*.c))
 
-# Rule to make everything.
-Pi3 Pi2 Pi1 Pi3-64: $(LIST)
-	
-# Rule to remake everything. Does not include clean.
-all: Pi3 Pi2 Pi1 Pi3-64
 
-# Rule to make the image & listing files.
-$(LIST) : kernel.elf
+Pi3-64: kernel.elf
+BINARY = $(IMGFILE)
+.PHONY: Pi3-64
+
+Pi3: kernel.elf
+BINARY = $(IMGFILE)
+.PHONY: Pi3
+
+Pi2: kernel.elf
+BINARY = $(IMGFILE)
+.PHONY: Pi2
+
+##Pi1: kernel.elf
+##BINARY = $(IMGFILE)
+##.PHONY: Pi1
+
+$(BUILD)/%.o: $(SOURCE)/%.s
+	$(ARMGNU)-gcc -MMD -MP -g $(CFLAGS) -c  $< -o $@ -lc -lm -lgcc
+
+$(BUILD)/%.o: $(SOURCE)/%.S
+	$(ARMGNU)-gcc -MMD -MP -g $(CFLAGS) -c  $< -o $@ -lc -lm -lgcc
+
+$(BUILD)/%.o: $(SOURCE)/%.c
+	$(ARMGNU)-gcc -MMD -MP -g $(CFLAGS) -c  $< -o $@ -lc -lm -lgcc
+
+kernel.elf: $(ASMOBJS) $(COBJS) 
+	$(ARMGNU)-gcc $(CFLAGS) $(ASMOBJS) $(COBJS) -T $(LINKERFILE) -o kernel.elf -lc -lm -lgcc
 	$(ARMGNU)-objdump -d kernel.elf > $(LIST)
-	$(ARMGNU)-objcopy kernel.elf -O binary DiskImg/$(IMGFILE)
+	$(ARMGNU)-objcopy kernel.elf -O binary DiskImg/$(BINARY)
 	$(ARMGNU)-nm -n kernel.elf > $(MAP)
-
-OBJDIR := build
-target = ${OBJDIR}/$(patsubst %.c,%.o,$(notdir ${1}))
-obj.c :=
-define obj
-  $(call target,${1}) : ${1} | 
-  obj$(suffix ${1}) += $(call target,${1})
-endef
-
-define SOURCES
-  $(foreach src,${1},$(eval $(call obj,${src})))
-endef
-
-$(eval $(call SOURCES,${C_FILES}))
-
-main.c : ${obj.c}
-
- ${obj.c} : % :
-	$(ARMGNU)-gcc -MMD -MP $(CFLAGS) $(LDFLAGS) -c $^ -o $@
-# Uncomment this if you want the assembler output of each object file
-#	$(ARMGNU)-gcc $(CFLAGS) $(LDFLAGS) -S $^ -o $(patsubst %.o,%.s,$(@))
-
-kernel.elf : main.c
-	$(ARMGNU)-gcc $(CFLAGS) $(LDFLAGS) $(LINKERFLAGS) -Wl,-T,$(LINKERFILE) $(wildcard $(OBJDIR)/*.o) main.c $(SMARTSTART) -o $@ $(LIBFLAGS)
 
 # Control silent mode  .... we want silent in clean
 .SILENT: clean
 
 # cleanup temp files
 clean:
-	$(RM) $(MAP)
-	$(RM) kernel.elf
-	$(RM) $(LIST)
-	$(RM) $(OBJDIR)$(SLASH)*.o
-	$(RM) $(OBJDIR)$(SLASH)*.d
+	$(RM) $(MAP) 
+	$(RM) kernel.elf 
+	$(RM) $(LIST) 
+	$(RM) $(BUILD)$(SLASH)*.o 
+	$(RM) $(BUILD)$(SLASH)*.d 
 	echo CLEAN COMPLETED
 .PHONY: clean
 
