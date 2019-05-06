@@ -7,14 +7,11 @@ ifeq ($(OS), Windows_NT)
 	#WINDOWS USE THESE DEFINITIONS
 	RM = -del /q /f
 	SLASH = \\
-	SWALLOW_OUTPUT = >nul 2>nul
 else
 	#LINUX USE THESE DEFINITIONS
 	RM = -rm -f
 	SLASH = /
-	SWALLOW_OUTPUT =
 endif 
-
 
 Pi3-64: CFLAGS = -Wall -O3 -mcpu=cortex-a53+fp+simd -ffreestanding -nostartfiles -std=c11 -mstrict-align -fno-tree-loop-vectorize -fno-tree-slp-vectorize -Wno-nonnull-compare
 Pi3-64: ARMGNU = d:/gcc-linaro-7.4.1-2019.02-i686-mingw32_aarch64-elf/bin/aarch64-elf
@@ -54,7 +51,7 @@ MAP = kernel.map
 # The names of all object files that must be generated. Deduced from the 
 # assembly code files in source.
 
-ASMOBJS = $(SOURCE)/$(SMARTSTART)
+ASMOBJS = $(patsubst $(SOURCE)/%.c,$(BUILD)/%.o,$(SMARTSTART))
 COBJS = $(patsubst $(SOURCE)/%.c,$(BUILD)/%.o,$(wildcard $(SOURCE)/*.c))
 
 

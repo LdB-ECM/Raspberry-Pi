@@ -121,31 +121,35 @@ SECTIONS {
 	.stack3 : {
         . = ALIGN(8); 					/* Stack must always be aligned to 8 byte boundary AAPCS32 call standard */
         __stack_start__core3 = .;		/* Label in case we want address of stack core 3 section start */
-        . = . + 512;     				/* IRQ stack size core 3 */
+        . = . + 1024;     				/* IRQ stack size core 3 */
         __IRQ_stack_core3 = .;
-        . = . + 512;     				/* FIQ stack size core 3 */
+        . = . + 1024;     				/* FIQ stack size core 3 */
         __FIQ_stack_core3 = .;
-        . = . + 512;    				/* SVC stack size core 3 */
+        . = . + 32768;    				/* SVC stack size core 3 */
         __SVC_stack_core3 = .;
-        . = . + 512;    				/* SYS stack size core 3 */
+        . = . + 32768;    				/* SYS stack size core 3 */
         __SYS_stack_core3 = .;
         __stack_end__core3 = .;  		/* Label in case we want address of stack core 3 section end */
    	}
 
-		.bss :
-	{
+	/* 
+	 * Next we put the bss data .. C/C++ compilers produce this and needs to be zeroed by startup
+	 */
+	.bss : {
 		. = ALIGN(4);
-		__bss_start = .;
+		 __bss_start__ = .;     	/* Label in case we want address of BSS section start */
+		  __bss_start = .;
 		*(.bss .bss.*)
-		__bss_end = .;
-	}
+ 		*(COMMON)
+		 __bss_end__ = .;     		/* Label in case we want address of BSS section end */
+		 __bss_end = .;
+   	}
 
-	/**
-	 *	Stack starts at the top of the RAM, and moves down!
-	 **/
-	. = ALIGN(8); 					/* Stack must always be aligned to 8 byte boundary AAPCS32 call standard */
-	. = . + 32768;
-	_estack = .;
+	.heap :	{
+     	. = ALIGN(4);
+     	__heap_start__ = .;			/* Label in case we want address of heap section start */
+    	_end = .; PROVIDE (end = .);/* Any memory from here is free to use so this is end of code and start of heap */
+	}
 
 	/*
 	* Finally comes everything else. A fun trick here is to put all other 

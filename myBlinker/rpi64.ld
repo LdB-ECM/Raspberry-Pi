@@ -57,15 +57,17 @@ SECTIONS
 	.bss : {
 		. = ALIGN(4);
 		 __bss_start__ = .;     	/* Label in case we want address of BSS section start */
+		  __bss_start = .;
 		*(.bss .bss.*)
  		*(COMMON)
 		 __bss_end__ = .;     		/* Label in case we want address of BSS section end */
+		 __bss_end = .;
    	}
 
 	.stack_core0 : {
         . = ALIGN(16);				/* Stack must always be aligned to 16 byte boundary AAPCS64 call standard */
         __stack_start_core0__ = .;
-        . = . + 16384;				/* EL0 stack size */
+        . = . + 512;				/* EL0 stack size */
         __EL0_stack_core0 = .;
         . = . + 16384;				/* EL1 stack size */
         __EL1_stack_core0 = .;
@@ -109,13 +111,6 @@ SECTIONS
        	__EL2_stack_core3 = .;
        	__stack_end_core3__ = .;  
     }
-
-	/**
-	 *	Stack starts at the top of the RAM, and moves down!
-	 **/
-	. = ALIGN(8); 					/* Stack must always be aligned to 8 byte boundary AAPCS32 call standard */
-	. = . + 32768;
-	_estack = .;
 
 	.heap :	{
      	. = ALIGN(4);
